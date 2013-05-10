@@ -1,0 +1,22 @@
+<!DOCTYPE html
+  PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns:orte_ns="http://www.fh-worms.de/orte" xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <title><%= @title %></title>
+    <link rel="stylesheet" href="/eli.css"/>
+    <script src="http://code.jquery.com/jquery-1.9.1.min.js"></script>
+    <script>
+      var psitype = "<%= @psitype %>";
+    </script>
+    <script src="/eli.js"></script>
+  </head>
+  <body>
+    <h1><%= @title %></h1>    
+    <form id="psi2eliform">
+      <p>Please enter here your <%= @psitype %>: <input id="psi" name="psi" type="text" size="30" maxlength="30"/></p>
+      <p><button id="okBtn">OK</button></p>
+    </form>
+    <p id="loading">Loading</p>
+    <p id="ELI"> </p>
+  </body>
+</html>

@@ -1,0 +1,99 @@
+<rdf:RDF
+    xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+    xmlns:j.0="http://publications.europa.eu/ontology/cdm#"
+    xmlns:j.1="http://www.w3.org/2004/02/skos/core#"
+    xmlns:owl="http://www.w3.org/2002/07/owl#"
+    xmlns:j.2="http://publications.europa.eu/ontology/cdm/cmr#"
+    xmlns:rdfs="http://www.w3.org/2000/01/rdf-schema#"
+    xmlns:j.3="http://publications.europa.eu/ontology/annotation#" > 
+  <rdf:Description rdf:about="http://publications.europa.eu/resource/oj/JOL_2010_084_R_0001_01">
+    <j.0:work_has_expression rdf:resource="http://publications.europa.eu/resource/oj/JOL_2010_084_R_0001_01.FRA"/>
+    <j.0:has rdf:resource="http://publications.europa.eu/resource/oj/JOL_2010_084_R_0001_01.FRA"/>
+    <rdf:type rdf:resource="http://publications.europa.eu/ontology/cdm#work"/>
+    <rdf:type rdf:resource="http://publications.europa.eu/ontology/cdm#directive"/>
+    <rdf:type rdf:resource="http://www.w3.org/2000/01/rdf-schema#Resource"/>
+    <rdf:type rdf:resource="http://publications.europa.eu/ontology/cdm#legislation_secondary"/>
+    <rdf:type rdf:resource="http://publications.europa.eu/ontology/cdm#resource_legal"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://publications.europa.eu/resource/oj/JOL_2010_084_R_0001_01.FRA.xhtml">
+    <rdf:type rdf:resource="http://publications.europa.eu/ontology/cdm#manifestation"/>
+    <rdf:type rdf:resource="http://www.w3.org/2000/01/rdf-schema#Resource"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://publications.europa.eu/resource/celex/32010L0024">
+    <rdf:type rdf:resource="http://www.w3.org/2000/01/rdf-schema#Resource"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://publications.europa.eu/ontology/cdm#expression">
+    <rdf:type rdf:resource="http://www.w3.org/2000/01/rdf-schema#Resource"/>
+    <rdf:type rdf:resource="http://www.w3.org/2000/01/rdf-schema#Class"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://publications.europa.eu/resource/cellar/9d591360-c832-4ca7-b9b9-fcaae395ef00.0010.03">
+    <owl:sameAs rdf:resource="http://publications.europa.eu/resource/oj/JOL_2010_084_R_0001_01.FRA.print"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://publications.europa.eu/resource/cellar/9d591360-c832-4ca7-b9b9-fcaae395ef00.0010.02">
+    <rdf:type rdf:resource="http://publications.europa.eu/ontology/cdm#manifestation"/>
+    <rdf:type rdf:resource="http://www.w3.org/2000/01/rdf-schema#Resource"/>
+    <owl:sameAs rdf:resource="http://publications.europa.eu/resource/oj/JOL_2010_084_R_0001_01.FRA.xhtml"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://publications.europa.eu/resource/oj/JOL_2010_084_R_0001_01.FRA.print">
+    <rdf:type rdf:resource="http://publications.europa.eu/ontology/cdm#manifestation"/>
+    <rdf:type rdf:resource="http://www.w3.org/2000/01/rdf-schema#Resource"/>
+    <rdf:type rdf:resource="http://publications.europa.eu/ontology/cdm#manifestation_official-journal_part"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://publications.europa.eu/resource/cellar/9d591360-c832-4ca7-b9b9-fcaae395ef00.0010.01">
+    <rdf:type rdf:resource="http://publications.europa.eu/ontology/cdm#manifestation"/>
+    <rdf:type rdf:resource="http://www.w3.org/2000/01/rdf-schema#Resource"/>
+    <owl:sameAs rdf:resource="http://publications.europa.eu/resource/oj/JOL_2010_084_R_0001_01.FRA.pdfa1a"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://publications.europa.eu/resource/authority/language/FRA">
+    <j.0:used_by rdf:resource="http://publications.europa.eu/resource/oj/JOL_2010_084_R_0001_01.FRA"/>
+    <rdf:type rdf:resource="http://publications.europa.eu/ontology/cdm#language"/>
+    <rdf:type rdf:resource="http://www.w3.org/2004/02/skos/core#Concept"/>
+    <rdf:type rdf:resource="http://www.w3.org/2000/01/rdf-schema#Resource"/>
+    <j.1:inScheme rdf:resource="http://publications.europa.eu/resource/authority/language"/>
+    <j.0:language_used_by_expression rdf:resource="http://publications.europa.eu/resource/oj/JOL_2010_084_R_0001_01.FRA"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://publications.europa.eu/resource/oj/JOL_2010_084_R_0001_01.FRA">
+    <j.0:expression_title_information_additional rdf:datatype="http://www.w3.org/2001/XMLSchema#string">CELEX1</j.0:expression_title_information_additional>
+    <rdf:type rdf:resource="http://publications.europa.eu/ontology/cdm#expression"/>
+    <j.0:uses rdf:resource="http://publications.europa.eu/resource/authority/language/FRA"/>
+    <rdf:type rdf:resource="http://www.w3.org/2000/01/rdf-schema#Resource"/>
+    <j.0:expression_uses_language rdf:resource="http://publications.europa.eu/resource/authority/language/FRA"/>
+    <j.0:title rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Directive 2010/24/UE du Conseil du 16 mars 2010 concernant l’assistance mutuelle en matière de recouvrement des créances relatives aux taxes, impôts, droits et autres mesures</j.0:title>
+    <j.0:title rdf:datatype="http://www.w3.org/2001/XMLSchema#string">CELEX1</j.0:title>
+    <j.3:build_info>cdm:4610  tdm:1523  xslt:3945 saxon:9.0.0.1J JVM:1.6.0_29 metaconvJar:1.0.3
+1.1.1
+1.1.2
+1.1.3 builddate:27/03/2013 18:18:16</j.3:build_info>
+    <j.0:expression_manifested_by_manifestation rdf:resource="http://publications.europa.eu/resource/oj/JOL_2010_084_R_0001_01.FRA.pdfa1a"/>
+    <j.0:expression_belongs_to_work rdf:resource="http://publications.europa.eu/resource/oj/JOL_2010_084_R_0001_01"/>
+    <j.0:title_information_additional rdf:datatype="http://www.w3.org/2001/XMLSchema#string">CELEX1</j.0:title_information_additional>
+    <j.0:belongs_to rdf:resource="http://publications.europa.eu/resource/oj/JOL_2010_084_R_0001_01"/>
+    <j.0:expression_manifested_by_manifestation rdf:resource="http://publications.europa.eu/resource/oj/JOL_2010_084_R_0001_01.FRA.print"/>
+    <j.0:expression_title rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Directive 2010/24/UE du Conseil du 16 mars 2010 concernant l’assistance mutuelle en matière de recouvrement des créances relatives aux taxes, impôts, droits et autres mesures</j.0:expression_title>
+    <j.0:expression_manifested_by_manifestation rdf:resource="http://publications.europa.eu/resource/oj/JOL_2010_084_R_0001_01.FRA.xhtml"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://publications.europa.eu/resource/cellar/9d591360-c832-4ca7-b9b9-fcaae395ef00.0010">
+    <j.2:metsStructSuperDiv rdf:resource="http://publications.europa.eu/resource/cellar/9d591360-c832-4ca7-b9b9-fcaae395ef00"/>
+    <j.2:lastModificationDate rdf:datatype="http://www.w3.org/2001/XMLSchema#dateTime">2013-04-10T05:43:14.962+02:00</j.2:lastModificationDate>
+    <j.2:lang rdf:datatype="http://www.w3.org/2001/XMLSchema#language">fr</j.2:lang>
+    <j.2:lang rdf:datatype="http://www.w3.org/2001/XMLSchema#language">fra</j.2:lang>
+    <owl:sameAs rdf:resource="http://publications.europa.eu/resource/uriserv/OJ.L_.2010.084.01.0001.01.FRA"/>
+    <owl:sameAs rdf:resource="http://publications.europa.eu/resource/celex/32010L0024.FRA"/>
+    <owl:sameAs rdf:resource="http://publications.europa.eu/resource/oj/JOL_2010_084_R_0001_01.FRA"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://www.w3.org/2004/02/skos/core#Concept">
+    <rdf:type rdf:resource="http://www.w3.org/2000/01/rdf-schema#Class"/>
+    <rdf:type rdf:resource="http://www.w3.org/2000/01/rdf-schema#Resource"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://publications.europa.eu/resource/oj/JOL_2010_084_R_0001_01.FRA.pdfa1a">
+    <rdf:type rdf:resource="http://publications.europa.eu/ontology/cdm#manifestation"/>
+    <rdf:type rdf:resource="http://www.w3.org/2000/01/rdf-schema#Resource"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://publications.europa.eu/resource/cellar/9d591360-c832-4ca7-b9b9-fcaae395ef00">
+    <owl:sameAs rdf:resource="http://publications.europa.eu/resource/celex/32010L0024"/>
+    <owl:sameAs rdf:resource="http://publications.europa.eu/resource/oj/JOL_2010_084_R_0001_01"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://publications.europa.eu/resource/authority/language">
+    <rdf:type rdf:resource="http://www.w3.org/2000/01/rdf-schema#Resource"/>
+  </rdf:Description>
+</rdf:RDF>

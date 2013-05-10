@@ -1,0 +1,7 @@
+body { 
+    font-family: verdana;sans-serif;
+    background-color: #FFFFF0;
+    padding: 20pt;
+}
+h1 {font-size: normal;}
+#loading {display: none;}
