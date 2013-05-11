@@ -7,7 +7,7 @@ $(document).ajaxStart(function(){
 $(function () {
     $("#psi2eliform").submit(function (event) {
         var psi = $("#psi").val();
-        var psitype = $("input:radio").val();
+        var psitype = $("input[name=psitype]:radio:checked").val();
         if(psitype == 'celex') {
             var uricomponent = '/eli4celex/';
         } else {
