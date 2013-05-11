@@ -31,7 +31,7 @@ module Repo
     expr_sparql = <<-sparql
 PREFIX cdm: #{Eli::CDM}
 
-SELECT ?expr_uri
+SELECT DISTINCT ?expr_uri
 WHERE
 {?work_uri cdm:work_has_expression ?expr_uri }
 sparql

@@ -15,4 +15,9 @@ class TestSampleELI < Test::Unit::TestCase
     assert_equal("http://eli.budabe.eu/eli/dec/2012/77/com/oj", Eli.build_eli("http://publications.europa.eu/resource/oj/JOL_2012_038_R_0047_01"))
     assert_equal("http://eli.budabe.eu/eli/dec/2011/10/ecb/oj", Eli.build_eli("http://publications.europa.eu/resource/celex/32010D0024"))
   end
+
+  def test_corrigenda
+    #assert_equal("http://eli.budabe.eu/eli/reg-corr/2010/178/com/oj", Eli.build_eli("http://publications.europa.eu/resource/celex/32010R0178R%2801%29"))  #Celex is 32010R0178R(01)
+    assert_equal("http://eli.budabe.eu/eli/reg-corr/2010/178/com/oj", Eli.build_eli("http://publications.europa.eu/resource/oj/JOL_2012_007_R_0011_01_REG_2010_178_11"))
+  end
 end

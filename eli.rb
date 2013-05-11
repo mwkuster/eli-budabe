@@ -24,7 +24,17 @@ sparql
   def Eli.parse_number(number) 
     "Parse numbers of type 2010/24 (EU)"
     scan = number.scan(/(\d{4})\/(\d+)/)
-    year, natural_number = scan[0] if scan
+    unless scan.empty?
+      year, natural_number = scan[0]
+    else #this is a hack, there are enough cases where this is ambiguous
+      scan = number.scan(/(\d+)\/(\d{4})/)
+      unless scan.empty?
+        natural_number, year = scan[0] 
+        [year, natural_number]
+      else
+        nil
+      end
+    end
   end 
 
   def Eli.build_eli(psi=nil)

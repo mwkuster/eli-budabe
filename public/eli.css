@@ -5,3 +5,4 @@ body {
 }
 h1 {font-size: normal;}
 #loading {display: none;}
+.warning {color: red; font-size: small; padding-top: 30pt;}

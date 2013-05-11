@@ -7,9 +7,16 @@ $(document).ajaxStart(function(){
 $(function () {
     $("#psi2eliform").submit(function (event) {
         var psi = $("#psi").val();
+        var psitype = $("input:radio").val();
+        if(psitype == 'celex') {
+            var uricomponent = '/eli4celex/';
+        } else {
+            var uricomponent = '/eli4id_jo/';
+        };
+        var encodedPSI =  encodeURIComponent(psi).replace(/\(/g, "%28").replace(/\)/g, "%29");
         $("#ELI").html("<b>Please wait for the search for identifier " + psi + " to complete</b>");
         $.ajax({
-            url: "/" + psitype + "2eli/" + encodeURIComponent(psi),
+            url: uricomponent + encodedPSI,
             type: "GET",
             dataType : "json",
             async : true,
