@@ -21,7 +21,7 @@ $(function () {
             dataType : "json",
             async : true,
             success: function( json ) {
-                $("#ELI").html("Your ELI is: <b>" + JSON.stringify(json) + "</b>");
+                $("#ELI").html("Your ELI is: <b>" + JSON.stringify(json) + "</b><br/> See here the corresponding <a href=\"" + uricomponent + encodedPSI + "/metadata\">RDFa-enriched metadata</a>  (might take a moment to load)");
             },
             error: function( xhr, status ) {
                 $("#ELI").html("<b>" + xhr.responseText + "</b>");
