@@ -25,7 +25,7 @@ sparql
 
   def initialize(psi = nil)
     @repo = if psi then Repo.repo_for_psi(psi) else Repo.sample_repo end
-    @psi = psi
+    @psi = if psi then psi else "32010L0024" end #test case
     @eli = nil
   end
 
@@ -79,39 +79,17 @@ sparql
   end
 
   def legal_resource_query()
-    eli_uri = "<#{self.eli}>"
-    <<-sparql
-PREFIX cdm: #{CDM}
-PREFIX eli: #{ELI}
-PREFIX xsd: #{XSD}
-CONSTRUCT
-{
-#{eli_uri} eli:id_document "#{self.eli}"^^xsd:string ;
-eli:type_document #{'<http://publications.europa.eu/resource/authority/resource-type/' + @typedoc + '>'} ;
-eli:agent_document ?agent_document .
-}
-WHERE {
-?subj cdm:work_created_by_agent ?agent_document .
-}
-sparql
-  end
-
-  def interpretation_query()
-    <<-sparql
-PREFIX cdm: #{CDM}
-SELECT DISTINCT ?title ?lang
-WHERE { 
-?expr cdm:expression_title ?title .
-?expr cdm:expression_uses_language ?lang .
-}
-sparql
+    eli_uri = "<" + self.eli + ">"
+    puts eli_uri
+    query = File.read("sparql/eli_md.rq")
+    query.gsub("<http://eli.budabe.eu/eli/dir/2010/24/consil/oj>", eli_uri)
   end
 
   def metadata()
-    interpretation_md = SPARQL.execute(self.interpretation_query, @repo)
-    interpretations = interpretation_md.collect{ |result|
-      {:belongs_to => self.eli, :language_expression => result[:lang], :title_expresion => result[:title]}
-    }
-    self.legal_resource_query
+    graph = SPARQL.execute(self.legal_resource_query, @repo)
+    rdfa_xhtml = RDF::RDFa::Writer.buffer(:haml => RDF::RDFa::Writer::DISTILLER_HAML) do |writer| 
+      writer << graph 
+    end
+    rdfa_xhtml
   end
 end
