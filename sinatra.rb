@@ -15,8 +15,20 @@ end
 
 get '/eli4celex/:psi' do
   begin
-    puts params[:psi]
-    Eli.build_eli("http://publications.europa.eu/resource/celex/" + psiencode(params[:psi])).to_json
+    Eli.new("http://publications.europa.eu/resource/celex/" + psiencode(params[:psi])).eli.to_json
+  rescue Exception => e
+    status 404
+    body e.to_json
+  end
+end
+
+get '/eli4celex/:psi/metadata' do
+  begin
+    psi = "http://publications.europa.eu/resource/celex/" + psiencode(params[:psi])
+    eli_obj = Eli.new(psi)
+    @eli = eli_obj.eli
+    metadata = eli_obj.metadata
+    
   rescue Exception => e
     status 404
     body e.to_json
@@ -25,7 +37,7 @@ end
 
 get '/eli4id_jo/:psi' do
   begin
-    Eli.build_eli("http://publications.europa.eu/resource/oj/" +  psiencode(params[:psi])).to_json
+    Eli.new("http://publications.europa.eu/resource/oj/" +  psiencode(params[:psi])).eli.to_json
   rescue Exception => e
     status 404
     body e.to_json
