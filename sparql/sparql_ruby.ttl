@@ -1,0 +1,20 @@
+
+<http://eli.budabe.eu/eli/dir/2010/24/consil/oj> <http://eurlex.europa.eu/eli#agent_document> <http://publications.europa.eu/resource/authority/corporate-body/CONSIL>;
+   <http://eurlex.europa.eu/eli#based_on> <http://publications.europa.eu/resource/celex/12008E113>,
+     <http://publications.europa.eu/resource/celex/12008E115>;
+   <http://eurlex.europa.eu/eli#cites> <http://publications.europa.eu/resource/celex/31976L0308>,
+     <http://publications.europa.eu/resource/celex/12007P%2FTXT>,
+     <http://publications.europa.eu/resource/celex/31999D0468>;
+   <http://eurlex.europa.eu/eli#date_document> "2010-03-16"^^<http://www.w3.org/2001/XMLSchema#date>;
+   <http://eurlex.europa.eu/eli#date_entry-in-force> "2010-04-20"^^<http://www.w3.org/2001/XMLSchema#date>;
+   <http://eurlex.europa.eu/eli#date_no-longer-in-force> "9999-12-31"^^<http://www.w3.org/2001/XMLSchema#date>;
+   <http://eurlex.europa.eu/eli#id_document> "http://eli.budabe.eu/eli/dir/2010/24/consil/oj";
+   <http://eurlex.europa.eu/eli#id_local> "32010L0024"^^<http://www.w3.org/2001/XMLSchema#string>;
+   <http://eurlex.europa.eu/eli#is_about> <http://eurovoc.europa.eu/5559>,
+     <http://eurovoc.europa.eu/4120>,
+     <http://eurovoc.europa.eu/979>,
+     <http://eurovoc.europa.eu/1005>,
+     <http://eurovoc.europa.eu/1021>,
+     <http://eurovoc.europa.eu/206>,
+     <http://eurovoc.europa.eu/3263>;
+   <http://eurlex.europa.eu/eli#type_document> <http://publications.europa.eu/resource/authority/resource-type/dir> .

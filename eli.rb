@@ -80,7 +80,6 @@ sparql
 
   def legal_resource_query()
     eli_uri = "<" + self.eli + ">"
-    puts eli_uri
     query = File.read("sparql/eli_md.rq")
     query.gsub("<http://eli.budabe.eu/eli/dir/2010/24/consil/oj>", eli_uri)
   end
