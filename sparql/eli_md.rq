@@ -27,10 +27,10 @@ CONSTRUCT {
 } WHERE {
   ?subj cdm:work_created_by_agent ?agent_document ;
   cdm:resource_legal_id_celex ?celex ;
-  cdm:work_is_about_concept_eurovoc ?eurovoc ;
-  cdm:work_date_document ?date_document ;
-  cdm:resource_legal_date_entry-into-force ?date_entry_in_force ;
-  cdm:resource_legal_date_end-of-validity ?date_no_longer_in_force .
+  cdm:work_date_document ?date_document .
+  OPTIONAL { ?subj cdm:work_is_about_concept_eurovoc ?eurovoc }
+  OPTIONAL {?subj cdm:resource_legal_date_entry-into-force ?date_entry_in_force }
+  OPTIONAL {?subj cdm:resource_legal_date_end-of-validity ?date_no_longer_in_force }
   OPTIONAL { ?subj cdm:work_cites_work ?cites }
   OPTIONAL { ?subj cdm:resource_legal_based_on_resource_legal ?based_on }
   OPTIONAL {  ?subj cdm:resource_legal_implemented_by_resource_legal ?transposes  }

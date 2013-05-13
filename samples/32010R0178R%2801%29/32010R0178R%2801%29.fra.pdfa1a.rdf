@@ -1,0 +1,65 @@
+<rdf:RDF
+    xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+    xmlns:j.0="http://publications.europa.eu/ontology/cdm#"
+    xmlns:owl="http://www.w3.org/2002/07/owl#"
+    xmlns:j.1="http://publications.europa.eu/ontology/cdm/cmr#"
+    xmlns:rdfs="http://www.w3.org/2000/01/rdf-schema#"
+    xmlns:j.2="http://publications.europa.eu/ontology/annotation#" > 
+  <rdf:Description rdf:about="http://publications.europa.eu/resource/oj/JOL_2012_007_R_0011_01_REG_2010_178_11.FRA">
+    <j.0:expression_manifested_by_manifestation rdf:resource="http://publications.europa.eu/resource/oj/JOL_2012_007_R_0011_01_REG_2010_178_11.FRA.pdfa1a"/>
+    <j.0:manifested_by rdf:resource="http://publications.europa.eu/resource/oj/JOL_2012_007_R_0011_01_REG_2010_178_11.FRA.pdfa1a"/>
+    <rdf:type rdf:resource="http://www.w3.org/2000/01/rdf-schema#Resource"/>
+    <rdf:type rdf:resource="http://publications.europa.eu/ontology/cdm#expression"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://publications.europa.eu/ontology/cdm#manifestation">
+    <rdf:type rdf:resource="http://www.w3.org/2000/01/rdf-schema#Resource"/>
+    <rdf:type rdf:resource="http://www.w3.org/2000/01/rdf-schema#Class"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://publications.europa.eu/resource/cellar/1d82d6e4-e3dd-491b-b0dd-48c1f6f0701e.0001.01">
+    <j.1:metsStructSuperDiv rdf:resource="http://publications.europa.eu/resource/cellar/1d82d6e4-e3dd-491b-b0dd-48c1f6f0701e.0001"/>
+    <j.1:lastModificationDate rdf:datatype="http://www.w3.org/2001/XMLSchema#dateTime">2013-04-18T20:47:43.952+02:00</j.1:lastModificationDate>
+    <owl:sameAs rdf:resource="http://publications.europa.eu/resource/uriserv/OJ.L_.2012.007.01.0011.01.FRA.pdfa1a"/>
+    <owl:sameAs rdf:resource="http://publications.europa.eu/resource/celex/32010R0178R%2801%29.FRA.pdfa1a"/>
+    <owl:sameAs rdf:resource="http://publications.europa.eu/resource/oj/JOL_2012_007_R_0011_01_REG_2010_178_11.FRA.pdfa1a"/>
+    <j.0:manifestation_has_item rdf:resource="http://publications.europa.eu/resource/cellar/1d82d6e4-e3dd-491b-b0dd-48c1f6f0701e.0001.01/DOC_1"/>
+    <rdf:type rdf:resource="http://publications.europa.eu/ontology/cdm#manifestation"/>
+    <rdf:type rdf:resource="http://www.w3.org/2000/01/rdf-schema#Resource"/>
+    <j.0:has rdf:resource="http://publications.europa.eu/resource/cellar/1d82d6e4-e3dd-491b-b0dd-48c1f6f0701e.0001.01/DOC_1"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://publications.europa.eu/resource/cellar/1d82d6e4-e3dd-491b-b0dd-48c1f6f0701e.0001.01/DOC_1">
+    <j.1:manifestationMimeType>application/pdf;type=pdfa1a</j.1:manifestationMimeType>
+    <owl:sameAs rdf:resource="http://publications.europa.eu/resource/celex/32010R0178R%2801%29.FRA.pdfa1a.l_00720120111fr00110011.pdf"/>
+    <j.0:item_belongs_to_manifestation rdf:resource="http://publications.europa.eu/resource/cellar/1d82d6e4-e3dd-491b-b0dd-48c1f6f0701e.0001.01"/>
+    <owl:sameAs rdf:resource="http://publications.europa.eu/resource/oj/JOL_2012_007_R_0011_01_REG_2010_178_11.FRA.pdfa1a.l_00720120111fr00110011.pdf"/>
+    <j.0:identifier>DOC_1</j.0:identifier>
+    <owl:sameAs rdf:resource="http://publications.europa.eu/resource/uriserv/OJ.L_.2012.007.01.0011.01.FRA.pdfa1a.l_00720120111fr00110011.pdf"/>
+    <rdf:type rdf:resource="http://www.w3.org/2000/01/rdf-schema#Resource"/>
+    <rdf:type rdf:resource="http://publications.europa.eu/ontology/cdm#item"/>
+    <j.0:item_identifier>DOC_1</j.0:item_identifier>
+    <j.1:metsStructSuperDiv rdf:resource="http://publications.europa.eu/resource/cellar/1d82d6e4-e3dd-491b-b0dd-48c1f6f0701e.0001.01"/>
+    <j.0:belongs_to rdf:resource="http://publications.europa.eu/resource/cellar/1d82d6e4-e3dd-491b-b0dd-48c1f6f0701e.0001.01"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://publications.europa.eu/resource/cellar/1d82d6e4-e3dd-491b-b0dd-48c1f6f0701e.0001">
+    <owl:sameAs rdf:resource="http://publications.europa.eu/resource/oj/JOL_2012_007_R_0011_01_REG_2010_178_11.FRA"/>
+    <owl:sameAs rdf:resource="http://publications.europa.eu/resource/celex/32010R0178R%2801%29.FRA"/>
+    <owl:sameAs rdf:resource="http://publications.europa.eu/resource/uriserv/OJ.L_.2012.007.01.0011.01.FRA"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://publications.europa.eu/ontology/cdm#item">
+    <rdf:type rdf:resource="http://www.w3.org/2000/01/rdf-schema#Class"/>
+    <rdf:type rdf:resource="http://www.w3.org/2000/01/rdf-schema#Resource"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://publications.europa.eu/resource/oj/JOL_2012_007_R_0011_01_REG_2010_178_11.FRA.pdfa1a">
+    <j.0:manifestation_manifests_expression rdf:resource="http://publications.europa.eu/resource/oj/JOL_2012_007_R_0011_01_REG_2010_178_11.FRA"/>
+    <j.0:manifestation_source-pool rdf:datatype="http://www.w3.org/2001/XMLSchema#string">src/eudor</j.0:manifestation_source-pool>
+    <j.0:manifestation_type rdf:datatype="http://www.w3.org/2001/XMLSchema#string">pdfa1a</j.0:manifestation_type>
+    <j.2:build_info>cdm:4610  tdm:1523  xslt:3945 saxon:9.0.0.1J JVM:1.6.0_29 metaconvJar:1.0.3
+1.1.1
+1.1.2
+1.1.3 builddate:02/04/2013 17:51:44</j.2:build_info>
+    <rdf:type rdf:resource="http://publications.europa.eu/ontology/cdm#manifestation"/>
+    <rdf:type rdf:resource="http://www.w3.org/2000/01/rdf-schema#Resource"/>
+    <j.0:type rdf:datatype="http://www.w3.org/2001/XMLSchema#string">pdfa1a</j.0:type>
+    <j.0:manifests rdf:resource="http://publications.europa.eu/resource/oj/JOL_2012_007_R_0011_01_REG_2010_178_11.FRA"/>
+    <j.0:source-pool rdf:datatype="http://www.w3.org/2001/XMLSchema#string">src/eudor</j.0:source-pool>
+  </rdf:Description>
+</rdf:RDF>
