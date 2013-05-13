@@ -86,7 +86,7 @@ sparql
 
   def metadata()
     graph = SPARQL.execute(self.legal_resource_query, @repo)
-    rdfa_xhtml = RDF::RDFa::Writer.buffer(:haml => RDF::RDFa::Writer::DISTILLER_HAML) do |writer| 
+    rdfa_xhtml = RDF::RDFa::Writer.buffer(:haml => RDF::RDFa::Writer::DISTILLER_HAML, :base_uri => self.eli) do |writer| 
       writer << graph 
     end
     rdfa_xhtml
