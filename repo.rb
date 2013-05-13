@@ -40,8 +40,22 @@ sparql
     expressions.each { |hit|
       expr_uri = hit[:expr_uri]
       add_to_repo!(repo, expr_uri)
-      add_to_repo!(repo, expr_uri + ".print")
+      #add_to_repo!(repo, expr_uri + ".print")
     }
+    manif_sparql = <<-sparql
+PREFIX cdm: #{Eli::CDM}
+
+SELECT DISTINCT ?manif_uri
+WHERE
+{?expr_uri cdm:expression_manifested_by_manifestation ?manif_uri }
+sparql
+    manifestations = SPARQL.execute(manif_sparql, repo)
+    raise "This work has no manifestations" if manifestations.length < 1
+    manifestations.each { |hit|
+      manif_uri = hit[:manif_uri]
+      add_to_repo!(repo, manif_uri)
+    }
+
     repo
   end
 end
