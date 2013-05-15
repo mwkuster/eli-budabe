@@ -38,7 +38,7 @@ CONSTRUCT {
   OPTIONAL {  ?subj cdm:resource_legal_basis_for_resource_legal ?basis_for  }
   OPTIONAL {  ?subj cdm:resource_legal_amends_resource_legal ?changes  } #and many more variants
   OPTIONAL {  ?subj cdm:resource_legal_amended_by_resource_legal ?changed_by  }
-  BIND (<http://eli.budabe.eu/eli/dir/2010/24/consil/oj> AS ?eli)
+  BIND (<http://eli.budabe.eu/eli/dir/2010/24/oj> AS ?eli)
   BIND (str(?eli) AS ?eli_str)
 
   ?expr cdm:expression_title ?title .

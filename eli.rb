@@ -14,14 +14,6 @@ class Eli
   CDM = "<http://publications.europa.eu/ontology/cdm#>"
   ELI = "<http://eurlex.europa.eu/eli#>"
   XSD = "<http://www.w3.org/2001/XMLSchema>"
-  ELI_CONSTR = <<-sparql
-PREFIX cdm: #{CDM}
-PREFIX eli: #{ELI}
-CONSTRUCT
-{?subj eli:expression_title ?title }
-WHERE
-{ ?subj cdm:expression_title ?title .}
-sparql
 
   def initialize(psi = nil)
     @repo = if psi then Repo.repo_for_psi(psi) else Repo.sample_repo end
@@ -53,27 +45,24 @@ sparql
       eli_query = <<-sparql
 PREFIX cdm: #{CDM}
 PREFIX eli: #{ELI}
-SELECT DISTINCT ?number ?typedoc ?author ?format ?is_corrigendum
+SELECT DISTINCT ?number ?typedoc ?is_corrigendum ?lang
 WHERE
 {
 ?manif cdm:manifestation_official-journal_part_information_number ?number .
 ?manif cdm:manifestation_official-journal_part_typedoc_printer  ?typedoc .
-?manif cdm:manifestation_official-journal_part_author_printer ?author .
 ?manif cdm:manifestation_official-journal_part_is_corrigendum_printer ?is_corrigendum .
 }
 sparql
       solutions = SPARQL.execute(eli_query, @repo)
       raise "No ELI could be built" if solutions.length < 1
-      raise "More than one ELI possible" unless solutions.length <= 2 #2 authors maximum
+      raise "More than one ELI possible" unless solutions.length < 2
       sol = solutions[0]
       information_number = sol[:number].to_s
       @typedoc = TYPEDOC_RT_MAPPING[sol[:typedoc].to_s]
-      author1 = TYPEDOC_CB_MAPPING[sol[:author].to_s]
-      author2 = if solutions.length == 2 then "/" + TYPEDOC_CB_MAPPING[sol[1][:author]]  else "" end
       is_corrigendum = sol[:is_corrigendum].to_s
       year, natural_number = parse_number(information_number)
     
-      @eli = "http://eli.budabe.eu/eli/#{@typedoc}#{if is_corrigendum == 'C' then '-corr' end}/#{year}/#{natural_number}/#{author1}#{author2}/oj"
+      @eli = "http://eli.budabe.eu/eli/#{@typedoc}#{if is_corrigendum == 'C' then '-corr' end}/#{year}/#{natural_number}/oj"
       @eli
     end
   end
@@ -81,7 +70,7 @@ sparql
   def legal_resource_query()
     eli_uri = "<" + self.eli + ">"
     query = File.read("sparql/eli_md.rq")
-    query.gsub("<http://eli.budabe.eu/eli/dir/2010/24/consil/oj>", eli_uri)
+    query.gsub("<http://eli.budabe.eu/eli/dir/2010/24/oj>", eli_uri)
   end
 
   def metadata()
