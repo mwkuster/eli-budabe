@@ -31,14 +31,18 @@ module Repo
     expr_sparql = <<-sparql
 PREFIX cdm: #{Eli::CDM}
 
-SELECT DISTINCT ?expr_uri
-WHERE
-{?work_uri cdm:work_has_expression ?expr_uri }
+SELECT DISTINCT ?uri
+WHERE {
+{?work_uri cdm:work_has_expression ?uri }
+UNION
+{?work_uri cdm:resource_legal_published_in_official-journal ?uri}
+}
 sparql
     expressions = SPARQL.execute(expr_sparql, repo)
     raise "This work has no expressions" if expressions.length < 1
     expressions.each { |hit|
-      expr_uri = hit[:expr_uri]
+      expr_uri = hit[:uri]
+      puts expr_uri
       add_to_repo!(repo, expr_uri)
       #add_to_repo!(repo, expr_uri + ".print")
     }

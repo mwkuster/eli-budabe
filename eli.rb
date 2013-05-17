@@ -44,14 +44,18 @@ class Eli
     else
       eli_query = <<-sparql
 PREFIX cdm: #{CDM}
-PREFIX eli: #{ELI}
-SELECT DISTINCT ?number ?typedoc ?is_corrigendum ?lang
+
+SELECT DISTINCT ?number ?typedoc ?is_corrigendum (GROUP_CONCAT(?lang_code; separator="-") AS ?langs)
 WHERE
 {
-?manif cdm:manifestation_official-journal_part_information_number ?number .
-?manif cdm:manifestation_official-journal_part_typedoc_printer  ?typedoc .
-?manif cdm:manifestation_official-journal_part_is_corrigendum_printer ?is_corrigendum .
+  ?manif cdm:manifestation_official-journal_part_information_number ?number .
+  ?manif cdm:manifestation_official-journal_part_typedoc_printer  ?typedoc .
+  ?manif cdm:manifestation_official-journal_part_is_corrigendum_printer ?is_corrigendum .
+  ?manif cdm:manifestation_manifests_expression ?expr .
+  ?expr cdm:expression_uses_language  ?lang .
+  BIND(lcase(replace(str(?lang), ".*/([A-Z]{3})", "$1")) AS ?lang_code)
 }
+GROUP BY ?number ?typedoc ?is_corrigendum
 sparql
       solutions = SPARQL.execute(eli_query, @repo)
       raise "No ELI could be built" if solutions.length < 1
@@ -60,9 +64,10 @@ sparql
       information_number = sol[:number].to_s
       @typedoc = TYPEDOC_RT_MAPPING[sol[:typedoc].to_s]
       is_corrigendum = sol[:is_corrigendum].to_s
+      langs = sol[:langs].to_s
       year, natural_number = parse_number(information_number)
     
-      @eli = "http://eli.budabe.eu/eli/#{@typedoc}#{if is_corrigendum == 'C' then '-corr' end}/#{year}/#{natural_number}/oj"
+      @eli = "http://eli.budabe.eu/eli/#{@typedoc}/#{year}/#{natural_number}/#{if is_corrigendum == 'C' then 'corr-' + langs + '/' end}oj"
       @eli
     end
   end
