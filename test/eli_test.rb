@@ -17,8 +17,9 @@ class TestSampleELI < Test::Unit::TestCase
   end
 
   def test_corrigenda
-    assert_equal("http://eli.budabe.eu/eli/reg-corr/2010/178/oj", Eli.new("http://publications.europa.eu/resource/celex/32010R0178R%2801%29").eli)  #Celex is 32010R0178R(01)
-    assert_equal("http://eli.budabe.eu/eli/reg-corr/2010/178/oj", Eli.new("http://publications.europa.eu/resource/oj/JOL_2012_007_R_0011_01_REG_2010_178_11").eli)
+    assert_equal("http://eli.budabe.eu/eli/reg/2010/178/corr-fra/2012-01-11/oj", Eli.new("http://publications.europa.eu/resource/celex/32010R0178R%2801%29").eli)  #Celex is 32010R0178R(01)
+    assert_equal("http://eli.budabe.eu/eli/reg/2010/178/corr-fra/2012-01-11/oj", Eli.new("http://publications.europa.eu/resource/oj/JOL_2012_007_R_0011_01_REG_2010_178_11").eli)
+    assert_equal("http://eli.budabe.eu/eli/dir/2012/12/corr-bul-ces-dan-deu-ell-eng-est-fin-fra-hun-ita-lav-lit-mlt-nld-pol-por-ron-slk-slv-spa-swe/2013-01-31/oj", Eli.new("http://publications.europa.eu/resource/celex/32012L0012R%2801%29").eli)
   end
 end
 
