@@ -26,6 +26,10 @@ sudo gem1.9 install equivalent-xml nokogiri
 ```
 sudo gem1.9 install rdf-rdfa 
 ```
+- RDF-turle for RDF.rb (https://github.com/ruby-rdf/rdf-turtle)
+```
+sudo gem1.9 install rdf-turtle
+```
 - SPARQL for RDF.rb (https://github.com/ruby-rdf/sparql)
 ```
 sudo gem1.9 install sparql
@@ -38,4 +42,14 @@ sudo gem1.9 install sinatra thin
 ```
 sudo gem1.9 install json
 ```
+- 4store as server backend
+
+Configuration
+=============
+In order to ensure sufficiently long-living connections, start thin directly with a suitable timeout (the default timeout of 30 seconds is insufficient):
+
+```
+thin -t 120 -p 4567 start
+```
+
 

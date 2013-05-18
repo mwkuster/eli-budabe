@@ -52,7 +52,7 @@ WHERE {
   ?manif cdm:manifestation_official-journal_part_is_corrigendum_printer ?is_corrigendum .
   ?work cdm:resource_legal_published_in_official-journal ?oj .
   ?oj  cdm:publication_general_date_publication ?pub_date .
-  FILTER(strlen(?number) > 0 && strlen(?typedoc) > 0 && strlen(?is_corrigendum) > 0)
+  FILTER(strlen(?number) > 0) # && strlen(?typedoc) > 0 && strlen(?is_corrigendum) > 0)
 }
 sparql
       solutions = SPARQL.execute(eli_query, @repo)
