@@ -43,21 +43,30 @@ class Eli
       @eli
     else
       eli_query = <<-sparql
-PREFIX cdm: #{CDM}
+PREFIX cdm: <http://publications.europa.eu/ontology/cdm#>
 
-SELECT DISTINCT ?number ?typedoc ?is_corrigendum (GROUP_CONCAT(?lang_code; separator="-") AS ?langs)
-WHERE
+SELECT DISTINCT ?number ?typedoc ?is_corrigendum  ?langs
+WHERE {
+ {
+   SELECT DISTINCT (GROUP_CONCAT(?lang_code; separator="-") AS ?langs)
+   WHERE
+   {
+     ?expr cdm:expression_uses_language  ?lang .
+     BIND(lcase(replace(str(?lang), ".*/([A-Z]{3})", "$1")) AS ?lang_code)
+   }
+ }
 {
+SELECT DISTINCT ?number ?typedoc ?is_corrigendum
+WHERE {
   ?manif cdm:manifestation_official-journal_part_information_number ?number .
   ?manif cdm:manifestation_official-journal_part_typedoc_printer  ?typedoc .
   ?manif cdm:manifestation_official-journal_part_is_corrigendum_printer ?is_corrigendum .
-  ?manif cdm:manifestation_manifests_expression ?expr .
-  ?expr cdm:expression_uses_language  ?lang .
-  BIND(lcase(replace(str(?lang), ".*/([A-Z]{3})", "$1")) AS ?lang_code)
 }
-GROUP BY ?number ?typedoc ?is_corrigendum
+}
+}
 sparql
       solutions = SPARQL.execute(eli_query, @repo)
+      puts solutions[0]
       raise "No ELI could be built" if solutions.length < 1
       raise "More than one ELI possible" unless solutions.length < 2
       sol = solutions[0]
@@ -65,9 +74,11 @@ sparql
       @typedoc = TYPEDOC_RT_MAPPING[sol[:typedoc].to_s]
       is_corrigendum = sol[:is_corrigendum].to_s
       langs = sol[:langs].to_s
+      puts "langs: " + langs
+      pub_date = sol[:pub_date].to_s
       year, natural_number = parse_number(information_number)
     
-      @eli = "http://eli.budabe.eu/eli/#{@typedoc}/#{year}/#{natural_number}/#{if is_corrigendum == 'C' then 'corr-' + langs + '/' end}oj"
+      @eli = "http://eli.budabe.eu/eli/#{@typedoc}/#{year}/#{natural_number}/#{if is_corrigendum == 'C' then 'corr-' + langs + '/' + pub_date + '/' end}oj"
       @eli
     end
   end

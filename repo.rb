@@ -42,7 +42,6 @@ sparql
     raise "This work has no expressions" if expressions.length < 1
     expressions.each { |hit|
       expr_uri = hit[:uri]
-      puts expr_uri
       add_to_repo!(repo, expr_uri)
       #add_to_repo!(repo, expr_uri + ".print")
     }
