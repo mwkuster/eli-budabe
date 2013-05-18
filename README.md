@@ -49,7 +49,7 @@ Configuration
 In order to ensure sufficiently long-living connections, start thin directly with a suitable timeout (the default timeout of 30 seconds is insufficient):
 
 ```
-thin -t 120 -p 4567 start
+thin -d -t 120 -p 4567 start
 ```
 
 

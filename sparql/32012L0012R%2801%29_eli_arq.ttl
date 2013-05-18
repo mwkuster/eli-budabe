@@ -1,0 +1,702 @@
+@prefix eli:     <http://eurlex.europa.eu/eli#> .
+@prefix cdm:     <http://publications.europa.eu/ontology/cdm#> .
+@prefix xsd:     <http://www.w3.org/2001/XMLSchema#> .
+@prefix owl:     <http://www.w3.org/2002/07/owl#> .
+
+<http://eli.budabe.eu/eli/dir/2010/24/oj/dan/print>
+      eli:manifests  <http://eli.budabe.eu/eli/dir/2010/24/oj/dan> ;
+      eli:publisher  "Publications Office"@en .
+
+<http://eli.budabe.eu/eli/dir/2010/24/oj/slk/pdfa1a>
+      eli:link_manifestation
+                    <http://publications.europa.eu/resource/cellar/ea3028ea-6bba-11e2-9294-01aa75ed71a1.0020.01/DOC_1> ;
+      eli:manifests  <http://eli.budabe.eu/eli/dir/2010/24/oj/slk> ;
+      eli:publisher  "Publications Office"@en .
+
+<http://eli.budabe.eu/eli/dir/2010/24/oj/fin/print>
+      eli:manifests  <http://eli.budabe.eu/eli/dir/2010/24/oj/fin> ;
+      eli:publisher  "Publications Office"@en .
+
+<http://eli.budabe.eu/eli/dir/2010/24/oj/lit/xhtml>
+      eli:link_manifestation
+                    <http://publications.europa.eu/resource/cellar/ea3028ea-6bba-11e2-9294-01aa75ed71a1.0013.04/DOC_1> ;
+      eli:manifests  <http://eli.budabe.eu/eli/dir/2010/24/oj/lit> ;
+      eli:publisher  "Publications Office"@en .
+
+<http://eli.budabe.eu/eli/dir/2010/24/oj/lav/print>
+      eli:manifests  <http://eli.budabe.eu/eli/dir/2010/24/oj/lav> ;
+      eli:publisher  "Publications Office"@en .
+
+<http://eli.budabe.eu/eli/dir/2010/24/oj/ron/pdfa1a>
+      eli:link_manifestation
+                    <http://publications.europa.eu/resource/cellar/ea3028ea-6bba-11e2-9294-01aa75ed71a1.0019.01/DOC_1> ;
+      eli:manifests  <http://eli.budabe.eu/eli/dir/2010/24/oj/ron> ;
+      eli:publisher  "Publications Office"@en .
+
+<http://eli.budabe.eu/eli/dir/2010/24/oj/swe/fmx4>
+      eli:link_manifestation
+                    <http://publications.europa.eu/resource/cellar/ea3028ea-6bba-11e2-9294-01aa75ed71a1.0022.03/DOC_1> ;
+      eli:link_manifestation
+                    <http://publications.europa.eu/resource/cellar/ea3028ea-6bba-11e2-9294-01aa75ed71a1.0022.03/DOC_2> ;
+      eli:manifests  <http://eli.budabe.eu/eli/dir/2010/24/oj/swe> ;
+      eli:publisher  "Publications Office"@en .
+
+<http://eli.budabe.eu/eli/dir/2010/24/oj/spa>
+      eli:belongs_to  <http://eli.budabe.eu/eli/dir/2010/24/oj> ;
+      eli:expression_title
+                    "Corrección de errores de la Directiva 2012/12/UE del Parlamento Europeo y del Consejo, de 19 de abril de 2012 , por la que se modifica la Directiva 2001/112/CE del Consejo relativa a los zumos de frutas y otros productos similares destinados a la alimentación humana ( DO L 115 de 27.4.2012 )"^^xsd:string ;
+      eli:language_expression
+                    <http://publications.europa.eu/resource/authority/language/SPA> .
+
+<http://eli.budabe.eu/eli/dir/2010/24/oj/ell/pdfa1a>
+      eli:link_manifestation
+                    <http://publications.europa.eu/resource/cellar/ea3028ea-6bba-11e2-9294-01aa75ed71a1.0005.01/DOC_1> ;
+      eli:manifests  <http://eli.budabe.eu/eli/dir/2010/24/oj/ell> ;
+      eli:publisher  "Publications Office"@en .
+
+<http://eli.budabe.eu/eli/dir/2010/24/oj/slv/xhtml>
+      eli:link_manifestation
+                    <http://publications.europa.eu/resource/cellar/ea3028ea-6bba-11e2-9294-01aa75ed71a1.0021.04/DOC_1> ;
+      eli:manifests  <http://eli.budabe.eu/eli/dir/2010/24/oj/slv> ;
+      eli:publisher  "Publications Office"@en .
+
+<http://eli.budabe.eu/eli/dir/2010/24/oj/nld/pdfa1a>
+      eli:link_manifestation
+                    <http://publications.europa.eu/resource/cellar/ea3028ea-6bba-11e2-9294-01aa75ed71a1.0016.01/DOC_1> ;
+      eli:manifests  <http://eli.budabe.eu/eli/dir/2010/24/oj/nld> ;
+      eli:publisher  "Publications Office"@en .
+
+<http://eli.budabe.eu/eli/dir/2010/24/oj/est/pdfa1a>
+      eli:link_manifestation
+                    <http://publications.europa.eu/resource/cellar/ea3028ea-6bba-11e2-9294-01aa75ed71a1.0008.01/DOC_1> ;
+      eli:manifests  <http://eli.budabe.eu/eli/dir/2010/24/oj/est> ;
+      eli:publisher  "Publications Office"@en .
+
+<http://eli.budabe.eu/eli/dir/2010/24/oj/est/xhtml>
+      eli:link_manifestation
+                    <http://publications.europa.eu/resource/cellar/ea3028ea-6bba-11e2-9294-01aa75ed71a1.0008.04/DOC_1> ;
+      eli:manifests  <http://eli.budabe.eu/eli/dir/2010/24/oj/est> ;
+      eli:publisher  "Publications Office"@en .
+
+<http://eli.budabe.eu/eli/dir/2010/24/oj/deu/print>
+      eli:manifests  <http://eli.budabe.eu/eli/dir/2010/24/oj/deu> ;
+      eli:publisher  "Publications Office"@en .
+
+<http://eli.budabe.eu/eli/dir/2010/24/oj/pol>
+      eli:belongs_to  <http://eli.budabe.eu/eli/dir/2010/24/oj> ;
+      eli:expression_title
+                    "Sprostowanie do dyrektywy Parlamentu Europejskiego i Rady 2012/12/UE z dnia 19 kwietnia 2012 r. zmieniającej dyrektywę Rady 2001/112/WE odnoszącą się do soków owocowych i niektórych podobnych produktów przeznaczonych do spożycia przez ludzi ( Dz.U. L 115 z 27.4.2012 )"^^xsd:string ;
+      eli:language_expression
+                    <http://publications.europa.eu/resource/authority/language/POL> .
+
+<http://eli.budabe.eu/eli/dir/2010/24/oj/swe/pdfa1a>
+      eli:link_manifestation
+                    <http://publications.europa.eu/resource/cellar/ea3028ea-6bba-11e2-9294-01aa75ed71a1.0022.01/DOC_1> ;
+      eli:manifests  <http://eli.budabe.eu/eli/dir/2010/24/oj/swe> ;
+      eli:publisher  "Publications Office"@en .
+
+<http://eli.budabe.eu/eli/dir/2010/24/oj/por/xhtml>
+      eli:link_manifestation
+                    <http://publications.europa.eu/resource/cellar/ea3028ea-6bba-11e2-9294-01aa75ed71a1.0018.04/DOC_1> ;
+      eli:manifests  <http://eli.budabe.eu/eli/dir/2010/24/oj/por> ;
+      eli:publisher  "Publications Office"@en .
+
+<http://eli.budabe.eu/eli/dir/2010/24/oj/slv/print>
+      eli:manifests  <http://eli.budabe.eu/eli/dir/2010/24/oj/slv> ;
+      eli:publisher  "Publications Office"@en .
+
+<http://eli.budabe.eu/eli/dir/2010/24/oj/fin/fmx4>
+      eli:link_manifestation
+                    <http://publications.europa.eu/resource/cellar/ea3028ea-6bba-11e2-9294-01aa75ed71a1.0009.03/DOC_2> ;
+      eli:link_manifestation
+                    <http://publications.europa.eu/resource/cellar/ea3028ea-6bba-11e2-9294-01aa75ed71a1.0009.03/DOC_1> ;
+      eli:manifests  <http://eli.budabe.eu/eli/dir/2010/24/oj/fin> ;
+      eli:publisher  "Publications Office"@en .
+
+<http://eli.budabe.eu/eli/dir/2010/24/oj/por/pdfa1a>
+      eli:link_manifestation
+                    <http://publications.europa.eu/resource/cellar/ea3028ea-6bba-11e2-9294-01aa75ed71a1.0018.01/DOC_1> ;
+      eli:manifests  <http://eli.budabe.eu/eli/dir/2010/24/oj/por> ;
+      eli:publisher  "Publications Office"@en .
+
+<http://eli.budabe.eu/eli/dir/2010/24/oj/eng>
+      eli:belongs_to  <http://eli.budabe.eu/eli/dir/2010/24/oj> ;
+      eli:expression_title
+                    "Corrigendum to Directive 2012/12/EU of the European Parliament and of the Council of 19 April 2012 amending Council Directive 2001/112/EC relating to fruit juices and certain similar products intended for human consumption ( OJ L 115, 27.4.2012 )"^^xsd:string ;
+      eli:language_expression
+                    <http://publications.europa.eu/resource/authority/language/ENG> .
+
+<http://eli.budabe.eu/eli/dir/2010/24/oj/spa/print>
+      eli:manifests  <http://eli.budabe.eu/eli/dir/2010/24/oj/spa> ;
+      eli:publisher  "Publications Office"@en .
+
+<http://eli.budabe.eu/eli/dir/2010/24/oj/eng/print>
+      eli:manifests  <http://eli.budabe.eu/eli/dir/2010/24/oj/eng> ;
+      eli:publisher  "Publications Office"@en .
+
+<http://eli.budabe.eu/eli/dir/2010/24/oj/ita/xhtml>
+      eli:link_manifestation
+                    <http://publications.europa.eu/resource/cellar/ea3028ea-6bba-11e2-9294-01aa75ed71a1.0012.04/DOC_1> ;
+      eli:manifests  <http://eli.budabe.eu/eli/dir/2010/24/oj/ita> ;
+      eli:publisher  "Publications Office"@en .
+
+<http://eli.budabe.eu/eli/dir/2010/24/oj/swe/xhtml>
+      eli:link_manifestation
+                    <http://publications.europa.eu/resource/cellar/ea3028ea-6bba-11e2-9294-01aa75ed71a1.0022.04/DOC_1> ;
+      eli:manifests  <http://eli.budabe.eu/eli/dir/2010/24/oj/swe> ;
+      eli:publisher  "Publications Office"@en .
+
+<http://eli.budabe.eu/eli/dir/2010/24/oj/hun/xhtml>
+      eli:link_manifestation
+                    <http://publications.europa.eu/resource/cellar/ea3028ea-6bba-11e2-9294-01aa75ed71a1.0011.04/DOC_1> ;
+      eli:manifests  <http://eli.budabe.eu/eli/dir/2010/24/oj/hun> ;
+      eli:publisher  "Publications Office"@en .
+
+<http://eli.budabe.eu/eli/dir/2010/24/oj/lit/fmx4>
+      eli:link_manifestation
+                    <http://publications.europa.eu/resource/cellar/ea3028ea-6bba-11e2-9294-01aa75ed71a1.0013.03/DOC_2> ;
+      eli:link_manifestation
+                    <http://publications.europa.eu/resource/cellar/ea3028ea-6bba-11e2-9294-01aa75ed71a1.0013.03/DOC_1> ;
+      eli:manifests  <http://eli.budabe.eu/eli/dir/2010/24/oj/lit> ;
+      eli:publisher  "Publications Office"@en .
+
+<http://eli.budabe.eu/eli/dir/2010/24/oj/slv>
+      eli:belongs_to  <http://eli.budabe.eu/eli/dir/2010/24/oj> ;
+      eli:expression_title
+                    "Popravek Direktive 2012/12/EU Evropskega parlamenta in Sveta z dne 19. aprila 2012 o spremembi Direktive Sveta 2001/112/ES o sadnih sokovih in nekaterih podobnih proizvodih, namenjenih za prehrano ljudi ( UL L 115, 27.4.2012 )"^^xsd:string ;
+      eli:language_expression
+                    <http://publications.europa.eu/resource/authority/language/SLV> .
+
+<http://eli.budabe.eu/eli/dir/2010/24/oj/fra/fmx4>
+      eli:link_manifestation
+                    <http://publications.europa.eu/resource/cellar/ea3028ea-6bba-11e2-9294-01aa75ed71a1.0010.03/DOC_2> ;
+      eli:link_manifestation
+                    <http://publications.europa.eu/resource/cellar/ea3028ea-6bba-11e2-9294-01aa75ed71a1.0010.03/DOC_1> ;
+      eli:manifests  <http://eli.budabe.eu/eli/dir/2010/24/oj/fra> ;
+      eli:publisher  "Publications Office"@en .
+
+<http://eli.budabe.eu/eli/dir/2010/24/oj/ces/pdfa1a>
+      eli:link_manifestation
+                    <http://publications.europa.eu/resource/cellar/ea3028ea-6bba-11e2-9294-01aa75ed71a1.0002.01/DOC_1> ;
+      eli:manifests  <http://eli.budabe.eu/eli/dir/2010/24/oj/ces> ;
+      eli:publisher  "Publications Office"@en .
+
+<http://eli.budabe.eu/eli/dir/2010/24/oj/lav>
+      eli:belongs_to  <http://eli.budabe.eu/eli/dir/2010/24/oj> ;
+      eli:expression_title
+                    "Labojums Eiropas Parlamenta un Padomes Direktīvā 2012/12/ES ( 2012. gada 19. aprīlis ), ar kuru groza Padomes Direktīvu 2001/112/EK, kas attiecas uz pārtikai paredzētām augļu sulām un dažiem līdzīgiem produktiem ( OV L 115, 27.4.2012. )"^^xsd:string ;
+      eli:language_expression
+                    <http://publications.europa.eu/resource/authority/language/LAV> .
+
+<http://eli.budabe.eu/eli/dir/2010/24/oj/pol/xhtml>
+      eli:link_manifestation
+                    <http://publications.europa.eu/resource/cellar/ea3028ea-6bba-11e2-9294-01aa75ed71a1.0017.04/DOC_1> ;
+      eli:manifests  <http://eli.budabe.eu/eli/dir/2010/24/oj/pol> ;
+      eli:publisher  "Publications Office"@en .
+
+<http://eli.budabe.eu/eli/dir/2010/24/oj/ita/print>
+      eli:manifests  <http://eli.budabe.eu/eli/dir/2010/24/oj/ita> ;
+      eli:publisher  "Publications Office"@en .
+
+<http://eli.budabe.eu/eli/dir/2010/24/oj/lav/fmx4>
+      eli:link_manifestation
+                    <http://publications.europa.eu/resource/cellar/ea3028ea-6bba-11e2-9294-01aa75ed71a1.0014.03/DOC_1> ;
+      eli:link_manifestation
+                    <http://publications.europa.eu/resource/cellar/ea3028ea-6bba-11e2-9294-01aa75ed71a1.0014.03/DOC_2> ;
+      eli:manifests  <http://eli.budabe.eu/eli/dir/2010/24/oj/lav> ;
+      eli:publisher  "Publications Office"@en .
+
+<http://eli.budabe.eu/eli/dir/2010/24/oj/deu/pdfa1a>
+      eli:link_manifestation
+                    <http://publications.europa.eu/resource/cellar/ea3028ea-6bba-11e2-9294-01aa75ed71a1.0004.01/DOC_1> ;
+      eli:manifests  <http://eli.budabe.eu/eli/dir/2010/24/oj/deu> ;
+      eli:publisher  "Publications Office"@en .
+
+<http://eli.budabe.eu/eli/dir/2010/24/oj/dan/fmx4>
+      eli:link_manifestation
+                    <http://publications.europa.eu/resource/cellar/ea3028ea-6bba-11e2-9294-01aa75ed71a1.0003.03/DOC_1> ;
+      eli:link_manifestation
+                    <http://publications.europa.eu/resource/cellar/ea3028ea-6bba-11e2-9294-01aa75ed71a1.0003.03/DOC_2> ;
+      eli:manifests  <http://eli.budabe.eu/eli/dir/2010/24/oj/dan> ;
+      eli:publisher  "Publications Office"@en .
+
+<http://eli.budabe.eu/eli/dir/2010/24/oj/fra/xhtml>
+      eli:link_manifestation
+                    <http://publications.europa.eu/resource/cellar/ea3028ea-6bba-11e2-9294-01aa75ed71a1.0010.04/DOC_1> ;
+      eli:manifests  <http://eli.budabe.eu/eli/dir/2010/24/oj/fra> ;
+      eli:publisher  "Publications Office"@en .
+
+<http://eli.budabe.eu/eli/dir/2010/24/oj/nld>
+      eli:belongs_to  <http://eli.budabe.eu/eli/dir/2010/24/oj> ;
+      eli:expression_title
+                    "Rectificatie van Richtlijn 2012/12/EU van het Europees Parlement en de Raad van 19 april 2012 tot wijziging van Richtlijn 2001/112/EG van de Raad inzake voor menselijke voeding bestemde vruchtensappen en bepaalde soortgelijke producten ( PB L 115 van 27.4.2012 )"^^xsd:string ;
+      eli:language_expression
+                    <http://publications.europa.eu/resource/authority/language/NLD> .
+
+<http://eli.budabe.eu/eli/dir/2010/24/oj/pol/pdfa1a>
+      eli:link_manifestation
+                    <http://publications.europa.eu/resource/cellar/ea3028ea-6bba-11e2-9294-01aa75ed71a1.0017.01/DOC_1> ;
+      eli:manifests  <http://eli.budabe.eu/eli/dir/2010/24/oj/pol> ;
+      eli:publisher  "Publications Office"@en .
+
+<http://eli.budabe.eu/eli/dir/2010/24/oj/eng/fmx4>
+      eli:link_manifestation
+                    <http://publications.europa.eu/resource/cellar/ea3028ea-6bba-11e2-9294-01aa75ed71a1.0006.03/DOC_1> ;
+      eli:link_manifestation
+                    <http://publications.europa.eu/resource/cellar/ea3028ea-6bba-11e2-9294-01aa75ed71a1.0006.03/DOC_2> ;
+      eli:manifests  <http://eli.budabe.eu/eli/dir/2010/24/oj/eng> ;
+      eli:publisher  "Publications Office"@en .
+
+<http://eli.budabe.eu/eli/dir/2010/24/oj/pol/print>
+      eli:manifests  <http://eli.budabe.eu/eli/dir/2010/24/oj/pol> ;
+      eli:publisher  "Publications Office"@en .
+
+<http://eli.budabe.eu/eli/dir/2010/24/oj/bul/xhtml>
+      eli:link_manifestation
+                    <http://publications.europa.eu/resource/cellar/ea3028ea-6bba-11e2-9294-01aa75ed71a1.0001.04/DOC_1> ;
+      eli:manifests  <http://eli.budabe.eu/eli/dir/2010/24/oj/bul> ;
+      eli:publisher  "Publications Office"@en .
+
+<http://eli.budabe.eu/eli/dir/2010/24/oj/fin/pdfa1a>
+      eli:link_manifestation
+                    <http://publications.europa.eu/resource/cellar/ea3028ea-6bba-11e2-9294-01aa75ed71a1.0009.01/DOC_1> ;
+      eli:manifests  <http://eli.budabe.eu/eli/dir/2010/24/oj/fin> ;
+      eli:publisher  "Publications Office"@en .
+
+<http://eli.budabe.eu/eli/dir/2010/24/oj/ces/fmx4>
+      eli:link_manifestation
+                    <http://publications.europa.eu/resource/cellar/ea3028ea-6bba-11e2-9294-01aa75ed71a1.0002.03/DOC_1> ;
+      eli:link_manifestation
+                    <http://publications.europa.eu/resource/cellar/ea3028ea-6bba-11e2-9294-01aa75ed71a1.0002.03/DOC_2> ;
+      eli:manifests  <http://eli.budabe.eu/eli/dir/2010/24/oj/ces> ;
+      eli:publisher  "Publications Office"@en .
+
+<http://eli.budabe.eu/eli/dir/2010/24/oj/bul/fmx4>
+      eli:link_manifestation
+                    <http://publications.europa.eu/resource/cellar/ea3028ea-6bba-11e2-9294-01aa75ed71a1.0001.03/DOC_2> ;
+      eli:link_manifestation
+                    <http://publications.europa.eu/resource/cellar/ea3028ea-6bba-11e2-9294-01aa75ed71a1.0001.03/DOC_1> ;
+      eli:manifests  <http://eli.budabe.eu/eli/dir/2010/24/oj/bul> ;
+      eli:publisher  "Publications Office"@en .
+
+<http://eli.budabe.eu/eli/dir/2010/24/oj/ell/print>
+      eli:manifests  <http://eli.budabe.eu/eli/dir/2010/24/oj/ell> ;
+      eli:publisher  "Publications Office"@en .
+
+<http://eli.budabe.eu/eli/dir/2010/24/oj/mlt/xhtml>
+      eli:link_manifestation
+                    <http://publications.europa.eu/resource/cellar/ea3028ea-6bba-11e2-9294-01aa75ed71a1.0015.04/DOC_1> ;
+      eli:manifests  <http://eli.budabe.eu/eli/dir/2010/24/oj/mlt> ;
+      eli:publisher  "Publications Office"@en .
+
+<http://eli.budabe.eu/eli/dir/2010/24/oj/slk/print>
+      eli:manifests  <http://eli.budabe.eu/eli/dir/2010/24/oj/slk> ;
+      eli:publisher  "Publications Office"@en .
+
+<http://eli.budabe.eu/eli/dir/2010/24/oj/mlt/fmx4>
+      eli:link_manifestation
+                    <http://publications.europa.eu/resource/cellar/ea3028ea-6bba-11e2-9294-01aa75ed71a1.0015.03/DOC_2> ;
+      eli:link_manifestation
+                    <http://publications.europa.eu/resource/cellar/ea3028ea-6bba-11e2-9294-01aa75ed71a1.0015.03/DOC_1> ;
+      eli:manifests  <http://eli.budabe.eu/eli/dir/2010/24/oj/mlt> ;
+      eli:publisher  "Publications Office"@en .
+
+<http://eli.budabe.eu/eli/dir/2010/24/oj/mlt>
+      eli:belongs_to  <http://eli.budabe.eu/eli/dir/2010/24/oj> ;
+      eli:expression_title
+                    "Rettifika tad-Direttiva 2012/12/UE tal-Parlament Ewropew u tal-Kunsill tad- 19 ta’ April 2012 li temenda d-Direttiva tal-Kunsill 2001/112/KE li tirrigwarda l-meraq tal-frott u ċerti prodotti simili maħsuba għall-konsum mill-bniedem ( ĠU L 115, 27.4.2012 )"^^xsd:string ;
+      eli:language_expression
+                    <http://publications.europa.eu/resource/authority/language/MLT> .
+
+<http://eli.budabe.eu/eli/dir/2010/24/oj/dan/pdfa1a>
+      eli:link_manifestation
+                    <http://publications.europa.eu/resource/cellar/ea3028ea-6bba-11e2-9294-01aa75ed71a1.0003.01/DOC_1> ;
+      eli:manifests  <http://eli.budabe.eu/eli/dir/2010/24/oj/dan> ;
+      eli:publisher  "Publications Office"@en .
+
+<http://eli.budabe.eu/eli/dir/2010/24/oj/lav/xhtml>
+      eli:link_manifestation
+                    <http://publications.europa.eu/resource/cellar/ea3028ea-6bba-11e2-9294-01aa75ed71a1.0014.04/DOC_1> ;
+      eli:manifests  <http://eli.budabe.eu/eli/dir/2010/24/oj/lav> ;
+      eli:publisher  "Publications Office"@en .
+
+<http://eli.budabe.eu/eli/dir/2010/24/oj/deu/fmx4>
+      eli:link_manifestation
+                    <http://publications.europa.eu/resource/cellar/ea3028ea-6bba-11e2-9294-01aa75ed71a1.0004.03/DOC_1> ;
+      eli:link_manifestation
+                    <http://publications.europa.eu/resource/cellar/ea3028ea-6bba-11e2-9294-01aa75ed71a1.0004.03/DOC_2> ;
+      eli:manifests  <http://eli.budabe.eu/eli/dir/2010/24/oj/deu> ;
+      eli:publisher  "Publications Office"@en .
+
+<http://eli.budabe.eu/eli/dir/2010/24/oj/ita>
+      eli:belongs_to  <http://eli.budabe.eu/eli/dir/2010/24/oj> ;
+      eli:expression_title
+                    "Rettifica della direttiva 2012/12/UE del Parlamento europeo e del Consiglio, del 19 aprile 2012 , che modifica la direttiva 2001/112/CE del Consiglio concernente i succhi di frutta e altri prodotti analoghi destinati all’alimentazione umana ( GU L 115 del 27.4.2012 )"^^xsd:string ;
+      eli:language_expression
+                    <http://publications.europa.eu/resource/authority/language/ITA> .
+
+<http://eli.budabe.eu/eli/dir/2010/24/oj/ron/print>
+      eli:manifests  <http://eli.budabe.eu/eli/dir/2010/24/oj/ron> ;
+      eli:publisher  "Publications Office"@en .
+
+<http://eli.budabe.eu/eli/dir/2010/24/oj/lit>
+      eli:belongs_to  <http://eli.budabe.eu/eli/dir/2010/24/oj> ;
+      eli:expression_title
+                    "2012 m. balandžio 19 d. Europos Parlamento ir Tarybos direktyvos 2012/12/ES, kuria iš dalies keičiama Tarybos direktyva 2001/112/EB dėl žmonių maistui skirtų vaisių sulčių ir tam tikrų panašių produktų, klaidų ištaisymas ( OL L 115, 2012 4 27 )"^^xsd:string ;
+      eli:language_expression
+                    <http://publications.europa.eu/resource/authority/language/LIT> .
+
+<http://eli.budabe.eu/eli/dir/2010/24/oj/fin>
+      eli:belongs_to  <http://eli.budabe.eu/eli/dir/2010/24/oj> ;
+      eli:expression_title
+                    "Oikaistaan Euroopan parlamentin ja neuvoston direktiivi 2012/12/EU, annettu 19 päivänä huhtikuuta 2012 , elintarvikkeena käytettävistä hedelmätäysmehuista ja tietyistä vastaavista valmisteista annetun neuvoston direktiivin 2001/112/EY muuttamisesta ( EUVL L 115, 27.4.2012 )"^^xsd:string ;
+      eli:language_expression
+                    <http://publications.europa.eu/resource/authority/language/FIN> .
+
+<http://eli.budabe.eu/eli/dir/2010/24/oj/lit/pdfa1a>
+      eli:link_manifestation
+                    <http://publications.europa.eu/resource/cellar/ea3028ea-6bba-11e2-9294-01aa75ed71a1.0013.01/DOC_1> ;
+      eli:manifests  <http://eli.budabe.eu/eli/dir/2010/24/oj/lit> ;
+      eli:publisher  "Publications Office"@en .
+
+<http://eli.budabe.eu/eli/dir/2010/24/oj/eng/pdfa1a>
+      eli:link_manifestation
+                    <http://publications.europa.eu/resource/cellar/ea3028ea-6bba-11e2-9294-01aa75ed71a1.0006.01/DOC_1> ;
+      eli:manifests  <http://eli.budabe.eu/eli/dir/2010/24/oj/eng> ;
+      eli:publisher  "Publications Office"@en .
+
+<http://eli.budabe.eu/eli/dir/2010/24/oj/ces/xhtml>
+      eli:link_manifestation
+                    <http://publications.europa.eu/resource/cellar/ea3028ea-6bba-11e2-9294-01aa75ed71a1.0002.04/DOC_1> ;
+      eli:manifests  <http://eli.budabe.eu/eli/dir/2010/24/oj/ces> ;
+      eli:publisher  "Publications Office"@en .
+
+<http://eli.budabe.eu/eli/dir/2010/24/oj/por/fmx4>
+      eli:link_manifestation
+                    <http://publications.europa.eu/resource/cellar/ea3028ea-6bba-11e2-9294-01aa75ed71a1.0018.03/DOC_2> ;
+      eli:link_manifestation
+                    <http://publications.europa.eu/resource/cellar/ea3028ea-6bba-11e2-9294-01aa75ed71a1.0018.03/DOC_1> ;
+      eli:manifests  <http://eli.budabe.eu/eli/dir/2010/24/oj/por> ;
+      eli:publisher  "Publications Office"@en .
+
+<http://eli.budabe.eu/eli/dir/2010/24/oj/hun>
+      eli:belongs_to  <http://eli.budabe.eu/eli/dir/2010/24/oj> ;
+      eli:expression_title
+                    "Helyesbítés a 2001/112/EK tanácsi irányelvnek a gyümölcslevek és egyes hasonló, emberi fogyasztásra szánt termékek tekintetében történő módosításáról szóló, 2012. április 19-i 2012/12/EU európai parlamenti és tanácsi irányelvhez ( HL L 115., 2012.4.27. )"^^xsd:string ;
+      eli:language_expression
+                    <http://publications.europa.eu/resource/authority/language/HUN> .
+
+<http://eli.budabe.eu/eli/dir/2010/24/oj/hun/print>
+      eli:manifests  <http://eli.budabe.eu/eli/dir/2010/24/oj/hun> ;
+      eli:publisher  "Publications Office"@en .
+
+<http://eli.budabe.eu/eli/dir/2010/24/oj/deu>
+      eli:belongs_to  <http://eli.budabe.eu/eli/dir/2010/24/oj> ;
+      eli:expression_title
+                    "Berichtigung der Richtlinie 2012/12/EU des Europäischen Parlaments und des Rates vom 19. April 2012 zur Änderung der Richtlinie 2001/112/EG des Rates über Fruchtsäfte und bestimmte gleichartige Erzeugnisse für die menschliche Ernährung ( ABl. L 115 vom 27.4.2012 )"^^xsd:string ;
+      eli:language_expression
+                    <http://publications.europa.eu/resource/authority/language/DEU> .
+
+<http://eli.budabe.eu/eli/dir/2010/24/oj/dan>
+      eli:belongs_to  <http://eli.budabe.eu/eli/dir/2010/24/oj> ;
+      eli:expression_title
+                    "Berigtigelse til Europa-Parlamentets og Rådets direktiv 2012/12/EU af 19. april 2012 om ændring af Rådets direktiv 2001/112/EF om frugtsaft og visse lignende produkter bestemt til konsum ( EUT L 115 af 27.4.2012 )"^^xsd:string ;
+      eli:language_expression
+                    <http://publications.europa.eu/resource/authority/language/DAN> .
+
+<http://eli.budabe.eu/eli/dir/2010/24/oj/slk/fmx4>
+      eli:link_manifestation
+                    <http://publications.europa.eu/resource/cellar/ea3028ea-6bba-11e2-9294-01aa75ed71a1.0020.03/DOC_1> ;
+      eli:link_manifestation
+                    <http://publications.europa.eu/resource/cellar/ea3028ea-6bba-11e2-9294-01aa75ed71a1.0020.03/DOC_2> ;
+      eli:manifests  <http://eli.budabe.eu/eli/dir/2010/24/oj/slk> ;
+      eli:publisher  "Publications Office"@en .
+
+<http://eli.budabe.eu/eli/dir/2010/24/oj/bul/print>
+      eli:manifests  <http://eli.budabe.eu/eli/dir/2010/24/oj/bul> ;
+      eli:publisher  "Publications Office"@en .
+
+<http://eli.budabe.eu/eli/dir/2010/24/oj/fra/print>
+      eli:manifests  <http://eli.budabe.eu/eli/dir/2010/24/oj/fra> ;
+      eli:publisher  "Publications Office"@en .
+
+<http://eli.budabe.eu/eli/dir/2010/24/oj/spa/xhtml>
+      eli:link_manifestation
+                    <http://publications.europa.eu/resource/cellar/ea3028ea-6bba-11e2-9294-01aa75ed71a1.0007.04/DOC_1> ;
+      eli:manifests  <http://eli.budabe.eu/eli/dir/2010/24/oj/spa> ;
+      eli:publisher  "Publications Office"@en .
+
+<http://eli.budabe.eu/eli/dir/2010/24/oj/ron/fmx4>
+      eli:link_manifestation
+                    <http://publications.europa.eu/resource/cellar/ea3028ea-6bba-11e2-9294-01aa75ed71a1.0019.03/DOC_1> ;
+      eli:link_manifestation
+                    <http://publications.europa.eu/resource/cellar/ea3028ea-6bba-11e2-9294-01aa75ed71a1.0019.03/DOC_2> ;
+      eli:manifests  <http://eli.budabe.eu/eli/dir/2010/24/oj/ron> ;
+      eli:publisher  "Publications Office"@en .
+
+<http://eli.budabe.eu/eli/dir/2010/24/oj/spa/fmx4>
+      eli:link_manifestation
+                    <http://publications.europa.eu/resource/cellar/ea3028ea-6bba-11e2-9294-01aa75ed71a1.0007.03/DOC_2> ;
+      eli:link_manifestation
+                    <http://publications.europa.eu/resource/cellar/ea3028ea-6bba-11e2-9294-01aa75ed71a1.0007.03/DOC_1> ;
+      eli:manifests  <http://eli.budabe.eu/eli/dir/2010/24/oj/spa> ;
+      eli:publisher  "Publications Office"@en .
+
+<http://eli.budabe.eu/eli/dir/2010/24/oj/nld/fmx4>
+      eli:link_manifestation
+                    <http://publications.europa.eu/resource/cellar/ea3028ea-6bba-11e2-9294-01aa75ed71a1.0016.03/DOC_2> ;
+      eli:link_manifestation
+                    <http://publications.europa.eu/resource/cellar/ea3028ea-6bba-11e2-9294-01aa75ed71a1.0016.03/DOC_1> ;
+      eli:manifests  <http://eli.budabe.eu/eli/dir/2010/24/oj/nld> ;
+      eli:publisher  "Publications Office"@en .
+
+<http://eli.budabe.eu/eli/dir/2010/24/oj/ell>
+      eli:belongs_to  <http://eli.budabe.eu/eli/dir/2010/24/oj> ;
+      eli:expression_title
+                    "Διορθωτικό στην οδηγία 2012/12/ΕΕ του Ευρωπαϊκού Κοινοβουλίου και του Συμβουλίου, της 19ης Απριλίου 2012 , για την τροποποίηση της οδηγίας 2001/112/ΕΚ του Συμβουλίου, για τους χυμούς φρούτων και ορισμένα ομοειδή προϊόντα που προορίζονται για τη διατροφή του ανθρώπου ( ΕΕ L 115 της 27.4.2012 )"^^xsd:string ;
+      eli:language_expression
+                    <http://publications.europa.eu/resource/authority/language/ELL> .
+
+<http://eli.budabe.eu/eli/dir/2010/24/oj/slv/pdfa1a>
+      eli:link_manifestation
+                    <http://publications.europa.eu/resource/cellar/ea3028ea-6bba-11e2-9294-01aa75ed71a1.0021.01/DOC_1> ;
+      eli:manifests  <http://eli.budabe.eu/eli/dir/2010/24/oj/slv> ;
+      eli:publisher  "Publications Office"@en .
+
+<http://eli.budabe.eu/eli/dir/2010/24/oj/dan/xhtml>
+      eli:link_manifestation
+                    <http://publications.europa.eu/resource/cellar/ea3028ea-6bba-11e2-9294-01aa75ed71a1.0003.04/DOC_1> ;
+      eli:manifests  <http://eli.budabe.eu/eli/dir/2010/24/oj/dan> ;
+      eli:publisher  "Publications Office"@en .
+
+<http://eli.budabe.eu/eli/dir/2010/24/oj/est>
+      eli:belongs_to  <http://eli.budabe.eu/eli/dir/2010/24/oj> ;
+      eli:expression_title
+                    "Euroopa Parlamendi ja nõukogu 19. aprilli 2012 . aasta direktiivi 2012/12/EL (millega muudetakse nõukogu direktiivi 2001/112/EÜ toiduks ettenähtud puuvilja- ja marjamahlade ning teatavate samalaadsete toodete kohta) parandus ( ELT L 115, 27.4.2012 )"^^xsd:string ;
+      eli:language_expression
+                    <http://publications.europa.eu/resource/authority/language/EST> .
+
+<http://eli.budabe.eu/eli/dir/2010/24/oj/mlt/pdfa1a>
+      eli:link_manifestation
+                    <http://publications.europa.eu/resource/cellar/ea3028ea-6bba-11e2-9294-01aa75ed71a1.0015.01/DOC_1> ;
+      eli:manifests  <http://eli.budabe.eu/eli/dir/2010/24/oj/mlt> ;
+      eli:publisher  "Publications Office"@en .
+
+<http://eli.budabe.eu/eli/dir/2010/24/oj/nld/xhtml>
+      eli:link_manifestation
+                    <http://publications.europa.eu/resource/cellar/ea3028ea-6bba-11e2-9294-01aa75ed71a1.0016.04/DOC_1> ;
+      eli:manifests  <http://eli.budabe.eu/eli/dir/2010/24/oj/nld> ;
+      eli:publisher  "Publications Office"@en .
+
+<http://eli.budabe.eu/eli/dir/2010/24/oj/est/fmx4>
+      eli:link_manifestation
+                    <http://publications.europa.eu/resource/cellar/ea3028ea-6bba-11e2-9294-01aa75ed71a1.0008.03/DOC_1> ;
+      eli:link_manifestation
+                    <http://publications.europa.eu/resource/cellar/ea3028ea-6bba-11e2-9294-01aa75ed71a1.0008.03/DOC_2> ;
+      eli:manifests  <http://eli.budabe.eu/eli/dir/2010/24/oj/est> ;
+      eli:publisher  "Publications Office"@en .
+
+<http://eli.budabe.eu/eli/dir/2010/24/oj/ron>
+      eli:belongs_to  <http://eli.budabe.eu/eli/dir/2010/24/oj> ;
+      eli:expression_title
+                    "Rectificare la Directiva 2012/12/UE a Parlamentului European și a Consiliului din 19 aprilie 2012 de modificare a Directivei 2001/112/CE a Consiliului privind sucurile de fructe și anumite produse similare destinate consumului uman ( JO L 115, 27.4.2012 )"^^xsd:string ;
+      eli:language_expression
+                    <http://publications.europa.eu/resource/authority/language/RON> .
+
+<http://eli.budabe.eu/eli/dir/2010/24/oj/slk/xhtml>
+      eli:link_manifestation
+                    <http://publications.europa.eu/resource/cellar/ea3028ea-6bba-11e2-9294-01aa75ed71a1.0020.04/DOC_1> ;
+      eli:manifests  <http://eli.budabe.eu/eli/dir/2010/24/oj/slk> ;
+      eli:publisher  "Publications Office"@en .
+
+<http://eli.budabe.eu/eli/dir/2010/24/oj/ces/print>
+      eli:manifests  <http://eli.budabe.eu/eli/dir/2010/24/oj/ces> ;
+      eli:publisher  "Publications Office"@en .
+
+<http://eli.budabe.eu/eli/dir/2010/24/oj/spa/pdfa1a>
+      eli:link_manifestation
+                    <http://publications.europa.eu/resource/cellar/ea3028ea-6bba-11e2-9294-01aa75ed71a1.0007.01/DOC_1> ;
+      eli:manifests  <http://eli.budabe.eu/eli/dir/2010/24/oj/spa> ;
+      eli:publisher  "Publications Office"@en .
+
+<http://eli.budabe.eu/eli/dir/2010/24/oj/lit/print>
+      eli:manifests  <http://eli.budabe.eu/eli/dir/2010/24/oj/lit> ;
+      eli:publisher  "Publications Office"@en .
+
+<http://eli.budabe.eu/eli/dir/2010/24/oj/ita/pdfa1a>
+      eli:link_manifestation
+                    <http://publications.europa.eu/resource/cellar/ea3028ea-6bba-11e2-9294-01aa75ed71a1.0012.01/DOC_1> ;
+      eli:manifests  <http://eli.budabe.eu/eli/dir/2010/24/oj/ita> ;
+      eli:publisher  "Publications Office"@en .
+
+<http://eli.budabe.eu/eli/dir/2010/24/oj/bul/pdfa1a>
+      eli:link_manifestation
+                    <http://publications.europa.eu/resource/cellar/ea3028ea-6bba-11e2-9294-01aa75ed71a1.0001.01/DOC_1> ;
+      eli:manifests  <http://eli.budabe.eu/eli/dir/2010/24/oj/bul> ;
+      eli:publisher  "Publications Office"@en .
+
+<http://eli.budabe.eu/eli/dir/2010/24/oj>
+      eli:agent_document  <http://publications.europa.eu/resource/authority/corporate-body/EP> ;
+      eli:agent_document  <http://publications.europa.eu/resource/authority/corporate-body/CONSIL> ;
+      eli:date_document  "2013-01-31"^^xsd:date ;
+      eli:id_document  "http://eli.budabe.eu/eli/dir/2010/24/oj" ;
+      eli:id_local  "32012L0012R(01)"^^xsd:string ;
+      eli:is_about  <http://eurovoc.europa.eu/5451> ;
+      eli:is_about  <http://eurovoc.europa.eu/893> ;
+      eli:is_about  <http://eurovoc.europa.eu/1425> ;
+      eli:is_about  <http://eurovoc.europa.eu/1552> ;
+      eli:is_about  <http://eurovoc.europa.eu/5573> ;
+      eli:is_about  <http://eurovoc.europa.eu/6569> ;
+      eli:is_about  <http://eurovoc.europa.eu/4314> ;
+      eli:is_about  <http://eurovoc.europa.eu/6052> ;
+      eli:type_document  <http://publications.europa.eu/resource/authority/resource-type/dir> .
+
+<http://eli.budabe.eu/eli/dir/2010/24/oj/pol/fmx4>
+      eli:link_manifestation
+                    <http://publications.europa.eu/resource/cellar/ea3028ea-6bba-11e2-9294-01aa75ed71a1.0017.03/DOC_1> ;
+      eli:link_manifestation
+                    <http://publications.europa.eu/resource/cellar/ea3028ea-6bba-11e2-9294-01aa75ed71a1.0017.03/DOC_2> ;
+      eli:manifests  <http://eli.budabe.eu/eli/dir/2010/24/oj/pol> ;
+      eli:publisher  "Publications Office"@en .
+
+<http://eli.budabe.eu/eli/dir/2010/24/oj/deu/xhtml>
+      eli:link_manifestation
+                    <http://publications.europa.eu/resource/cellar/ea3028ea-6bba-11e2-9294-01aa75ed71a1.0004.04/DOC_1> ;
+      eli:manifests  <http://eli.budabe.eu/eli/dir/2010/24/oj/deu> ;
+      eli:publisher  "Publications Office"@en .
+
+<http://eli.budabe.eu/eli/dir/2010/24/oj/fra/pdfa1a>
+      eli:link_manifestation
+                    <http://publications.europa.eu/resource/cellar/ea3028ea-6bba-11e2-9294-01aa75ed71a1.0010.01/DOC_1> ;
+      eli:manifests  <http://eli.budabe.eu/eli/dir/2010/24/oj/fra> ;
+      eli:publisher  "Publications Office"@en .
+
+<http://eli.budabe.eu/eli/dir/2010/24/oj/slv/fmx4>
+      eli:link_manifestation
+                    <http://publications.europa.eu/resource/cellar/ea3028ea-6bba-11e2-9294-01aa75ed71a1.0021.03/DOC_1> ;
+      eli:link_manifestation
+                    <http://publications.europa.eu/resource/cellar/ea3028ea-6bba-11e2-9294-01aa75ed71a1.0021.03/DOC_2> ;
+      eli:manifests  <http://eli.budabe.eu/eli/dir/2010/24/oj/slv> ;
+      eli:publisher  "Publications Office"@en .
+
+<http://eli.budabe.eu/eli/dir/2010/24/oj/bul>
+      eli:belongs_to  <http://eli.budabe.eu/eli/dir/2010/24/oj> ;
+      eli:expression_title
+                    "Поправка на Директива 2012/12/ЕС на Европейския парламент и на Съвета от 19 април 2012 година за изменение на Директива 2001/112/ЕО на Съвета относно соковете от плодове и някои сходни продукти, предназначени за консумация от човека ( ОВ L 115, 27.4.2012 г. )"^^xsd:string ;
+      eli:language_expression
+                    <http://publications.europa.eu/resource/authority/language/BUL> .
+
+<http://eli.budabe.eu/eli/dir/2010/24/oj/nld/print>
+      eli:manifests  <http://eli.budabe.eu/eli/dir/2010/24/oj/nld> ;
+      eli:publisher  "Publications Office"@en .
+
+<http://eli.budabe.eu/eli/dir/2010/24/oj/ell/fmx4>
+      eli:link_manifestation
+                    <http://publications.europa.eu/resource/cellar/ea3028ea-6bba-11e2-9294-01aa75ed71a1.0005.03/DOC_2> ;
+      eli:link_manifestation
+                    <http://publications.europa.eu/resource/cellar/ea3028ea-6bba-11e2-9294-01aa75ed71a1.0005.03/DOC_1> ;
+      eli:manifests  <http://eli.budabe.eu/eli/dir/2010/24/oj/ell> ;
+      eli:publisher  "Publications Office"@en .
+
+<http://eli.budabe.eu/eli/dir/2010/24/oj/ell/xhtml>
+      eli:link_manifestation
+                    <http://publications.europa.eu/resource/cellar/ea3028ea-6bba-11e2-9294-01aa75ed71a1.0005.04/DOC_1> ;
+      eli:manifests  <http://eli.budabe.eu/eli/dir/2010/24/oj/ell> ;
+      eli:publisher  "Publications Office"@en .
+
+<http://eli.budabe.eu/eli/dir/2010/24/oj/slk>
+      eli:belongs_to  <http://eli.budabe.eu/eli/dir/2010/24/oj> ;
+      eli:expression_title
+                    "Korigendum k smernici Európskeho parlamentu a Rady 2012/12/EÚ z  19. apríla 2012 , ktorou sa mení a dopĺňa smernica Rady 2001/112/ES, ktorá sa vzťahuje na ovocné šťavy a niektoré podobné produkty určené na ľudskú spotrebu ( Ú. v. EÚ L 115, 27.4.2012 )"^^xsd:string ;
+      eli:language_expression
+                    <http://publications.europa.eu/resource/authority/language/SLK> .
+
+<http://eli.budabe.eu/eli/dir/2010/24/oj/eng/xhtml>
+      eli:link_manifestation
+                    <http://publications.europa.eu/resource/cellar/ea3028ea-6bba-11e2-9294-01aa75ed71a1.0006.04/DOC_1> ;
+      eli:manifests  <http://eli.budabe.eu/eli/dir/2010/24/oj/eng> ;
+      eli:publisher  "Publications Office"@en .
+
+<http://eli.budabe.eu/eli/dir/2010/24/oj/ron/xhtml>
+      eli:link_manifestation
+                    <http://publications.europa.eu/resource/cellar/ea3028ea-6bba-11e2-9294-01aa75ed71a1.0019.04/DOC_1> ;
+      eli:manifests  <http://eli.budabe.eu/eli/dir/2010/24/oj/ron> ;
+      eli:publisher  "Publications Office"@en .
+
+<http://eli.budabe.eu/eli/dir/2010/24/oj/fin/xhtml>
+      eli:link_manifestation
+                    <http://publications.europa.eu/resource/cellar/ea3028ea-6bba-11e2-9294-01aa75ed71a1.0009.04/DOC_1> ;
+      eli:manifests  <http://eli.budabe.eu/eli/dir/2010/24/oj/fin> ;
+      eli:publisher  "Publications Office"@en .
+
+<http://eli.budabe.eu/eli/dir/2010/24/oj/mlt/print>
+      eli:manifests  <http://eli.budabe.eu/eli/dir/2010/24/oj/mlt> ;
+      eli:publisher  "Publications Office"@en .
+
+<http://eli.budabe.eu/eli/dir/2010/24/oj/lav/pdfa1a>
+      eli:link_manifestation
+                    <http://publications.europa.eu/resource/cellar/ea3028ea-6bba-11e2-9294-01aa75ed71a1.0014.01/DOC_1> ;
+      eli:manifests  <http://eli.budabe.eu/eli/dir/2010/24/oj/lav> ;
+      eli:publisher  "Publications Office"@en .
+
+<http://eli.budabe.eu/eli/dir/2010/24/oj/por>
+      eli:belongs_to  <http://eli.budabe.eu/eli/dir/2010/24/oj> ;
+      eli:expression_title
+                    "Retificação da Diretiva 2012/12/UE do Parlamento Europeu e do Conselho, de 19 de abril de 2012 , que altera a Diretiva 2001/112/CE do Conselho relativa aos sumos de frutos e a determinados produtos similares destinados à alimentação humana ( JO L 115 de 27.4.2012 )"^^xsd:string ;
+      eli:language_expression
+                    <http://publications.europa.eu/resource/authority/language/POR> .
+
+<http://eli.budabe.eu/eli/dir/2010/24/oj/swe>
+      eli:belongs_to  <http://eli.budabe.eu/eli/dir/2010/24/oj> ;
+      eli:expression_title
+                    "Rättelse till Europaparlamentets och rådets direktiv 2012/12/EU av den 19 april 2012 om ändring av rådets direktiv 2001/112/EG om fruktjuice och vissa liknande produkter avsedda som livsmedel ( EUT L 115 av den 27.4.2012 )"^^xsd:string ;
+      eli:language_expression
+                    <http://publications.europa.eu/resource/authority/language/SWE> .
+
+<http://eli.budabe.eu/eli/dir/2010/24/oj/hun/pdfa1a>
+      eli:link_manifestation
+                    <http://publications.europa.eu/resource/cellar/ea3028ea-6bba-11e2-9294-01aa75ed71a1.0011.01/DOC_1> ;
+      eli:manifests  <http://eli.budabe.eu/eli/dir/2010/24/oj/hun> ;
+      eli:publisher  "Publications Office"@en .
+
+<http://eli.budabe.eu/eli/dir/2010/24/oj/hun/fmx4>
+      eli:link_manifestation
+                    <http://publications.europa.eu/resource/cellar/ea3028ea-6bba-11e2-9294-01aa75ed71a1.0011.03/DOC_2> ;
+      eli:link_manifestation
+                    <http://publications.europa.eu/resource/cellar/ea3028ea-6bba-11e2-9294-01aa75ed71a1.0011.03/DOC_1> ;
+      eli:manifests  <http://eli.budabe.eu/eli/dir/2010/24/oj/hun> ;
+      eli:publisher  "Publications Office"@en .
+
+<http://eli.budabe.eu/eli/dir/2010/24/oj/fra>
+      eli:belongs_to  <http://eli.budabe.eu/eli/dir/2010/24/oj> ;
+      eli:expression_title
+                    "Rectificatif à la directive 2012/12/UE du Parlement européen et du Conseil du 19 avril 2012 modifiant la directive 2001/112/CE du Conseil relative aux jus de fruits et à certains produits similaires destinés à l'alimentation humaine ( JO L 115 du 27.4.2012 )"^^xsd:string ;
+      eli:language_expression
+                    <http://publications.europa.eu/resource/authority/language/FRA> .
+
+<http://eli.budabe.eu/eli/dir/2010/24/oj/est/print>
+      eli:manifests  <http://eli.budabe.eu/eli/dir/2010/24/oj/est> ;
+      eli:publisher  "Publications Office"@en .
+
+<http://eli.budabe.eu/eli/dir/2010/24/oj/swe/print>
+      eli:manifests  <http://eli.budabe.eu/eli/dir/2010/24/oj/swe> ;
+      eli:publisher  "Publications Office"@en .
+
+<http://eli.budabe.eu/eli/dir/2010/24/oj/por/print>
+      eli:manifests  <http://eli.budabe.eu/eli/dir/2010/24/oj/por> ;
+      eli:publisher  "Publications Office"@en .
+
+<http://eli.budabe.eu/eli/dir/2010/24/oj/ces>
+      eli:belongs_to  <http://eli.budabe.eu/eli/dir/2010/24/oj> ;
+      eli:expression_title
+                    "Oprava směrnice Evropského parlamentu a Rady 2012/12/EU ze dne 19. dubna 2012 , kterou se mění směrnice Rady 2001/112/ES o ovocných šťávách a některých podobných produktech určených k lidské spotřebě ( Úř. věst. L 115 ze dne 27.4.2012 )"^^xsd:string ;
+      eli:language_expression
+                    <http://publications.europa.eu/resource/authority/language/CES> .
+
+<http://eli.budabe.eu/eli/dir/2010/24/oj/ita/fmx4>
+      eli:link_manifestation
+                    <http://publications.europa.eu/resource/cellar/ea3028ea-6bba-11e2-9294-01aa75ed71a1.0012.03/DOC_1> ;
+      eli:link_manifestation
+                    <http://publications.europa.eu/resource/cellar/ea3028ea-6bba-11e2-9294-01aa75ed71a1.0012.03/DOC_2> ;
+      eli:manifests  <http://eli.budabe.eu/eli/dir/2010/24/oj/ita> ;
+      eli:publisher  "Publications Office"@en .

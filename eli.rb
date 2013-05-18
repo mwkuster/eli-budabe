@@ -97,8 +97,9 @@ sparql
 
   def metadata()
     graph = SPARQL.execute(self.legal_resource_query, @repo)
-    rdfa_xhtml = RDF::RDFa::Writer.buffer(:haml => RDF::RDFa::Writer::DISTILLER_HAML, :base_uri => self.eli) do |writer| 
-      writer << graph 
+    g2 = SPARQL.execute("CONSTRUCT {?s ?p ?o} WHERE {?s ?p ?o} ORDER BY ?s ?p ?o", graph)
+    rdfa_xhtml = RDF::RDFa::Writer.buffer(:haml => RDF::RDFa::Writer::DEFAULT_HAML, :standard_prefixes => true, :base_uri => "") do |writer| 
+      writer << g2
     end
     rdfa_xhtml
   end
