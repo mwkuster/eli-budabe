@@ -1,16 +1,40 @@
 require './repo'
+require 'json'
 
-TRIPLESTORE_URL = "http://localhost:3030/eli/data"
+TRIPLESTORE_URL = "http://localhost:3030/eli/"
 
 class CachedRepo < Repo    
   def in_cache?(cellar_psi)
     #Check if there is already data on this cellar_psi in the local repository (if any)
-    @graph_url = "#{TRIPLESTORE_URL}?graph=#{CGI::escape(cellar_psi)}"
+    @graph_uri = ""
+    find_graph_query = <<-sparql
+PREFIX owl: <http://www.w3.org/2002/07/owl#>
+
+SELECT DISTINCT ?gra
+WHERE {
+      GRAPH ?gra
+      {
+        {<#{cellar_psi}> owl:sameAs ?o}
+          UNION
+        {?s owl:sameAs <#{cellar_psi}>}
+      } 
+      } 
+LIMIT 1    
+sparql
+    query_url = "#{TRIPLESTORE_URL}query?query=#{CGI::escape(find_graph_query)}&output=json"
     begin
-      response = RestClient.head(@graph_url) do  |response, request, result |
+      response = RestClient.get(query_url) do  |response, request, result |
         case response.code
         when 200 then
-          true
+          res = JSON::parse(response.body)
+          bindings = res["results"]["bindings"]
+          if bindings.length > 0 then
+            graph_uri = bindings[0]["gra"]["value"]
+            @graph_url = "#{TRIPLESTORE_URL}data?graph=#{CGI::escape(graph_uri)}"
+            true
+          else
+            false
+          end
         else
           false
         end
