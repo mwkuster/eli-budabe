@@ -2,12 +2,12 @@ require 'rdf'
 require 'sparql'
 require 'rdf/rdfxml'
 require 'rdf/rdfa'
-require './repo'
+require './cachedrepo'
 
 class Eli
   attr_reader :repo, :psi
 
-  TYPEDOC_RT_MAPPING = {"DIR" => "dir", "REG" => "reg", "REGIMP" => "reg_impl", "DEC" => "dec", "DECDEL" => "dec_del", "DIRIMP" => "dir_impl", "GENGUID" => "GUIDELINE", "INFO" => "info", "NOTICE" => "notice", "OP.COM.COM" => "opin", "PROC" => "proc_rules", "PROT" => "prot", "RDINFO" => "note", "REC" => "rec", "RECDEL" => "rec_del", "REGIMP" => "reg_impl", "RESOLUTION" => "res", "SAB" => "budget_suppl_amend", "TREATY" => "treaty", "AGR" => "agree" }
+  TYPEDOC_RT_MAPPING = {"DIR" => "dir", "REG" => "reg", "REGIMP" => "reg_impl", "DEC" => "dec", "DECDEL" => "dec_del", "DIRIMP" => "dir_impl", "GENGUID" => "GUIDELINE", "INFO" => "info", "NOTICE" => "notice", "OP.COM.COM" => "opin", "PROC" => "proc_rules", "PROT" => "prot", "RDINFO" => "note", "REC" => "rec", "RECDEL" => "rec_del", "REGIMP" => "reg_impl", "RESOLUTION" => "res", "SAB" => "budget_suppl_amend", "TREATY" => "treaty", "AGR" => "agree", "COMMUNIC_COURT" => "communic", "OP.COM.CES" => "opin" }
   TYPEDOC_RT_MAPPING.default = "undefined"
   TYPEDOC_CB_MAPPING = {"CS" => "consil", "PE" => "EP", "COM" => "com", "BCE" => "ecb", "COM-UN" => "unece"}
 
@@ -16,7 +16,8 @@ class Eli
   XSD = "<http://www.w3.org/2001/XMLSchema>"
 
   def initialize(psi = nil)
-    @repo = if psi then Repo.repo_for_psi(psi) else Repo.sample_repo end
+    r = CachedRepo.new(psi)
+    @repo = r.repo
     @psi = if psi then psi else "32010L0024" end #test case
     @eli = nil
   end
