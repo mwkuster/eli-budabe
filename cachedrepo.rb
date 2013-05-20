@@ -6,20 +6,17 @@ TRIPLESTORE_URL = "http://localhost:3030/eli/"
 class CachedRepo < Repo    
   def in_cache?(cellar_psi)
     #Check if there is already data on this cellar_psi in the local repository (if any)
-    @graph_uri = ""
+    @graph_url = "#{TRIPLESTORE_URL}data?graph=#{CGI::escape(cellar_psi)}"
     find_graph_query = <<-sparql
 PREFIX owl: <http://www.w3.org/2002/07/owl#>
-
 SELECT DISTINCT ?gra
 WHERE {
-      GRAPH ?gra
-      {
+      GRAPH ?gra{
         {<#{cellar_psi}> owl:sameAs ?o}
           UNION
         {?s owl:sameAs <#{cellar_psi}>}
       } 
-      } 
-LIMIT 1    
+} LIMIT 1    
 sparql
     query_url = "#{TRIPLESTORE_URL}query?query=#{CGI::escape(find_graph_query)}&output=json"
     begin
@@ -30,6 +27,7 @@ sparql
           bindings = res["results"]["bindings"]
           if bindings.length > 0 then
             graph_uri = bindings[0]["gra"]["value"]
+            #if the identifier was already bound to some other graph identifier, use that to avoid duplicating data
             @graph_url = "#{TRIPLESTORE_URL}data?graph=#{CGI::escape(graph_uri)}"
             true
           else
@@ -40,7 +38,7 @@ sparql
         end
       end
     rescue
-      puts "Cache not reachable or other issue"
+      puts "is_cache?: Cache not reachable or other issue"
       false
     end
   end
@@ -57,7 +55,7 @@ sparql
                        end
                      end, :content_type => 'application/rdf+xml')
     rescue
-      puts "Cache not reachable or other issue"
+      puts "add_to_cache: Cache not reachable or other issue"
       false #Cache isn't reachable, we don't add anything
     end 
   end
