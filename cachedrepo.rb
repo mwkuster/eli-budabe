@@ -6,7 +6,6 @@ class CachedRepo < Repo
   def in_cache?(cellar_psi)
     #Check if there is already data on this cellar_psi in the local repository (if any)
     @graph_url = "#{TRIPLESTORE_URL}?graph=#{CGI::escape(cellar_psi)}"
-    #puts @graph_url
     begin
       response = RestClient.head(@graph_url) do  |response, request, result |
         case response.code
@@ -33,7 +32,8 @@ class CachedRepo < Repo
                          writer << statement
                        end
                      end, :content_type => 'application/rdf+xml')
-    rescue Exception
+    rescue
+      puts "Cache not reachable or other issue"
       false #Cache isn't reachable, we don't add anything
     end 
   end
@@ -46,7 +46,7 @@ class CachedRepo < Repo
       puts "Had information on #{cellar_psi} cached"
       fetch_from_cache()
     else
-      @repo = self.uncached_repo_for_psi(cellar_psi)
+      self.uncached_repo_for_psi(cellar_psi)
       add_to_cache()
     end
   end
