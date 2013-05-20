@@ -58,14 +58,22 @@ In order to ensure sufficiently long-living connections, start thin directly wit
 thin -d -t 120 -p 4567 start
 ```
 
-4store as server backend
+Fuseki as server backend
 ===========================
-Largely inspired by the excellent http://www.jenitennison.com/blog/node/152
-
+Download latest version of Fuseki and unzip. Run the server with
 ```
-4s-backend-setup eli (only once during the initial setup)
-4s-backend eli
-4s-httpd -p 8000 -U eli
+./fuseki-server -loc=/var/lib/fuseki/eli ---update /eli
 ```
 
-Data physically stored under /var/lib/4store/eli/
+Storage location chosen to be /var/lib/fuseki/eli (any other location will work just as well)
+
+```
+curl -v -XPUT -T 32012L0012.ttl --header "Content-type: text/turtle;charset=utf-8" http://localhost:3030/eli/data?graph=http%3A%2F%2Fpublications.europa.eu%2Fresource%2Fcelex%2F32012L0012
+
+curl -v -XPUT -T 32012L0012R%2801%29.ttl --header "Content-type: text/turtle;charset=utf-8" http://localhost:3030/eli/data?graph=http%3A%2F%2Fpublications.europa.eu%2Fresource%2Fcelex%2F32012L0012R%2801%29
+
+curl -v http://localhost:3030/eli/data?graph=http%3A%2F%2Fpublications.europa.eu%2Fresource%2Fcelex%2F32012L0012
+```
+
+
+
