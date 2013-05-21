@@ -1,5 +1,6 @@
 PREFIX cdm: <http://publications.europa.eu/ontology/cdm#>
 PREFIX eli: <http://eurlex.europa.eu/eli#>
+PREFIX eli-fn: <http://eurlex.europa.eu/eli/function#>
 PREFIX xsd: <http://www.w3.org/2001/XMLSchema#>
 PREFIX owl: <http://www.w3.org/2002/07/owl#>
 
@@ -13,12 +14,12 @@ CONSTRUCT {
   eli:date_entry-in-force ?date_entry_in_force ;
   eli:date_no-longer-in-force ?date_no_longer_in_force ;
   eli:date_publication ?pub_date ;
-  eli:cites ?cites ;
+  eli:cites ?cites_eli ;
   eli:transposes ?transposes ;
-  eli:based_on ?based_on ;
-  eli:basis_for ?basis_for ;
-  eli:changes ?changes ;
-  eli:changed_by ?changed_by .
+  eli:based_on ?based_on_eli ;
+  eli:basis_for ?basis_for_eli ;
+  eli:changes ?changes_eli ;
+  eli:changed_by ?changed_by_eli .
   ?expr_eli eli:expression_title ?title ;
   eli:language_expression ?lang ;
   eli:belongs_to ?eli .
@@ -44,6 +45,12 @@ CONSTRUCT {
     ?oj  cdm:publication_general_date_publication ?pub_date .}
   BIND (<http://eli.budabe.eu/eli/dir/2010/24/oj> AS ?eli)
   BIND (str(?eli) AS ?eli_str)
+  BIND (IRI(eli-fn:to_eli(STR(?cites))) AS ?cites_eli)
+  BIND (IRI(eli-fn:to_eli(STR(?changes))) AS ?changes_eli)
+  BIND (IRI(eli-fn:to_eli(STR(?changed_by))) AS ?changed_by_eli)
+  BIND (IRI(eli-fn:to_eli(STR(?based_on))) AS ?based_on_eli)
+  BIND (IRI(eli-fn:to_eli(STR(?basis_for))) AS ?basis_for_eli)
+
 
   ?expr cdm:expression_title ?title .
   ?expr cdm:expression_uses_language ?lang .

@@ -20,6 +20,17 @@ class Eli
     @repo = r.repo
     @psi = if psi then psi else "32010L0024" end #test case
     @eli = nil
+
+    eli_iri = RDF::URI("http://eurlex.europa.eu/eli/function#to_eli")
+    SPARQL::Algebra::Expression.register_extension(eli_iri) do |literal|
+      raise TypeError, "argument must be a literal" unless literal.literal?
+      begin
+        RDF::Literal(Eli.new(literal.to_s).eli)
+      rescue
+        #If the PSI reference does not exist, leave it unchanged
+        RDF::Literal(literal.to_s)
+      end  
+    end
   end
 
   def parse_number(number) 
