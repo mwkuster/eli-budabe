@@ -55,7 +55,7 @@ Running of server
 In order to ensure sufficiently long-living connections, start thin directly with a suitable timeout (the default timeout of 30 seconds is insufficient):
 
 ```
-thin -d -t 120 -p 4567 start
+thin -d -t 240 -p 4567 start
 ```
 
 Fuseki as server backend

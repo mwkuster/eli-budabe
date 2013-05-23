@@ -7,7 +7,7 @@ require './cachedrepo'
 class Eli
   attr_reader :repo, :psi
 
-  TYPEDOC_RT_MAPPING = {"DIR" => "dir", "REG" => "reg", "REGIMP" => "reg_impl", "DEC" => "dec", "DECDEL" => "dec_del", "DIRIMP" => "dir_impl", "GENGUID" => "GUIDELINE", "INFO" => "info", "NOTICE" => "notice", "OP.COM.COM" => "opin", "PROC" => "proc_rules", "PROT" => "prot", "RDINFO" => "note", "REC" => "rec", "RECDEL" => "rec_del", "REGIMP" => "reg_impl", "RESOLUTION" => "res", "SAB" => "budget_suppl_amend", "TREATY" => "treaty", "AGR" => "agree", "COMMUNIC_COURT" => "communic", "OP.COM.CES" => "opin" }
+  TYPEDOC_RT_MAPPING = {"DIR" => "dir", "REG" => "reg", "REGIMP" => "reg_impl", "DEC" => "dec", "DECDEL" => "dec_del", "DIRIMP" => "dir_impl", "GENGUID" => "guideline", "INFO" => "info", "NOTICE" => "notice", "OP.COM.COM" => "opin", "PROC" => "proc_rules", "PROT" => "prot", "RDINFO" => "note", "REC" => "rec", "RECDEL" => "rec_del", "REGIMP" => "reg_impl", "RESOLUTION" => "res", "SAB" => "budget_suppl_amend", "TREATY" => "treaty", "AGR" => "agree", "COMMUNIC_COURT" => "communic", "OP.COM.CES" => "opin" }
   TYPEDOC_RT_MAPPING.default = "undefined"
   TYPEDOC_CB_MAPPING = {"CS" => "consil", "PE" => "EP", "COM" => "com", "BCE" => "ecb", "COM-UN" => "unece"}
 

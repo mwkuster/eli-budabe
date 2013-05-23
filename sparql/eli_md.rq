@@ -28,8 +28,8 @@ CONSTRUCT {
   eli:publisher "Publications Office"@en .
 } WHERE {
   ?subj cdm:work_created_by_agent ?agent_document ;
-  cdm:resource_legal_id_celex ?celex ;
   cdm:work_date_document ?date_document .
+  OPTIONAL { ?subj cdm:resource_legal_id_celex ?celex  }
   OPTIONAL { ?subj cdm:work_is_about_concept_eurovoc ?eurovoc }
   OPTIONAL {?subj cdm:resource_legal_date_entry-into-force ?date_entry_in_force }
   OPTIONAL {?subj cdm:resource_legal_date_end-of-validity ?date_no_longer_in_force }
