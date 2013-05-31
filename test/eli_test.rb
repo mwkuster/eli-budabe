@@ -24,4 +24,3 @@ class TestSampleELI < Test::Unit::TestCase
     assert_equal("http://eli.budabe.eu/eli/dir/2003/98/corr-lav-spa/2011-09-23/oj", Eli.new("http://publications.europa.eu/resource/celex/32003L0098R%2803%29").eli)
   end
 end
-

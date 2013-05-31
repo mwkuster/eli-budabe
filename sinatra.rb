@@ -4,6 +4,7 @@ require 'erb'
 require './eli'
 require 'open-uri'
 require 'json'
+require './cachedrepo'
 
 def psiencode(psi)
   URI::encode(psi).gsub(/\(/, "%28").gsub(/\)/, "%29")
@@ -50,5 +51,15 @@ get '/eli4id_jo/:psi/metadata' do
   rescue Exception => e
     status 404
     body e.to_json
+  end
+end
+
+get '/eli/:typedoc/:year/:natural_number/ojl' do
+  celex = find_celex(params[:typedoc].upcase, params[:year], params[:natural_number])
+  puts "celex: " + celex
+  if celex.is_a? String then
+    redirect "/eli4celex/#{celex}/metadata"
+  else
+    celex
   end
 end

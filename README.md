@@ -62,7 +62,7 @@ Fuseki as server backend
 ===========================
 Download latest version of Fuseki and unzip. Run the server with
 ```
-./fuseki-server -loc=/var/lib/fuseki/eli ---update /eli
+./fuseki-server -loc=/var/lib/fuseki/eli -update /eli
 ```
 
 Storage location chosen to be /var/lib/fuseki/eli (any other location will work just as well)

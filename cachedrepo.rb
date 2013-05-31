@@ -19,6 +19,7 @@ WHERE {
 } LIMIT 1    
 sparql
     query_url = "#{TRIPLESTORE_URL}query?query=#{CGI::escape(find_graph_query)}&output=json"
+    puts query_url
     begin
       response = RestClient.get(query_url) do  |response, request, result |
         case response.code
@@ -35,7 +36,7 @@ sparql
           end
         else
           false
-        end
+        end 
       end
     rescue
       puts "is_cache?: Cache not reachable or other issue"
@@ -73,3 +74,42 @@ sparql
     end
   end
 end
+
+def find_celex(typedoc, year, natural_number)
+  eli_query = <<-sparql
+PREFIX cdm: <http://publications.europa.eu/ontology/cdm#>
+
+SELECT DISTINCT ?celex 
+WHERE {
+GRAPH ?g {
+  ?manif cdm:manifestation_official-journal_part_information_number ?number .
+  ?manif cdm:manifestation_official-journal_part_typedoc_printer "#{typedoc}" .
+  ?manif cdm:manifestation_official-journal_part_is_corrigendum_printer "O" .
+  ?work cdm:resource_legal_id_celex ?celex .
+  FILTER(strlen(?number) > 0 && (regex(?number, "#{year}/#{natural_number}", "i") || regex(?number, "#{natural_number}/#{year}", "i")))
+ }
+}
+LIMIT 10
+sparql
+  puts eli_query
+  query_url = "#{TRIPLESTORE_URL}query?query=#{CGI::escape(eli_query)}&output=json"
+  puts query_url
+  response = RestClient.get(query_url) do  |response, request, result |
+    case response.code
+    when 200 then
+      res = JSON::parse(response.body)
+      bindings = res["results"]["bindings"]
+      case bindings.length
+      when 1 then
+        bindings[0]["celex"]["value"]
+      when 0 then
+        nil
+      else
+        bindings
+      end
+    else
+      nil
+    end
+  end
+  response
+end  

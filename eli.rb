@@ -7,7 +7,27 @@ require './cachedrepo'
 class Eli
   attr_reader :repo, :psi
 
-  TYPEDOC_RT_MAPPING = {"DIR" => "dir", "REG" => "reg", "REGIMP" => "reg_impl", "DEC" => "dec", "DECDEL" => "dec_del", "DIRIMP" => "dir_impl", "GENGUID" => "guideline", "INFO" => "info", "NOTICE" => "notice", "OP.COM.COM" => "opin", "PROC" => "proc_rules", "PROT" => "prot", "RDINFO" => "note", "REC" => "rec", "RECDEL" => "rec_del", "REGIMP" => "reg_impl", "RESOLUTION" => "res", "SAB" => "budget_suppl_amend", "TREATY" => "treaty", "AGR" => "agree", "COMMUNIC_COURT" => "communic", "OP.COM.CES" => "opin" }
+  TYPEDOC_RT_MAPPING = {"AGR" => "agree", 
+    "COMMUNIC_COURT" => "communic",
+    "DEC" => "dec", 
+    "DECDEL" => "dec_del",
+    "DECIMP" => "dec_impl", 
+    "DIR" => "dir", 
+    "DIRDEL" => "dir_del", 
+    "DIRIMP" => "dir_impl", 
+    "GENGUID" => "guideline", 
+    "INFO" => "info", 
+    "NOTICE" => "notice", 
+    "PROC" => "proc_rules", 
+    "PROT" => "prot", 
+    "RDINFO" => "note", 
+    "REC" => "rec", 
+    "RECDEL" => "rec_del", 
+    "REG" => "reg", 
+    "REGDEL" => "reg_del", 
+    "REGIMP" => "reg_impl", 
+    "RESOLUTION" => "res", 
+    "SAB" => "budget_suppl_amend"  }
   TYPEDOC_RT_MAPPING.default = "undefined"
   TYPEDOC_CB_MAPPING = {"CS" => "consil", "PE" => "EP", "COM" => "com", "BCE" => "ecb", "COM-UN" => "unece"}
 
@@ -35,11 +55,11 @@ class Eli
 
   def parse_number(number) 
     "Parse numbers of type 2010/24 (EU)"
-    scan = number.scan(/(\d{4})\/(\d+)/)
+    scan = number.scan(/(19\d{2}|20\d{2})\/(\d+)/)
     unless scan.empty?
       year, natural_number = scan[0]
     else #this is a hack, there are enough cases where this is ambiguous
-      scan = number.scan(/(\d+)\/(\d{4})/)
+      scan = number.scan(/(\d+)\/(19\d{2}|20\d{2})/)
       unless scan.empty?
         natural_number, year = scan[0] 
         [year, natural_number]
@@ -96,7 +116,7 @@ sparql
       pub_date = sol[:pub_date].to_s
       year, natural_number = parse_number(information_number)
     
-      @eli = "http://eli.budabe.eu/eli/#{@typedoc}/#{year}/#{natural_number}/#{if is_corrigendum == 'C' then 'corr-' + langs + '/' + pub_date + '/' end}oj"
+      @eli = "http://eli.budabe.eu/eli/#{@typedoc}/#{year}/#{natural_number}/#{if is_corrigendum == 'C' then 'corr-' + langs + '/' + pub_date + '/' end}ojl"
       @eli
     end
   end
@@ -110,9 +130,11 @@ sparql
   def metadata()
     graph = SPARQL.execute(self.legal_resource_query, @repo)
     g2 = SPARQL.execute("CONSTRUCT {?s ?p ?o} WHERE {?s ?p ?o} ORDER BY ?s ?p ?o", graph)
+    puts "In metadata1"
     rdfa_xhtml = RDF::RDFa::Writer.buffer(:haml => RDF::RDFa::Writer::DEFAULT_HAML, :standard_prefixes => true, :base_uri => "") do |writer| 
       writer << g2
     end
+    puts "In metadata"
     rdfa_xhtml
   end
 end
