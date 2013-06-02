@@ -55,7 +55,7 @@ get '/eli4id_jo/:psi/metadata' do
 end
 
 get '/eli/:typedoc/:year/:natural_number/ojl' do
-  celex = find_celex(params[:typedoc].upcase, params[:year], params[:natural_number])
+  celex = find_celex(Eli::RT_TYPEDOC_MAPPING[params[:typedoc]], params[:year], params[:natural_number])
   puts "celex: " + celex
   if celex.is_a? String then
     redirect "/eli4celex/#{celex}/metadata"

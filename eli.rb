@@ -28,6 +28,7 @@ class Eli
     "REGIMP" => "reg_impl", 
     "RESOLUTION" => "res", 
     "SAB" => "budget_suppl_amend"  }
+  RT_TYPEDOC_MAPPING = TYPEDOC_RT_MAPPING.invert
   TYPEDOC_RT_MAPPING.default = "undefined"
   TYPEDOC_CB_MAPPING = {"CS" => "consil", "PE" => "EP", "COM" => "com", "BCE" => "ecb", "COM-UN" => "unece"}
 
@@ -130,11 +131,9 @@ sparql
   def metadata()
     graph = SPARQL.execute(self.legal_resource_query, @repo)
     g2 = SPARQL.execute("CONSTRUCT {?s ?p ?o} WHERE {?s ?p ?o} ORDER BY ?s ?p ?o", graph)
-    puts "In metadata1"
     rdfa_xhtml = RDF::RDFa::Writer.buffer(:haml => RDF::RDFa::Writer::DEFAULT_HAML, :standard_prefixes => true, :base_uri => "") do |writer| 
       writer << g2
     end
-    puts "In metadata"
     rdfa_xhtml
   end
 end
