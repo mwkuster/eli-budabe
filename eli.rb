@@ -52,6 +52,16 @@ class Eli
         RDF::Literal(literal.to_s)
       end  
     end
+    resource_type_iri = RDF::URI("http://eurlex.europa.eu/eli/function#to_rt")
+    SPARQL::Algebra::Expression.register_extension(resource_type_iri) do |literal|
+      raise TypeError, "argument must be a literal" unless literal.literal?
+      begin
+        RDF::Literal("http://publications.europa.eu/resource/authority/resource-type/" + TYPEDOC_RT_MAPPING[literal.to_s].upcase)
+      rescue
+        #If the PSI reference does not exist, leave it unchanged
+        RDF::Literal("undefined")
+      end  
+    end
   end
 
   def parse_number(number) 
@@ -117,7 +127,7 @@ sparql
       pub_date = sol[:pub_date].to_s
       year, natural_number = parse_number(information_number)
     
-      @eli = "http://eli.budabe.eu/eli/#{@typedoc}/#{year}/#{natural_number}/#{if is_corrigendum == 'C' then 'corr-' + langs + '/' + pub_date + '/' end}ojl"
+      @eli = "http://eli.budabe.eu/eli/#{@typedoc}/#{year}/#{natural_number}/#{if is_corrigendum == 'C' then 'corr-' + langs + '/' + pub_date + '/' end}oj"
       @eli
     end
   end

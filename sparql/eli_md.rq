@@ -6,7 +6,7 @@ PREFIX owl: <http://www.w3.org/2002/07/owl#>
 
 CONSTRUCT {
   ?eli eli:id_document ?eli_str ;
-  eli:type_document <http://publications.europa.eu/resource/authority/resource-type/dir> ;
+  eli:type_document ?rt ;
   eli:agent_document ?agent_document ;
   eli:id_local ?celex ;
   eli:is_about ?eurovoc ;
@@ -51,15 +51,16 @@ CONSTRUCT {
   BIND (IRI(eli-fn:to_eli(STR(?based_on))) AS ?based_on_eli)
   BIND (IRI(eli-fn:to_eli(STR(?basis_for))) AS ?basis_for_eli)
 
-
   ?expr cdm:expression_title ?title .
   ?expr cdm:expression_uses_language ?lang .
   BIND ( IRI(lcase(replace(str(?expr), "^.*\\.([A-Z]{3})$", concat(?eli_str, "/", "$1")))) AS ?expr_eli)
 
   ?manif cdm:manifestation_manifests_expression ?expr .
+  ?manif cdm:manifestation_official-journal_part_typedoc_printer  ?typedoc .
   OPTIONAL { 
     ?manif_cellar_id owl:sameAs ?manif .
     ?item cdm:item_belongs_to_manifestation ?manif_cellar_id . 
   } #Print manifestations have no link to a file
   BIND ( IRI(lcase(replace(str(?manif), "^.*\\.([A-Z]{3})\\.([a-z0-9]+)$", concat(?eli_str, "/", "$1", "/", "$2")))) AS ?manif_eli)
+  BIND ( IRI(eli-fn:to_rt(?typedoc)) AS ?rt)
 }

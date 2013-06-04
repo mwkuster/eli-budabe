@@ -54,12 +54,14 @@ get '/eli4id_jo/:psi/metadata' do
   end
 end
 
-get '/eli/:typedoc/:year/:natural_number/ojl' do
-  celex = find_celex(Eli::RT_TYPEDOC_MAPPING[params[:typedoc]], params[:year], params[:natural_number])
-  puts "celex: " + celex
-  if celex.is_a? String then
-    redirect "/eli4celex/#{celex}/metadata"
-  else
-    celex
+get '/eli/:typedoc/:year/:natural_number/oj' do
+  begin
+    celex = find_celex(Eli::RT_TYPEDOC_MAPPING[params[:typedoc]], params[:year], params[:natural_number])
+    psi = "http://publications.europa.eu/resource/celex/#{celex}"
+    eli_obj = Eli.new(psi)
+    eli_obj.metadata
+  rescue Exception => e
+    status 404
+    body e.to_json
   end
 end
