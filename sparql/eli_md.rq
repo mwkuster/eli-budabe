@@ -57,7 +57,9 @@ CONSTRUCT {
   BIND ( IRI(lcase(replace(str(?expr), "^.*\\.([A-Z]{3})$", concat(?eli_str, "/", "$1")))) AS ?expr_eli)
 
   ?manif cdm:manifestation_manifests_expression ?expr .
-  ?manif_print cdm:manifestation_official-journal_part_typedoc_printer  ?typedoc .
+  OPTIONAL {
+    ?manif cdm:manifestation_official-journal_part_typedoc_printer  ?typedoc .
+  }
   OPTIONAL { 
     ?manif_cellar_id owl:sameAs ?manif .
     ?item cdm:item_belongs_to_manifestation ?manif_cellar_id . 
