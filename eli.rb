@@ -88,7 +88,7 @@ class Eli
       eli_query = <<-sparql
 PREFIX cdm: <http://publications.europa.eu/ontology/cdm#>
 
-SELECT DISTINCT ?number ?typedoc ?is_corrigendum  ?pub_date
+SELECT ?number ?typedoc ?is_corrigendum  ?pub_date
 WHERE {
   ?manif cdm:manifestation_official-journal_part_information_number ?number .
   ?manif cdm:manifestation_official-journal_part_typedoc_printer  ?typedoc .
@@ -96,16 +96,17 @@ WHERE {
   ?work cdm:resource_legal_published_in_official-journal ?oj .
   ?oj  cdm:publication_general_date_publication ?pub_date .
   FILTER(strlen(?number) > 0) # && strlen(?typedoc) > 0 && strlen(?is_corrigendum) > 0)
-}
+} LIMIT 1
 sparql
       solutions = SPARQL.execute(eli_query, @repo)
       raise "No ELI could be built" if solutions.length < 1
-      raise "More than one ELI possible" unless solutions.length < 2
+      #raise "More than one ELI possible" unless solutions.length < 2
       sol = solutions[0]
       information_number = sol[:number].to_s
       @typedoc = TYPEDOC_RT_MAPPING[sol[:typedoc].to_s]
       is_corrigendum = sol[:is_corrigendum].to_s
-      lang_query = <<-sparql
+      langs = if is_corrigendum == 'C' then
+                lang_query = <<-sparql
 PREFIX cdm: <http://publications.europa.eu/ontology/cdm#>
 
 SELECT DISTINCT ?lang_code
@@ -115,15 +116,12 @@ WHERE {
 }
 ORDER BY ?lang_code
 sparql
-      langs = if is_corrigendum == 'C' then
-        langs_sol = SPARQL.execute(lang_query, @repo)
-        lang_lst = langs_sol.collect { |sol| 
-          sol[:lang_code] 
-        }
-        lang_lst.join("-")
-      else
-        ""
-      end
+                langs_sol = SPARQL.execute(lang_query, @repo)
+                lang_lst = langs_sol.collect do |sol| sol[:lang_code] end
+                lang_lst.join("-")
+              else
+                ""
+              end
       pub_date = sol[:pub_date].to_s
       year, natural_number = parse_number(information_number)
     
