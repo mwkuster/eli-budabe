@@ -2,10 +2,13 @@ require 'rdf'
 require 'sparql'
 require 'rdf/rdfxml'
 require 'rdf/rdfa'
-require './cachedrepo'
+require 'CGI'
+
 
 class Eli
   attr_reader :repo, :psi
+
+  @@elis = {}
 
   TYPEDOC_RT_MAPPING = {"AGR" => "agree", 
     "COMMUNIC_COURT" => "communic",
@@ -36,9 +39,27 @@ class Eli
   ELI = "<http://eurlex.europa.eu/eli#>"
   XSD = "<http://www.w3.org/2001/XMLSchema>"
 
+  def self.get_eli(psi)
+    puts "In get_eli #{psi}"
+    puts @@elis
+    if @@elis.has_key?(psi) then
+      @@elis[psi]
+    else
+      begin
+        eli = Eli.new(psi).eli
+      rescue
+        eli = psi
+      end
+      @@elis[psi] = eli
+      eli
+    end
+  end
+
   def initialize(psi = nil)
-    r = CachedRepo.new(psi)
-    @repo = r.repo
+    uri = "http://localhost:3000/#{CGI::escape(psi)}"
+    puts uri
+    @repo = RDF::Repository.new
+    @repo.load(uri, options={:format => :rdf, :headers => {"Accept" => "application/rdf+xml"}})
     @psi = if psi then psi else "32010L0024" end #test case
     @eli = nil
 
@@ -46,7 +67,7 @@ class Eli
     SPARQL::Algebra::Expression.register_extension(eli_iri) do |literal|
       raise TypeError, "argument must be a literal" unless literal.literal?
       begin
-        RDF::Literal(Eli.new(literal.to_s).eli)
+        RDF::Literal(Eli.get_eli(literal.to_s))
       rescue
         #If the PSI reference does not exist, leave it unchanged
         RDF::Literal(literal.to_s)
@@ -138,9 +159,8 @@ sparql
 
   def metadata()
     graph = SPARQL.execute(self.legal_resource_query, @repo)
-    g2 = SPARQL.execute("CONSTRUCT {?s ?p ?o} WHERE {?s ?p ?o} ORDER BY ?s ?p ?o", graph)
     rdfa_xhtml = RDF::RDFa::Writer.buffer(:haml => RDF::RDFa::Writer::DEFAULT_HAML, :standard_prefixes => true, :base_uri => "") do |writer| 
-      writer << g2
+      writer << graph
     end
     rdfa_xhtml
   end

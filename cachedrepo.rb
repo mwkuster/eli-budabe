@@ -89,7 +89,7 @@ GRAPH ?g {
   FILTER(strlen(?number) > 0 && (regex(?number, "^#{year}/#{natural_number}$", "i") || regex(?number, "^#{natural_number}/#{year}$", "i") || regex(?number, "^#{year}/#{natural_number} ", "i") || regex(?number, "^#{natural_number}/#{year} ", "i")))
  }
 }
-LIMIT 10
+LIMIT 2
 sparql
   puts eli_query
   query_url = "#{TRIPLESTORE_URL}query?query=#{CGI::escape(eli_query)}&output=json"
