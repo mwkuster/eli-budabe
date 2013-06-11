@@ -2,13 +2,31 @@ require 'rdf'
 require 'sparql'
 require 'rdf/rdfxml'
 require 'rdf/rdfa'
-require 'CGI'
+require 'cgi'
 
+eli_iri = RDF::URI("http://eurlex.europa.eu/eli/function#to_eli")
+SPARQL::Algebra::Expression.register_extension(eli_iri) do |literal|
+  raise TypeError, "argument must be a literal" unless literal.literal?
+  begin
+    RDF::Literal(Eli.get_eli(literal.to_s))
+  rescue
+    #If the PSI reference does not exist, leave it unchanged
+    RDF::Literal(literal.to_s)
+  end  
+end
+resource_type_iri = RDF::URI("http://eurlex.europa.eu/eli/function#to_rt")
+SPARQL::Algebra::Expression.register_extension(resource_type_iri) do |literal|
+  raise TypeError, "argument must be a literal" unless literal.literal?
+  begin
+    RDF::Literal("http://publications.europa.eu/resource/authority/resource-type/" + TYPEDOC_RT_MAPPING[literal.to_s].upcase)
+  rescue
+    #If the PSI reference does not exist, leave it unchanged
+    RDF::Literal("undefined")
+  end  
+end
 
 class Eli
   attr_reader :repo, :psi
-
-  @@elis = {}
 
   TYPEDOC_RT_MAPPING = {"AGR" => "agree", 
     "COMMUNIC_COURT" => "communic",
@@ -39,9 +57,8 @@ class Eli
   ELI = "<http://eurlex.europa.eu/eli#>"
   XSD = "<http://www.w3.org/2001/XMLSchema>"
 
+  @@elis = {}
   def self.get_eli(psi)
-    puts "In get_eli #{psi}"
-    puts @@elis
     if @@elis.has_key?(psi) then
       @@elis[psi]
     else
@@ -62,27 +79,6 @@ class Eli
     @repo.load(uri, options={:format => :rdf, :headers => {"Accept" => "application/rdf+xml"}})
     @psi = if psi then psi else "32010L0024" end #test case
     @eli = nil
-
-    eli_iri = RDF::URI("http://eurlex.europa.eu/eli/function#to_eli")
-    SPARQL::Algebra::Expression.register_extension(eli_iri) do |literal|
-      raise TypeError, "argument must be a literal" unless literal.literal?
-      begin
-        RDF::Literal(Eli.get_eli(literal.to_s))
-      rescue
-        #If the PSI reference does not exist, leave it unchanged
-        RDF::Literal(literal.to_s)
-      end  
-    end
-    resource_type_iri = RDF::URI("http://eurlex.europa.eu/eli/function#to_rt")
-    SPARQL::Algebra::Expression.register_extension(resource_type_iri) do |literal|
-      raise TypeError, "argument must be a literal" unless literal.literal?
-      begin
-        RDF::Literal("http://publications.europa.eu/resource/authority/resource-type/" + TYPEDOC_RT_MAPPING[literal.to_s].upcase)
-      rescue
-        #If the PSI reference does not exist, leave it unchanged
-        RDF::Literal("undefined")
-      end  
-    end
   end
 
   def parse_number(number) 
