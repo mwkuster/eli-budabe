@@ -143,29 +143,43 @@ WHERE {
          (list "NO_YEAR" "NO_NUMBER"))))))
 
 (defn eli4psi 
-  "Transform where posssible a Cellar PSI into an ELI"
+  "Transform where possible a Cellar PSI into an ELI"
+  ([cellar-psi]
+     (eli4psi cellar-psi (fetch-work cellar-psi)))
+  ([cellar-psi model]
+     (println cellar-psi)
+     (let
+         [solutions (rdf/bounce eli-query model)
+          solution (first (:data solutions))]
+       (println solutions)
+       (if solution
+         (let
+             [number (:number solution)
+              [year natural-number] (parse-number number)
+              typedoc (get  TYPEDOC_RT_MAPPING (:typedoc solution))]
+           (str "http://eli.budabe.eu/eli/" typedoc "/" year "/" natural-number "/oj"))
+         (throw (java.lang.IllegalArgumentException. "Cannot build ELI")))
+  )))
+
+(defn eli-metadata
+  "Return the ELI-encoded metadata for an object"
   [cellar-psi]
-  (println cellar-psi)
   (let
       [model (fetch-work cellar-psi)
-       solutions (rdf/bounce eli-query model)
-       solution (first (:data solutions))]
-    (println solutions)
-    (if solution
-      (let
-          [number (:number solution)
-           [year natural-number] (parse-number number)
-           typedoc (get  TYPEDOC_RT_MAPPING (:typedoc solution))]
-        (str "http://eli.budabe.eu/eli/" typedoc "/" year "/" natural-number "/oj"))
-      (throw (java.lang.IllegalArgumentException. "Cannot build ELI")))
-  ))
+       eli (eli4psi cellar-psi model)
+       query (clojure.string/replace (slurp "sparql/eli_md.rq") "http://eli.eli/" eli)]
+    (model-to-string (rdf/pull query model))))
+    
 
 (defroutes app
   (GET "/eli4psi/:psi" [psi] 
-     (println psi)
-     (str (eli4psi psi)))
+       (println "/eli4psi/:psi" psi)
+       (str (eli4psi psi)))
+  (GET "/eli4psi/:psi/metadata" [psi] 
+       (println "/eli4psi/:psi/metadata" psi)
+       (eli-metadata psi))
   (GET "/:psi" [psi] 
-       (println psi)
+       (println "/:psi" psi)
        (model-to-string (fetch-work psi)))
   (route/not-found "<h1>Page not found</h1>"))
 
