@@ -18,7 +18,7 @@ resource_type_iri = RDF::URI("http://eurlex.europa.eu/eli/function#to_rt")
 SPARQL::Algebra::Expression.register_extension(resource_type_iri) do |literal|
   raise TypeError, "argument must be a literal" unless literal.literal?
   begin
-    RDF::Literal("http://publications.europa.eu/resource/authority/resource-type/" + TYPEDOC_RT_MAPPING[literal.to_s].upcase)
+    RDF::Literal("http://publications.europa.eu/resource/authority/resource-type/" + Eli::TYPEDOC_RT_MAPPING[literal.to_s].upcase)
   rescue
     #If the PSI reference does not exist, leave it unchanged
     RDF::Literal("undefined")
@@ -73,7 +73,6 @@ module Eli
 
   def self.eli(cellar_psi)
     "Build an ELI for a given Cellar production system identifier (PSI). If this PSI is nil, use a local sample repository for testing"
-    puts "In self.eli"
     uri = "http://localhost:3000/#{CGI::escape(cellar_psi)}"
     puts uri
     repo = RDF::Repository.new
@@ -127,13 +126,18 @@ sparql
 
   @@elis = {}
   def self.get_eli(psi)
-    puts "In get_eli"
-    puts @@elis
     if @@elis.has_key?(psi) then
       @@elis[psi]
     else
       begin
-        el = eli(psi)
+        el = RestClient.get("http://localhost:3000/eli4psi/#{CGI::escape(psi)}") do  |response, request, result |
+          case response.code
+          when 200 then
+            response.body
+          else
+            psi
+          end
+        end
       rescue
         el = psi
       end

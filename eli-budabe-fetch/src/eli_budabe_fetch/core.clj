@@ -37,6 +37,32 @@
                          (:body (client/get url {:headers {"Accept" "application/rdf+xml"}}))) "" "RDF/XML")))
     (ModelFactory/createInfModel reasoner core)))       
 
+(def TYPEDOC_RT_MAPPING 
+  {"AGR" "agree", 
+    "COMMUNIC_COURT" "communic",
+    "DEC" "dec", 
+    "DECDEL"  "dec_del",
+    "DECIMP" "dec_impl", 
+    "DIR"  "dir", 
+    "DIRDEL" "dir_del", 
+    "DIRIMP" "dir_impl", 
+    "GENGUID" "guideline", 
+    "INFO" "info", 
+    "NOTICE" "notice", 
+    "PROC" "proc_rules", 
+    "PROT" "prot", 
+    "RDINFO" "note", 
+    "REC" "rec", 
+    "RECDEL" "rec_del", 
+    "REG"  "reg", 
+    "REGDEL"  "reg_del", 
+    "REGIMP" "reg_impl", 
+    "RESOLUTION"  "res", 
+    "SAB" "budget_suppl_amend"  })
+
+(def TYPEDOC_CB_MAPPING 
+  {"CS" "consil", "PE" "EP", "COM" "com", "BCE" "ecb", "COM-UN" "unece"})
+
 (def expression-query "PREFIX cdm: <http://publications.europa.eu/ontology/cdm#>\nSELECT DISTINCT ?uri\nWHERE {?work_uri cdm:work_has_expression ?uri}")
 
 (def manifestation-query "PREFIX cdm: <http://publications.europa.eu/ontology/cdm#>\nSELECT DISTINCT ?uri WHERE {?u cdm:expression_manifested_by_manifestation ?uri}")
@@ -89,7 +115,62 @@ SELECT DISTINCT ?gra WHERE { GRAPH ?gra{ {<#{cellar_psi}> owl:sameAs ?o} UNION {
       (add-to-cache cellar-psi model))
     model))
 
+(def eli-query "PREFIX cdm: <http://publications.europa.eu/ontology/cdm#>
+
+SELECT ?number ?typedoc ?is_corrigendum  ?pub_date
+WHERE {
+  ?manif cdm:manifestation_official-journal_part_information_number ?number .
+  ?manif cdm:manifestation_official-journal_part_typedoc_printer  ?typedoc .
+  ?manif cdm:manifestation_official-journal_part_is_corrigendum_printer ?is_corrigendum .
+  ?work cdm:resource_legal_published_in_official-journal ?oj .
+  ?oj  cdm:publication_general_date_publication ?pub_date .
+  FILTER(strlen(?number) > 0) # && strlen(?typedoc) > 0 && strlen(?is_corrigendum) > 0)
+} LIMIT 1")
+
+
+(defn parse-number
+ "Parse numbers of type 2010/24 (EU)"
+ [number]
+ (let
+     [parse-list (first (re-seq #"(19\d{2}|20\d{2})/(\d+)" number))]
+   (if parse-list
+     (list (nth parse-list 1) (nth parse-list 2))
+     (list "NO_YEAR" "NO_NUMBER"))))
+
+    ;; scan = number.scan(/(19\d{2}|20\d{2})\/(\d+)/)
+    ;; unless scan.empty?
+    ;;   year, natural_number = scan[0]
+    ;; else #this is a hack, there are enough cases where this is ambiguous
+    ;;   scan = number.scan(/(\d+)\/(19\d{2}|20\d{2})/)
+    ;;   unless scan.empty?
+    ;;     natural_number, year = scan[0] 
+    ;;     [year, natural_number]
+    ;;   else
+    ;;     nil
+    ;;   end
+    ;; end
+(defn eli4psi 
+  "Transform where posssible a Cellar PSI into an ELI"
+  [cellar-psi]
+  (println cellar-psi)
+  (let
+      [model (fetch-work cellar-psi)
+       solutions (rdf/bounce eli-query model)
+       solution (first (:data solutions))]
+    (println solutions)
+    (if solution
+      (let
+          [number (:number solution)
+           [year natural-number] (parse-number number)
+           typedoc (get  TYPEDOC_RT_MAPPING (:typedoc solution))]
+        (str "http://eli.budabe.eu/eli/" typedoc "/" year "/" natural-number "/oj"))
+      (throw (java.lang.IllegalArgumentException. "Cannot build ELI")))
+  ))
+
 (defroutes app
+  (GET "/eli4psi/:psi" [psi] 
+     (println psi)
+     (str (eli4psi psi)))
   (GET "/:psi" [psi] 
        (println psi)
        (model-to-string (fetch-work psi)))
