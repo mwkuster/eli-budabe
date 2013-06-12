@@ -168,27 +168,6 @@ WHERE {
          cellar-psi)
   )))
 
-;; (defprotocol ToEli
-;;   ;(to_eli [this])
-;;   (exec [this nv1]))
-
-;; (extend-protocol ToEli com.hp.hpl.jena.sparql.function.FunctionBase1
-;;                  ;(to_eli [this] this)
-;;                  (exec [this nv1] 
-;;                    (println "In ToEli")
-;;                    "http://eli.eli/"))
-
-;; (def toEli 
-;;   (proxy [FunctionBase1] []
-;;     ;(toEli [] (println "to_eli"))
-;;     (^NodeValue exec [^NodeValue nv1]
-;;       (println "In ToEli")
-;;       (com.hp.hpl.jena.sparql.expr.NodeValue/makeString "Hallo"))))
-
-;; ;(def to_eli (ToEli.))
-
-;; (.put (com.hp.hpl.jena.sparql.function.FunctionRegistry/get) "http://eurlex.europa.eu/eli/function#to_eli" (class toEli))
-
 (defn find-eli [encoded-psi]
   (println encoded-psi)
   ;encoded-psi is a vector of style [ELI:http%3A%2F%2Fpublications.europa.eu%2Fresource%2Fcelex%2F31976L0308 http%3A%2F%2Fpublications.europa.eu%2Fresource%2Fcelex%2F31976L0308]
@@ -202,12 +181,7 @@ WHERE {
        eli (eli4psi cellar-psi model)
        query (clojure.string/replace (slurp "sparql/eli_md.rq") "http://eli.eli/" eli)
        eli-xml (model-to-string (rdf/pull query model))]
-    ;because registering extension functions under Clojure doesn't seem to work, the brutal hammer: text replace
-    ;eli-budabe-fetch.core=> (defn x [y] (str y "zzz"))
-    ;eli-budabe-fetch.core=> (clojure.string/replace "abc" #"(a+)" (x "$1"))
-    (clojure.string/replace eli-xml #"ELI:([a-zA-Z0-9%\.-]+)" #(find-eli %1))
-    ;eli-xml
-    ))
+    (clojure.string/replace eli-xml #"ELI:([a-zA-Z0-9%\.-]+)" #(find-eli %1))))
     
 
 (defroutes app
