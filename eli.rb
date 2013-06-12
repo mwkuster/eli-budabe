@@ -25,9 +25,7 @@ SPARQL::Algebra::Expression.register_extension(resource_type_iri) do |literal|
   end  
 end
 
-class Eli
-  attr_reader :repo, :psi
-
+module Eli
   TYPEDOC_RT_MAPPING = {"AGR" => "agree", 
     "COMMUNIC_COURT" => "communic",
     "DEC" => "dec", 
@@ -57,31 +55,7 @@ class Eli
   ELI = "<http://eurlex.europa.eu/eli#>"
   XSD = "<http://www.w3.org/2001/XMLSchema>"
 
-  @@elis = {}
-  def self.get_eli(psi)
-    if @@elis.has_key?(psi) then
-      @@elis[psi]
-    else
-      begin
-        eli = Eli.new(psi).eli
-      rescue
-        eli = psi
-      end
-      @@elis[psi] = eli
-      eli
-    end
-  end
-
-  def initialize(psi = nil)
-    uri = "http://localhost:3000/#{CGI::escape(psi)}"
-    puts uri
-    @repo = RDF::Repository.new
-    @repo.load(uri, options={:format => :rdf, :headers => {"Accept" => "application/rdf+xml"}})
-    @psi = if psi then psi else "32010L0024" end #test case
-    @eli = nil
-  end
-
-  def parse_number(number) 
+  def self.parse_number(number) 
     "Parse numbers of type 2010/24 (EU)"
     scan = number.scan(/(19\d{2}|20\d{2})\/(\d+)/)
     unless scan.empty?
@@ -97,12 +71,16 @@ class Eli
     end
   end 
 
-  def eli()
+  def self.eli(cellar_psi)
     "Build an ELI for a given Cellar production system identifier (PSI). If this PSI is nil, use a local sample repository for testing"
-    if(@eli)
-      @eli
-    else
-      eli_query = <<-sparql
+    puts "In self.eli"
+    uri = "http://localhost:3000/#{CGI::escape(cellar_psi)}"
+    puts uri
+    repo = RDF::Repository.new
+    repo.load(uri, options={:format => :rdf, :headers => {"Accept" => "application/rdf+xml"}})
+    puts repo
+
+    eli_query = <<-sparql
 PREFIX cdm: <http://publications.europa.eu/ontology/cdm#>
 
 SELECT ?number ?typedoc ?is_corrigendum  ?pub_date
@@ -115,15 +93,15 @@ WHERE {
   FILTER(strlen(?number) > 0) # && strlen(?typedoc) > 0 && strlen(?is_corrigendum) > 0)
 } LIMIT 1
 sparql
-      solutions = SPARQL.execute(eli_query, @repo)
-      raise "No ELI could be built" if solutions.length < 1
-      #raise "More than one ELI possible" unless solutions.length < 2
-      sol = solutions[0]
-      information_number = sol[:number].to_s
-      @typedoc = TYPEDOC_RT_MAPPING[sol[:typedoc].to_s]
-      is_corrigendum = sol[:is_corrigendum].to_s
-      langs = if is_corrigendum == 'C' then
-                lang_query = <<-sparql
+    solutions = SPARQL.execute(eli_query, repo)
+    raise "No ELI could be built" if solutions.length < 1
+    #raise "More than one ELI possible" unless solutions.length < 2
+    sol = solutions[0]
+    information_number = sol[:number].to_s
+    typedoc = TYPEDOC_RT_MAPPING[sol[:typedoc].to_s]
+    is_corrigendum = sol[:is_corrigendum].to_s
+    langs = if is_corrigendum == 'C' then
+              lang_query = <<-sparql
 PREFIX cdm: <http://publications.europa.eu/ontology/cdm#>
 
 SELECT DISTINCT ?lang_code
@@ -133,28 +111,49 @@ WHERE {
 }
 ORDER BY ?lang_code
 sparql
-                langs_sol = SPARQL.execute(lang_query, @repo)
-                lang_lst = langs_sol.collect do |sol| sol[:lang_code] end
-                lang_lst.join("-")
-              else
-                ""
-              end
-      pub_date = sol[:pub_date].to_s
-      year, natural_number = parse_number(information_number)
+              langs_sol = SPARQL.execute(lang_query, repo)
+              lang_lst = langs_sol.collect do |sol| sol[:lang_code] end
+              lang_lst.join("-")
+            else
+              ""
+            end
+    pub_date = sol[:pub_date].to_s
+    year, natural_number = self.parse_number(information_number)
     
-      @eli = "http://eli.budabe.eu/eli/#{@typedoc}/#{year}/#{natural_number}/#{if is_corrigendum == 'C' then 'corr-' + langs + '/' + pub_date + '/' end}oj"
-      @eli
+    eli = "http://eli.budabe.eu/eli/#{typedoc}/#{year}/#{natural_number}/#{if is_corrigendum == 'C' then 'corr-' + langs + '/' + pub_date + '/' end}oj"
+    eli
+  end
+
+
+  @@elis = {}
+  def self.get_eli(psi)
+    puts "In get_eli"
+    puts @@elis
+    if @@elis.has_key?(psi) then
+      @@elis[psi]
+    else
+      begin
+        el = eli(psi)
+      rescue
+        el = psi
+      end
+      @@elis[psi] = el
+      el
     end
   end
 
-  def legal_resource_query()
-    eli_uri = "<" + self.eli + ">"
+  def self.legal_resource_query(cellar_psi)
+    eli_uri = "<" + get_eli(cellar_psi) + ">"
     query = File.read("sparql/eli_md.rq")
     query.gsub("<http://eli.budabe.eu/eli/dir/2010/24/oj>", eli_uri)
   end
 
-  def metadata()
-    graph = SPARQL.execute(self.legal_resource_query, @repo)
+  def self.metadata(cellar_psi)
+    uri = "http://localhost:3000/#{CGI::escape(cellar_psi)}"
+    puts uri
+    repo = RDF::Repository.new
+    repo.load(uri, options={:format => :rdf, :headers => {"Accept" => "application/rdf+xml"}})
+    graph = SPARQL.execute(legal_resource_query(cellar_psi), repo)
     rdfa_xhtml = RDF::RDFa::Writer.buffer(:haml => RDF::RDFa::Writer::DEFAULT_HAML, :standard_prefixes => true, :base_uri => "") do |writer| 
       writer << graph
     end
