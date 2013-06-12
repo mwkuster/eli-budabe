@@ -9,8 +9,12 @@
   (:import [com.hp.hpl.jena.reasoner.rulesys GenericRuleReasonerFactory Rule])
   (:import [com.hp.hpl.jena.vocabulary ReasonerVocabulary])
   (:import [java.io File OutputStreamWriter FileOutputStream])
-  (:import [java.net URLEncoder])
-  (:import [java.net URL]))
+  (:import [java.net URLEncoder URLDecoder])
+  (:import [java.net URL])
+  (:import [com.hp.hpl.jena.sparql.function FunctionBase1])
+  (:import [com.hp.hpl.jena.sparql.expr NodeValue])
+  ;(:import [ToEli]))
+  )
 
 (defn save-model [model filename]
   (.write model (OutputStreamWriter. (FileOutputStream. filename) "UTF-8") "RDF/XML"))
@@ -145,7 +149,10 @@ WHERE {
 (defn eli4psi 
   "Transform where possible a Cellar PSI into an ELI"
   ([cellar-psi]
-     (eli4psi cellar-psi (fetch-work cellar-psi)))
+     (try
+       (eli4psi cellar-psi (fetch-work cellar-psi))
+       (catch Exception e ;if a cellar-psi does not exist in the Cellar, return it itself and don't try to build an ELI
+         cellar-psi)))
   ([cellar-psi model]
      (println cellar-psi)
      (let
@@ -158,8 +165,34 @@ WHERE {
               [year natural-number] (parse-number number)
               typedoc (get  TYPEDOC_RT_MAPPING (:typedoc solution))]
            (str "http://eli.budabe.eu/eli/" typedoc "/" year "/" natural-number "/oj"))
-         (throw (java.lang.IllegalArgumentException. "Cannot build ELI")))
+         cellar-psi)
   )))
+
+;; (defprotocol ToEli
+;;   ;(to_eli [this])
+;;   (exec [this nv1]))
+
+;; (extend-protocol ToEli com.hp.hpl.jena.sparql.function.FunctionBase1
+;;                  ;(to_eli [this] this)
+;;                  (exec [this nv1] 
+;;                    (println "In ToEli")
+;;                    "http://eli.eli/"))
+
+;; (def toEli 
+;;   (proxy [FunctionBase1] []
+;;     ;(toEli [] (println "to_eli"))
+;;     (^NodeValue exec [^NodeValue nv1]
+;;       (println "In ToEli")
+;;       (com.hp.hpl.jena.sparql.expr.NodeValue/makeString "Hallo"))))
+
+;; ;(def to_eli (ToEli.))
+
+;; (.put (com.hp.hpl.jena.sparql.function.FunctionRegistry/get) "http://eurlex.europa.eu/eli/function#to_eli" (class toEli))
+
+(defn find-eli [encoded-psi]
+  (println encoded-psi)
+  ;encoded-psi is a vector of style [ELI:http%3A%2F%2Fpublications.europa.eu%2Fresource%2Fcelex%2F31976L0308 http%3A%2F%2Fpublications.europa.eu%2Fresource%2Fcelex%2F31976L0308]
+  (eli4psi (URLDecoder/decode (second encoded-psi))))
 
 (defn eli-metadata
   "Return the ELI-encoded metadata for an object"
@@ -167,8 +200,14 @@ WHERE {
   (let
       [model (fetch-work cellar-psi)
        eli (eli4psi cellar-psi model)
-       query (clojure.string/replace (slurp "sparql/eli_md.rq") "http://eli.eli/" eli)]
-    (model-to-string (rdf/pull query model))))
+       query (clojure.string/replace (slurp "sparql/eli_md.rq") "http://eli.eli/" eli)
+       eli-xml (model-to-string (rdf/pull query model))]
+    ;because registering extension functions under Clojure doesn't seem to work, the brutal hammer: text replace
+    ;eli-budabe-fetch.core=> (defn x [y] (str y "zzz"))
+    ;eli-budabe-fetch.core=> (clojure.string/replace "abc" #"(a+)" (x "$1"))
+    (clojure.string/replace eli-xml #"ELI:([a-zA-Z0-9%\.-]+)" #(find-eli %1))
+    ;eli-xml
+    ))
     
 
 (defroutes app

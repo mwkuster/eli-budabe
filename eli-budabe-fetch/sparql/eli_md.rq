@@ -14,7 +14,7 @@ CONSTRUCT {
   eli:date_entry-in-force ?date_entry_in_force ;
   eli:date_no-longer-in-force ?date_no_longer_in_force ;
   eli:date_publication ?pub_date ;
-  eli:cites ?cites ;
+  eli:cites ?cites_eli ;
   eli:transposes ?transposes ;
   eli:based_on ?based_on ;
   eli:basis_for ?basis_for ;
@@ -46,7 +46,8 @@ CONSTRUCT {
     ?oj  cdm:publication_general_date_publication ?pub_date .}
   BIND (<http://eli.eli/> AS ?eli)
   BIND (str(?eli) AS ?eli_str)
-  # BIND (IRI(eli-fn:to_eli(STR(?cites))) AS ?cites_eli)
+  # BIND (IRI(f:ToEli(STR(?cites))) AS ?cites_eli)
+  BIND (IRI(concat("ELI:", ENCODE_FOR_URI(STR(?cites)))) AS ?cites_eli)
   # BIND (IRI(eli-fn:to_eli(STR(?changes))) AS ?changes_eli)
   # BIND (IRI(eli-fn:to_eli(STR(?changed_by))) AS ?changed_by_eli)
   # BIND (IRI(eli-fn:to_eli(STR(?based_on))) AS ?based_on_eli)

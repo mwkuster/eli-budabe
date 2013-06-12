@@ -146,18 +146,11 @@ sparql
     end
   end
 
-  def self.legal_resource_query(cellar_psi)
-    eli_uri = "<" + get_eli(cellar_psi) + ">"
-    query = File.read("sparql/eli_md.rq")
-    query.gsub("<http://eli.budabe.eu/eli/dir/2010/24/oj>", eli_uri)
-  end
-
   def self.metadata(cellar_psi)
     uri = "http://localhost:3000/eli4psi/#{CGI::escape(cellar_psi)}/metadata"
     puts uri
     repo = RDF::Repository.new
     repo.load(uri, options={:format => :rdf, :headers => {"Accept" => "application/rdf+xml"}})
-    #graph = SPARQL.execute(legal_resource_query(cellar_psi), repo)
     rdfa_xhtml = RDF::RDFa::Writer.buffer(:haml => RDF::RDFa::Writer::DEFAULT_HAML, :standard_prefixes => true, :base_uri => "") do |writer| 
       writer << repo
     end

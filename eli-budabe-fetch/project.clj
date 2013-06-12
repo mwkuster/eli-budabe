@@ -10,6 +10,7 @@
                  [cheshire "5.2.0"]
                  [compojure "1.1.5"]
                  [seabass "2.0"]]
+  ;:aot [eli-budabe-fetch.toeli]
   :plugins [[lein-ring "0.8.5"]]
   :ring {:handler eli-budabe-fetch.core/app}
   :profiles
