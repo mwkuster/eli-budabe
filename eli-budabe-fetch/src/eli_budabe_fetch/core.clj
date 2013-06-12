@@ -129,26 +129,19 @@ WHERE {
 
 
 (defn parse-number
- "Parse numbers of type 2010/24 (EU)"
+ "Parse numbers of type 2010/24 (EU). This implementation is a bit of a hack since we don't know in advance the sequence and there are ambiguous situations"
  [number]
- (let
-     [parse-list (first (re-seq #"(19\d{2}|20\d{2})/(\d+)" number))]
-   (if parse-list
-     (list (nth parse-list 1) (nth parse-list 2))
-     (list "NO_YEAR" "NO_NUMBER"))))
+ (let ;case year / number
+     [year-number-parse (first (re-seq #"(19\d{2}|20\d{2})/(\d+)" number))]
+   (if year-number-parse
+     (list (nth year-number-parse 1) (nth year-number-parse 2))
+     (let ;case number / year
+         [number-year-parse (first (re-seq #"(\d+)/(19\d{2}|20\d{2})" number))]
+       (println number-year-parse)
+       (if number-year-parse
+         (list (nth number-year-parse 2) (nth number-year-parse 1))
+         (list "NO_YEAR" "NO_NUMBER"))))))
 
-    ;; scan = number.scan(/(19\d{2}|20\d{2})\/(\d+)/)
-    ;; unless scan.empty?
-    ;;   year, natural_number = scan[0]
-    ;; else #this is a hack, there are enough cases where this is ambiguous
-    ;;   scan = number.scan(/(\d+)\/(19\d{2}|20\d{2})/)
-    ;;   unless scan.empty?
-    ;;     natural_number, year = scan[0] 
-    ;;     [year, natural_number]
-    ;;   else
-    ;;     nil
-    ;;   end
-    ;; end
 (defn eli4psi 
   "Transform where posssible a Cellar PSI into an ELI"
   [cellar-psi]
