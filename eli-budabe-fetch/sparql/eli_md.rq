@@ -15,11 +15,14 @@ CONSTRUCT {
   eli:date_no-longer-in-force ?date_no_longer_in_force ;
   eli:date_publication ?pub_date ;
   eli:cites ?cites_eli ;
+  eli:cited_by ?cites_by_eli ;
   eli:transposes ?transposes ;
+  eli:transposed_by ?transposed_by ;
   eli:based_on ?based_on_eli ;
   eli:basis_for ?basis_for_eli ;
   eli:changes ?changes_eli ;
-  eli:changed_by ?changed_by_eli .
+  eli:changed_by ?changed_by_eli ;
+  eli:relevant_for ?relevant_for_eli .
   ?expr_eli eli:expression_title ?title ;
   eli:language_expression ?lang ;
   eli:belongs_to ?eli .
@@ -32,25 +35,76 @@ CONSTRUCT {
   cdm:work_date_document ?date_document .
   OPTIONAL { ?subj cdm:resource_legal_id_celex ?celex  }
   OPTIONAL { ?subj cdm:work_is_about_concept_eurovoc ?eurovoc }
-  OPTIONAL {?subj cdm:resource_legal_date_entry-into-force ?date_entry_in_force }
-  OPTIONAL {?subj cdm:resource_legal_date_end-of-validity ?date_no_longer_in_force }
+  OPTIONAL { ?subj cdm:resource_legal_date_entry-into-force ?date_entry_in_force }
+  OPTIONAL { ?subj cdm:resource_legal_date_end-of-validity ?date_no_longer_in_force }
   OPTIONAL { ?subj cdm:work_cites_work ?cites }
+  OPTIONAL { ?subj cdm:work_cited_by_work ?cited_by }
+  OPTIONAL { ?subj cdm:work_explains_work ?cites }
+  OPTIONAL { ?subj cdm:work_explained_by_work ?cited_by }
+  OPTIONAL { ?subj cdm:work_summarizes_work ?cites }
+  OPTIONAL { ?subj cdm:work_summarized_by_work ?cited_by }
+  OPTIONAL { ?subj cdm:work_related_to_work ?related_to }
+  OPTIONAL { ?subj cdm:work_affects_work ?related_to }
+  OPTIONAL { ?subj cdm:work_affected_by_work ?related_to }
+  OPTIONAL { ?subj cdm:resource_legal_confirmed_by_resource_legal ?related_to }
+  OPTIONAL { ?subj cdm:resource_legal_confirms_resource_legal ?related_to }
+  OPTIONAL { ?subj cdm:resource_legal_tackles_similar_question_as_resource_legal ?related_to }
+  OPTIONAL { ?subj cdm:resource_legal_adds_to_resource_legal ?related_to }
+  OPTIONAL { ?subj cdm:resource_legal_added_to_resource_legal ?related_to }
+  OPTIONAL { ?subj cdm:resource_legal_adopts_resource_legal ?related_to }
+  OPTIONAL { ?subj cdm:resource_legal_adopted_by_resource_legal ?related_to }
+  OPTIONAL { ?subj cdm:resource_legal_partially_refers_to_resource_legal ?related_to }
+  OPTIONAL { ?subj cdm:resource_legal_partially_referred_to_resource_legal ?related_to }
+  OPTIONAL { ?subj cdm:resource_legal_related_question_to_resource_legal ?related_to }
+  OPTIONAL { ?subj cdm:resource_legal_contains_eesc_opinion_on_resource_legal ?related_to }
+  OPTIONAL { ?subj cdm:resource_legal_eesc_opinion_contained_in_resource_legal ?related_to }
+  OPTIONAL { ?subj cdm:resource_legal_contains_ep_opinion_on_resource_legal ?related_to }
+  OPTIONAL { ?subj cdm:resource_legal_ep_opinion_contained_in_resource_legal ?related_to }
+  OPTIONAL { ?subj cdm:resource_legal_contains_cor_opinion_on_resource_legal ?related_to }
+  OPTIONAL { ?subj cdm:resource_legal_cor_opinion_contained_in_resource_legal ?related_to }
+  OPTIONAL { ?subj cdm:work_affected_by_work ?related_to }
+  OPTIONAL { ?subj cdm:act_consolidated_consolidates_resource_legal ?consolidates }
+  OPTIONAL { ?subj cdm:resource_legal_consolidated_by_act_consolidated ?consolidated_by }
+  OPTIONAL { ?subj cdm:resource_legal_implemented_by_resource_legal ?transposes  }
+  OPTIONAL { ?subj cdm:resource_legal_implements_resource_legal ?transposed_by  }
+  OPTIONAL { ?subj cdm:directive_implemented_by_measure_national_implementing ?transposes  }
   OPTIONAL { ?subj cdm:resource_legal_based_on_resource_legal ?based_on }
-  OPTIONAL {  ?subj cdm:resource_legal_implemented_by_resource_legal ?transposes  }
-  OPTIONAL {  ?subj cdm:directive_implemented_by_measure_national_implementing ?transposes  }
-  OPTIONAL {  ?subj cdm:resource_legal_basis_for_resource_legal ?basis_for  }
-  OPTIONAL {  ?subj cdm:resource_legal_amends_resource_legal ?changes  } #and many more variants
-  OPTIONAL {  ?subj cdm:resource_legal_amended_by_resource_legal ?changed_by  }
+  OPTIONAL { ?subj cdm:resource_legal_based_on_treaty ?based_on }
+  OPTIONAL { ?subj cdm:resource_legal_basis_for_resource_legal ?basis_for  }
+  OPTIONAL { ?subj cdm:resource_legal_implements_resource_legal ?based_on }
+  OPTIONAL { ?subj cdm:resource_legal_implemented_by_resource_legal ?basis_for  }
+  OPTIONAL { ?subj cdm:resource_legal_amends_resource_legal ?changes  }
+  OPTIONAL { ?subj cdm:resource_legal_repeals_resource_legal ?changes  }
+  OPTIONAL { ?subj cdm:resource_legal_repealed_by_resource_legal ?changed_by  }
+  OPTIONAL { ?subj cdm:resource_legal_implicitly_repeals_resource_legal ?changes  }
+  OPTIONAL { ?subj cdm:resource_legal_implicitly_repealed_by_resource_legal ?changed_by  }
+  OPTIONAL { ?subj cdm:resource_legal_renders_obsolete_resource_legal ?changes  }
+  OPTIONAL { ?subj cdm:resource_legal_rendered_obsolete_by_resource_legal ?changed_by  }
+  OPTIONAL { ?subj cdm:resource_legal_replaces_resource_legal ?changes  }
+  OPTIONAL { ?subj cdm:resource_legal_replaced_by_resource_legal ?changed_by  }
+  OPTIONAL { ?subj cdm:resource_legal_suspends_resource_legal ?changes  }
+  OPTIONAL { ?subj cdm:resource_legal_suspended_by_resource_legal ?changed_by  } 
+  OPTIONAL { ?subj cdm:resource_legal_partially_suspends_resource_legal ?changes  }
+  OPTIONAL { ?subj cdm:resource_legal_partially_suspended_by_resource_legal ?changed_by  } #and many more variants
+  OPTIONAL { ?subj cdm:resource_legal_amended_by_resource_legal ?changed_by  }
+  OPTIONAL { ?subj cdm:resource_legal_relevant_for_unit_administrative ?relevant_for  }
+
   OPTIONAL {   
-    ?work cdm:resource_legal_published_in_official-journal ?oj .
+    ?subj cdm:resource_legal_published_in_official-journal ?oj .
     ?oj  cdm:publication_general_date_publication ?pub_date .}
   BIND (<http://eli.eli/> AS ?eli)
   BIND (str(?eli) AS ?eli_str)
   BIND (IRI(concat("ELI:", ENCODE_FOR_URI(STR(?cites)))) AS ?cites_eli)
+  BIND (IRI(concat("ELI:", ENCODE_FOR_URI(STR(?cited_by)))) AS ?cited_by_eli)
   BIND (IRI(concat("ELI:", ENCODE_FOR_URI(STR(?changes)))) AS ?changes_eli)
   BIND (IRI(concat("ELI:", ENCODE_FOR_URI(STR(?change_by)))) AS ?changed_eli)
+  BIND (IRI(concat("ELI:", ENCODE_FOR_URI(STR(?related_to)))) AS ?related_to_eli)
+  BIND (IRI(concat("ELI:", ENCODE_FOR_URI(STR(?consolidates)))) AS ?consolidates_eli)
+  BIND (IRI(concat("ELI:", ENCODE_FOR_URI(STR(?consolidated_by)))) AS ?consolidated_by_eli)
   BIND (IRI(concat("ELI:", ENCODE_FOR_URI(STR(?based_on)))) AS ?based_on_eli)
   BIND (IRI(concat("ELI:", ENCODE_FOR_URI(STR(?basis_for)))) AS ?basis_for_eli)
+  BIND (IRI(concat("ELI:", ENCODE_FOR_URI(STR(?relevant_for)))) AS ?relevant_for_eli)
+
 
 
   ?expr cdm:expression_title ?title .
