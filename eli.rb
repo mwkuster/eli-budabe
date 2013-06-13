@@ -55,21 +55,6 @@ module Eli
   ELI = "<http://eurlex.europa.eu/eli#>"
   XSD = "<http://www.w3.org/2001/XMLSchema>"
 
-  # def self.parse_number(number) 
-#     "Parse numbers of type 2010/24 (EU)"
-#     scan = number.scan(/(19\d{2}|20\d{2})\/(\d+)/)
-#     unless scan.empty?
-#       year, natural_number = scan[0]
-#     else #this is a hack, there are enough cases where this is ambiguous
-#       scan = number.scan(/(\d+)\/(19\d{2}|20\d{2})/)
-#       unless scan.empty?
-#         natural_number, year = scan[0] 
-#         [year, natural_number]
-#       else
-#         nil
-#       end
-#     end
-#   end 
 
 #   def self.eli(cellar_psi)
 #     "Build an ELI for a given Cellar production system identifier (PSI). If this PSI is nil, use a local sample repository for testing"
