@@ -78,13 +78,13 @@ end
 def find_celex(typedoc, year, natural_number)
   eli_query = <<-sparql
 PREFIX cdm: <http://publications.europa.eu/ontology/cdm#>
-
+PREFIX xsd: <http://www.w3.org/2001/XMLSchema#>
 SELECT DISTINCT ?celex 
 WHERE {
 GRAPH ?g {
   ?manif cdm:manifestation_official-journal_part_information_number ?number .
-  ?manif cdm:manifestation_official-journal_part_typedoc_printer "#{typedoc}" .
-  ?manif cdm:manifestation_official-journal_part_is_corrigendum_printer "O" .
+  ?manif cdm:manifestation_official-journal_part_typedoc_printer "#{typedoc}"^^xsd:string .
+  ?manif cdm:manifestation_official-journal_part_is_corrigendum_printer "O"^^xsd:string .
   ?work cdm:resource_legal_id_celex ?celex .
   FILTER(strlen(?number) > 0 && (regex(?number, "^#{year}/#{natural_number}$", "i") || regex(?number, "^#{natural_number}/#{year}$", "i") || regex(?number, "^#{year}/#{natural_number} ", "i") || regex(?number, "^#{natural_number}/#{year} ", "i")))
  }

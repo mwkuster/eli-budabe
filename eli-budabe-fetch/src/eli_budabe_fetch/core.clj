@@ -120,15 +120,19 @@ SELECT DISTINCT ?gra WHERE { GRAPH ?gra{ {<#{cellar_psi}> owl:sameAs ?o} UNION {
     model))
 
 (def eli-query "PREFIX cdm: <http://publications.europa.eu/ontology/cdm#>
-
+PREFIX xsd: <http://www.w3.org/2001/XMLSchema#>
 SELECT ?number ?typedoc ?is_corrigendum  ?pub_date
 WHERE {
+  GRAPH <#{GRAPH-URI}> {
   ?manif cdm:manifestation_official-journal_part_information_number ?number .
   ?manif cdm:manifestation_official-journal_part_typedoc_printer  ?typedoc .
   ?manif cdm:manifestation_official-journal_part_is_corrigendum_printer ?is_corrigendum .
+  OPTIONAL {
   ?work cdm:resource_legal_published_in_official-journal ?oj .
   ?oj  cdm:publication_general_date_publication ?pub_date .
+}
   FILTER(strlen(?number) > 0) # && strlen(?typedoc) > 0 && strlen(?is_corrigendum) > 0)
+  }
 } LIMIT 1")
 
 
@@ -146,27 +150,40 @@ WHERE {
          (list (nth number-year-parse 2) (nth number-year-parse 1))
          (list "NO_YEAR" "NO_NUMBER"))))))
 
+(defn get-graph-uri
+  "Get the Graph URI of an object in the cache (if existing)"
+  [cellar-psi]
+  (let
+      [graph-uri (in-cache? cellar-psi)]
+    (if graph-uri
+      graph-uri
+      (do
+        (fetch-work cellar-psi)
+        (in-cache? cellar-psi)))))
+
 (defn eli4psi 
   "Transform where possible a Cellar PSI into an ELI"
-  ([cellar-psi]
-     (try
-       (eli4psi cellar-psi (fetch-work cellar-psi))
-       (catch Exception e ;if a cellar-psi does not exist in the Cellar, return it itself and don't try to build an ELI
-         cellar-psi)))
-  ([cellar-psi model]
+   ([cellar-psi]
      (println cellar-psi)
-     (let
-         [solutions (rdf/bounce eli-query model)
-          solution (first (:data solutions))]
-       (println solutions)
-       (if solution
-         (let
-             [number (:number solution)
-              [year natural-number] (parse-number number)
-              typedoc (get  TYPEDOC_RT_MAPPING (:typedoc solution))]
-           (str "http://eli.budabe.eu/eli/" typedoc "/" year "/" natural-number "/oj"))
-         cellar-psi)
-  )))
+     (try
+       (let
+           [graph-uri (get-graph-uri cellar-psi)
+            query (clojure.string/replace eli-query "#{GRAPH-URI}" graph-uri)
+            query-url (str "http://localhost:3030/eli/query?query=" (URLEncoder/encode query) "&output=json")
+            query-result (json/parse-string (:body (client/get query-url)))
+            binding (first (get (get query-result "results")  "bindings"))]
+         (println query)
+         (println query-url)
+         (println graph-uri)
+         (if binding
+           (let
+               [number (get (get binding "number") "value")
+                [year natural-number] (parse-number number)
+                typedoc (get  TYPEDOC_RT_MAPPING (get (get binding "typedoc") "value"))]
+            (str "http://eli.budabe.eu/eli/" typedoc "/" year "/" natural-number "/oj"))
+           cellar-psi))
+       (catch Exception e cellar-psi))
+  ))
 
 (defn find-eli [encoded-psi]
   (println encoded-psi)
@@ -178,7 +195,7 @@ WHERE {
   [cellar-psi]
   (let
       [model (fetch-work cellar-psi)
-       eli (eli4psi cellar-psi model)
+       eli (eli4psi cellar-psi)
        query (clojure.string/replace (slurp "sparql/eli_md.rq") "http://eli.eli/" eli)
        eli-xml (model-to-string (rdf/pull query model))]
     (clojure.string/replace eli-xml #"ELI:([a-zA-Z0-9%\.-]+)" #(find-eli %1))))
