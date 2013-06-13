@@ -161,29 +161,32 @@ WHERE {
         (fetch-work cellar-psi)
         (in-cache? cellar-psi)))))
 
+(def elis (atom {}))
+
 (defn eli4psi 
   "Transform where possible a Cellar PSI into an ELI"
-   ([cellar-psi]
+   [cellar-psi]
      (println cellar-psi)
-     (try
+     (if (find @elis cellar-psi)
+       (get @elis cellar-psi)
        (let
-           [graph-uri (get-graph-uri cellar-psi)
-            query (clojure.string/replace eli-query "#{GRAPH-URI}" graph-uri)
-            query-url (str "http://localhost:3030/eli/query?query=" (URLEncoder/encode query) "&output=json")
-            query-result (json/parse-string (:body (client/get query-url)))
-            binding (first (get (get query-result "results")  "bindings"))]
-         (println query)
-         (println query-url)
-         (println graph-uri)
-         (if binding
-           (let
-               [number (get (get binding "number") "value")
-                [year natural-number] (parse-number number)
-                typedoc (get  TYPEDOC_RT_MAPPING (get (get binding "typedoc") "value"))]
-            (str "http://eli.budabe.eu/eli/" typedoc "/" year "/" natural-number "/oj"))
-           cellar-psi))
-       (catch Exception e cellar-psi))
-  ))
+           [eli (try
+                  (let
+                      [graph-uri (get-graph-uri cellar-psi)
+                       query (clojure.string/replace eli-query "#{GRAPH-URI}" graph-uri)
+                       query-url (str "http://localhost:3030/eli/query?query=" (URLEncoder/encode query) "&output=json")
+                       query-result (json/parse-string (:body (client/get query-url)))
+                       binding (first (get (get query-result "results")  "bindings"))]
+                    (if binding
+                      (let
+                          [number (get (get binding "number") "value")
+                           [year natural-number] (parse-number number)
+                           typedoc (get  TYPEDOC_RT_MAPPING (get (get binding "typedoc") "value"))]
+                        (str "http://eli.budabe.eu/eli/" typedoc "/" year "/" natural-number "/oj"))
+                      cellar-psi))
+                  (catch Exception e cellar-psi))]
+         (swap! elis assoc cellar-psi eli)
+         eli)))
 
 (defn find-eli [encoded-psi]
   (println encoded-psi)
