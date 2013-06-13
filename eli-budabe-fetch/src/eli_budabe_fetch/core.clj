@@ -210,10 +210,16 @@ WHERE {
        (str (eli4psi psi)))
   (GET "/eli4psi/:psi/metadata" [psi] 
        (println "/eli4psi/:psi/metadata" psi)
-       (eli-metadata psi))
+       (try
+         (eli-metadata psi)
+         (catch clojure.lang.ExceptionInfo e
+           (route/not-found "<h1>#{psi} not found</h1>"))))
   (GET "/:psi" [psi] 
        (println "/:psi" psi)
-       (model-to-string (fetch-work psi)))
+       (try
+         (model-to-string (fetch-work psi))
+         (catch clojure.lang.ExceptionInfo e
+           (route/not-found "<h1>#{psi} not found</h1>"))))
   (route/not-found "<h1>Page not found</h1>"))
 
 (defn -main [cellar-psi & args]
