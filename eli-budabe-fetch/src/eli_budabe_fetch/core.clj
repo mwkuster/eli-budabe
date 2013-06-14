@@ -3,11 +3,9 @@
   (:require [clj-http.client :as client])
   (:require [saxon :as xml])
   (:require [cheshire.core :as json])
-  (:use [net.cgrand.enlive-html
-         :only [deftemplate defsnippet content clone-for
-                nth-of-type first-child do-> set-attr sniptest at emit*]])
   (:use compojure.core)
   (:require [compojure.route :as route])
+  (:use  eli-budabe-fetch.rdfa)
   (:import [com.hp.hpl.jena.rdf.model Model ModelFactory])
   (:import [com.hp.hpl.jena.reasoner.rulesys GenericRuleReasonerFactory Rule])
   (:import [com.hp.hpl.jena.vocabulary ReasonerVocabulary])
@@ -41,6 +39,19 @@
                         (java.io.StringReader. 
                          (:body (client/get url {:headers {"Accept" "application/rdf+xml"}}))) "" "RDF/XML")))
     (ModelFactory/createInfModel reasoner core)))       
+
+(defn build-model-from-string [str]
+  "Build a model serialized as a string, heavily inspired by https://github.com/ryankohl/seabass/blob/master/src/seabass/impl.clj"
+  (let 
+      [core (ModelFactory/createDefaultModel)
+       model (ModelFactory/createDefaultModel)
+       config (.addProperty (.createResource core)
+                            ReasonerVocabulary/PROPruleMode
+                            "hybrid")
+       reasoner (.create (GenericRuleReasonerFactory/theInstance) config)]
+    (.add core (.read model 
+                      (java.io.StringReader. str) "" "RDF/XML"))
+    (ModelFactory/createInfModel reasoner core)))
 
 (def TYPEDOC_RT_MAPPING 
   {"AGR" "agree", 
@@ -212,7 +223,7 @@ WHERE {
   (GET "/eli4psi/:psi/metadata" [psi] 
        (println "/eli4psi/:psi/metadata" psi)
        (try
-         (eli-metadata psi)
+         (build-rdfa (build-model-from-string (eli-metadata psi)))
          (catch clojure.lang.ExceptionInfo e
            (route/not-found "<h1>#{psi} not found</h1>"))))
   (GET "/:psi" [psi] 

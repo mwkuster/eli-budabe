@@ -134,13 +134,21 @@ module Eli
   def self.metadata(cellar_psi)
     uri = "http://localhost:3000/eli4psi/#{CGI::escape(cellar_psi)}/metadata"
     puts uri
-    repo = RDF::Repository.new
-    repo.load(uri, options={:format => :rdf, :headers => {"Accept" => "application/rdf+xml"}})
-    #graph = SPARQL.execute("SELECT ?s ?p ?o WHERE {?s ?p ?o} ORDER BY ?s ?p ?o", repo)
-    #puts graph
-    rdfa_xhtml = RDF::RDFa::Writer.buffer(:haml => RDF::RDFa::Writer::DISTILLER_HAML, :standard_prefixes => true, :base_uri => "") do |writer| 
-      writer << repo
+    # repo = RDF::Repository.new
+    # repo.load(uri, options={:format => :rdf, :headers => {"Accept" => "application/rdf+xml"}})
+    # #graph = SPARQL.execute("SELECT ?s ?p ?o WHERE {?s ?p ?o} ORDER BY ?s ?p ?o", repo)
+    # #puts graph
+    # rdfa_xhtml = RDF::RDFa::Writer.buffer(:haml => RDF::RDFa::Writer::DISTILLER_HAML, :standard_prefixes => true, :base_uri => "") do |writer| 
+    #   writer << repo
+    # end
+    # rdfa_xhtml
+     res = RestClient.get("http://localhost:3000/eli4psi/#{CGI::escape(cellar_psi)}/metadata") do  |response, request, result |
+      case response.code
+      when 200 then
+        response.body
+      else
+        "<h1>Could not load ELI metadata for #{cellar_psi}</h1>"
+      end
     end
-    rdfa_xhtml
   end
 end
