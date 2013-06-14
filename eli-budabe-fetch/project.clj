@@ -9,6 +9,8 @@
                  [clojure-saxon "0.9.3"]
                  [cheshire "5.2.0"]
                  [compojure "1.1.5"]
+                 [enlive "1.1.1"]
+                 [hiccup "1.0.3"]
                  [seabass "2.0"]]
   :plugins [[lein-ring "0.8.5"]]
   :ring {:handler eli-budabe-fetch.core/app}

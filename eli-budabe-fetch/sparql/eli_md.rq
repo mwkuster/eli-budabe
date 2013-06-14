@@ -6,6 +6,7 @@ PREFIX owl: <http://www.w3.org/2002/07/owl#>
 
 CONSTRUCT {
   ?eli eli:id_document ?eli_str ;
+  a eli:resource_legal ;
   eli:type_document ?typedoc ;
   eli:agent_document ?agent_document ;
   eli:id_local ?celex ;
@@ -24,9 +25,11 @@ CONSTRUCT {
   eli:changed_by ?changed_by_eli ;
   eli:relevant_for ?relevant_for_eli .
   ?expr_eli eli:expression_title ?title ;
+  a eli:interpretation ;
   eli:language_expression ?lang ;
   eli:belongs_to ?eli .
   ?manif_eli eli:manifests ?expr_eli ;
+  a eli:format ;
   eli:link_manifestation ?item ;
   eli:publisher "Publications Office"@en .
 } WHERE {
@@ -104,8 +107,6 @@ CONSTRUCT {
   BIND (IRI(concat("ELI:", ENCODE_FOR_URI(STR(?based_on)))) AS ?based_on_eli)
   BIND (IRI(concat("ELI:", ENCODE_FOR_URI(STR(?basis_for)))) AS ?basis_for_eli)
   BIND (IRI(concat("ELI:", ENCODE_FOR_URI(STR(?relevant_for)))) AS ?relevant_for_eli)
-
-
 
   ?expr cdm:expression_title ?title .
   ?expr cdm:expression_uses_language ?lang .

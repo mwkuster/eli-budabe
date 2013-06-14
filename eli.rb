@@ -136,7 +136,9 @@ module Eli
     puts uri
     repo = RDF::Repository.new
     repo.load(uri, options={:format => :rdf, :headers => {"Accept" => "application/rdf+xml"}})
-    rdfa_xhtml = RDF::RDFa::Writer.buffer(:haml => RDF::RDFa::Writer::DEFAULT_HAML, :standard_prefixes => true, :base_uri => "") do |writer| 
+    #graph = SPARQL.execute("SELECT ?s ?p ?o WHERE {?s ?p ?o} ORDER BY ?s ?p ?o", repo)
+    #puts graph
+    rdfa_xhtml = RDF::RDFa::Writer.buffer(:haml => RDF::RDFa::Writer::DISTILLER_HAML, :standard_prefixes => true, :base_uri => "") do |writer| 
       writer << repo
     end
     rdfa_xhtml

@@ -3,6 +3,9 @@
   (:require [clj-http.client :as client])
   (:require [saxon :as xml])
   (:require [cheshire.core :as json])
+  (:use [net.cgrand.enlive-html
+         :only [deftemplate defsnippet content clone-for
+                nth-of-type first-child do-> set-attr sniptest at emit*]])
   (:use compojure.core)
   (:require [compojure.route :as route])
   (:import [com.hp.hpl.jena.rdf.model Model ModelFactory])
@@ -12,9 +15,7 @@
   (:import [java.net URLEncoder URLDecoder])
   (:import [java.net URL])
   (:import [com.hp.hpl.jena.sparql.function FunctionBase1])
-  (:import [com.hp.hpl.jena.sparql.expr NodeValue])
-  ;(:import [ToEli]))
-  )
+  (:import [com.hp.hpl.jena.sparql.expr NodeValue]))
 
 (defn save-model [model filename]
   (.write model (OutputStreamWriter. (FileOutputStream. filename) "UTF-8") "RDF/XML"))
