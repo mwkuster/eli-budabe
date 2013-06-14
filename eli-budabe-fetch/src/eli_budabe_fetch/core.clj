@@ -217,17 +217,18 @@ WHERE {
     
 
 (defroutes app
-  (GET ["/eli4psi/:psi", :psi #"[^/]+"] [psi] 
+  (GET ["/eli4psi/:psi", :psi #"[^/;?]+"] [psi] 
        (println "/eli4psi/:psi" psi)
        (str (eli4psi psi)))
- 
-  (GET  ["/eli4psi/:psi/metadata", :psi #"[^/]+"] [psi] 
+
+  (GET  ["/eli4psi/:psi/metadata", :psi #"[^/;?]+"] [psi] 
        (println "/eli4psi/:psi/metadata" psi)
        (try
          (build-rdfa (build-model-from-string (eli-metadata psi)))
          (catch clojure.lang.ExceptionInfo e
            (route/not-found "<h1>#{psi} not found</h1>"))))
-  (GET [":psi", :psi #"[^/]+"] [psi] 
+
+  (GET [":psi", :psi #"[^/;?]+"] [psi] 
        (println "/:psi" psi)
        (try
          (model-to-string (fetch-work psi))
