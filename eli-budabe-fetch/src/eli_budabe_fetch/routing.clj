@@ -78,8 +78,8 @@
 
 (defn wrap-prn-request [handler]
   (fn [request]
-    (prn request)
-    (handler request)))
+    (println "request:" request)
+    (handler (dissoc request :path-info))))
 
 (def app
   (-> (handler/api app-routes)
