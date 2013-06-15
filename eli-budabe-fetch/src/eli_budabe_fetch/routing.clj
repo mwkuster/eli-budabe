@@ -5,6 +5,7 @@
   (:require [cheshire.core :as json])
   (:use  eli-budabe-fetch.rdfa)
   (:require [compojure.route :as route])
+  (:require [compojure.handler :as handler])
   (:require
         [ring.util.response :as resp])
   (:require [ring.adapter.jetty :as jetty]))
@@ -12,7 +13,7 @@
 (defn parse-int [s]
   (Integer. (re-find #"[0-9]*" s)))
   
-(defroutes app
+(defroutes app-routes
   (GET "/eli4psi" []
        (resp/redirect "/psi2eli.html"))
 
@@ -74,6 +75,15 @@
            (route/not-found "<h1>#{psi} not found</h1>"))))
   (route/files "/" {:root "public"})
   (route/not-found "<h1>Page not found</h1>"))
+
+(defn wrap-prn-request [handler]
+  (fn [request]
+    (prn request)
+    (handler request)))
+
+(def app
+  (-> (handler/api app-routes)
+      (wrap-prn-request)))
 
 (defn increase-timeout [server]
   (doseq [connector (.getConnectors server)]
