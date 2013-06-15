@@ -8,31 +8,9 @@
   (:import [com.hp.hpl.jena.sparql.function FunctionBase1])
   (:import [com.hp.hpl.jena.sparql.expr NodeValue]))
 
-(def TYPEDOC_RT_MAPPING 
-  {"AGR" "agree", 
-   "COMMUNIC_COURT" "communic",
-   "DEC" "dec", 
-   "DECDEL"  "dec_del",
-   "DECIMP" "dec_impl", 
-   "DIR"  "dir", 
-   "DIRDEL" "dir_del", 
-   "DIRIMP" "dir_impl", 
-   "GENGUID" "guideline", 
-   "INFO" "info", 
-   "NOTICE" "notice", 
-   "PROC" "proc_rules", 
-   "PROT" "prot", 
-   "RDINFO" "note", 
-   "REC" "rec", 
-   "RECDEL" "rec_del", 
-   "REG"  "reg", 
-   "REGDEL"  "reg_del", 
-   "REGIMP" "reg_impl", 
-   "RESOLUTION"  "res", 
-   "SAB" "budget_suppl_amend"  })
+(def TYPEDOC_RT_MAPPING (json/parse-string (slurp "conf/typedoc_rt_mapping.json")))
 
-(def TYPEDOC_CB_MAPPING 
-  {"CS" "consil", "PE" "EP", "COM" "com", "BCE" "ecb", "COM-UN" "unece"})
+(def TYPEDOC_CB_MAPPING (json/parse-string (slurp "conf/typedoc_cb_mapping.json")))
 
 (def expression-query "PREFIX cdm: <http://publications.europa.eu/ontology/cdm#>\nSELECT DISTINCT ?uri\nWHERE {?work_uri cdm:work_has_expression ?uri}")
 
