@@ -4,6 +4,7 @@
   (:require [clj-http.client :as client])
   (:require [cheshire.core :as json])
   (:use  eli-budabe-fetch.rdfa)
+  (:use eli-budabe-fetch.interface-jena)
   (:require [compojure.route :as route])
   (:require [compojure.handler :as handler])
   (:require
