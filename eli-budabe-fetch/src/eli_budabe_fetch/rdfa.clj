@@ -34,7 +34,9 @@
                        [:td (let
                                 [obj (:o triple)]
                               (if (and (string? obj) (.startsWith obj "http://"))
-                                [:a {:property (:p triple) :href obj} obj]
+                                (if (.startsWith obj "http://publications.europa.eu/resource/cellar/")
+                                  [:a {:property (:p triple) :href obj :onClick (str "this.removeAttribute('href');var loc = '/content/'+encodeURIComponent('" obj "'); window.location =  loc;")} obj]
+                                  [:a {:property (:p triple) :href obj} obj])
                                 [:span {:property (:p triple) :content obj} obj]))]]))]]))]])))
               
             

@@ -1,0 +1,24 @@
+<!DOCTYPE html
+  PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns:orte_ns="http://www.fh-worms.de/orte" xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <title>EUR-Lex to ELI conversion</title>
+    <link rel="stylesheet" href="/eli.css"/>
+    <script src="http://code.jquery.com/jquery-1.9.1.min.js"></script>
+    <script src="/eli.js"></script>
+  </head>
+  <body>
+    <h1>EUR-Lex production system identifier to ELI</h1>    
+    <form id="psi2eliform">
+      <table>
+      <tr><td>Please enter here your current identifier:</td><td><input id="psi" name="psi" type="text" size="40" maxlength="70"/></td></tr>
+      <tr><td></td><td><input type="radio" name="psitype" value="celex" checked="checked">Celex</input>  <input type="radio" name="psitype" value="id_jo">ID_JO</input></td></tr>
+      <tr><td></td><td><button id="okBtn">OK</button></td></tr>
+    </table>
+
+    </form>
+    <p id="loading">Loading</p>
+    <p id="ELI"> </p>
+    <p class="warning">This tool is purely experimental, privately maintained and certain to change. No guarantee for any of the ELIs generated.</p>
+  </body>
+</html>

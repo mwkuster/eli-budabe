@@ -1,11 +1,7 @@
 (ns eli-budabe-fetch.core
   (:require [seabass.core :as rdf])
   (:require [clj-http.client :as client])
-  (:require [saxon :as xml])
   (:require [cheshire.core :as json])
-  (:use compojure.core)
-  (:require [compojure.route :as route])
-  (:use  eli-budabe-fetch.rdfa)
   (:import [com.hp.hpl.jena.rdf.model Model ModelFactory])
   (:import [com.hp.hpl.jena.reasoner.rulesys GenericRuleReasonerFactory Rule])
   (:import [com.hp.hpl.jena.vocabulary ReasonerVocabulary])
@@ -173,6 +169,13 @@ WHERE {
         (fetch-work cellar-psi)
         (in-cache? cellar-psi)))))
 
+(defn get-content
+  "Get a brute content of a psi and return it to the sender (typically a binary datastream)"
+  [cellar-psi]
+  (let
+      [uri (URLDecoder/decode cellar-psi)]
+    (client/get uri {:as :stream})))
+    
 (def elis (atom {}))
 
 (defn eli4psi 
@@ -215,26 +218,6 @@ WHERE {
        eli-xml (model-to-string (rdf/pull query model))]
     (clojure.string/replace eli-xml #"ELI:([a-zA-Z0-9%\.-]+)" #(find-eli %1))))
     
-
-(defroutes app
-  (GET ["/eli4psi/:psi", :psi #"[^/;?]+"] [psi] 
-       (println "/eli4psi/:psi" psi)
-       (str (eli4psi psi)))
-
-  (GET  ["/eli4psi/:psi/metadata", :psi #"[^/;?]+"] [psi] 
-       (println "/eli4psi/:psi/metadata" psi)
-       (try
-         (build-rdfa (build-model-from-string (eli-metadata psi)))
-         (catch clojure.lang.ExceptionInfo e
-           (route/not-found "<h1>#{psi} not found</h1>"))))
-
-  (GET [":psi", :psi #"[^/;?]+"] [psi] 
-       (println "/:psi" psi)
-       (try
-         (model-to-string (fetch-work psi))
-         (catch clojure.lang.ExceptionInfo e
-           (route/not-found "<h1>#{psi} not found</h1>"))))
-  (route/not-found "<h1>Page not found</h1>"))
 
 (defn -main [cellar-psi & args]
   (let
