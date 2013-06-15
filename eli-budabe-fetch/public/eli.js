@@ -22,7 +22,8 @@ $(function () {
             async : true,
             success: function( json ) {
                 var eli = JSON.stringify(json);
-                var eli_msg = "Your ELI is: <b><a href=\"" + eli + "\">" + eli + "</a></b><br/> See here the corresponding <a href=\"/eli4psi/" + encodedPSI + "/metadata\">RDFa-enriched metadata</a>  (might take a moment to load)";
+                var eli_msg = "Your ELI is: <b><a href=" + eli + "\>" + eli + "</a></b><br/> See here the corresponding <a href=\"/eli4psi/" + encodedPSI + "/metadata\">RDFa-enriched metadata</a>  (might take a moment to load)";
+                alert(eli_msg);
                 $("#ELI").html(eli_msg);
             },
             error: function( xhr, status ) {

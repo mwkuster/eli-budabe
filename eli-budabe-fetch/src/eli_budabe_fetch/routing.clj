@@ -67,14 +67,15 @@
                                     (get (:headers response) "content-type")}, :body (:body response)}
            (route/not-found "<h1>Content for #{psi} not found</h1>"))))
 
-  (GET [":psi", :psi #"[^/;?]+"] [psi] 
-       (println "/:psi" psi)
-       (try
-         (model-to-string (fetch-work psi))
-         (catch clojure.lang.ExceptionInfo e
-           (route/not-found "<h1>#{psi} not found</h1>"))))
+  ;; (GET [":psi", :psi #"[^/;?]+"] [psi] 
+  ;;      (println "/:psi" psi)
+  ;;      (try
+  ;;        (model-to-string (fetch-work psi))
+  ;;        (catch clojure.lang.ExceptionInfo e
+  ;;          (route/not-found "<h1>#{psi} not found</h1>"))))
   (route/files "/" {:root "public"})
-  (route/not-found "<h1>Page not found</h1>"))
+  (route/not-found 
+   "<h1>Page not found</h1>"))
 
 (defn wrap-prn-request [handler]
   (fn [request]
