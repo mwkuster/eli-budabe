@@ -13,7 +13,7 @@ $(function () {
         } else {
             var uricomponent = '/oj/';
         };
-        var encodedPSI =  encodeURIComponent(encodeURIComponent("http://publications.europa.eu/resource" + uricomponent + psi).replace(/\(/g, "%28").replace(/\)/g, "%29"));
+        var encodedPSI =  encodeURIComponent("http://publications.europa.eu/resource" + uricomponent + psi).replace(/\(/g, "%28").replace(/\)/g, "%29");
         $("#ELI").html("<b>Please wait for the search for identifier " + psi + " to complete</b>");
         $.ajax({
             url: "/eli4psi/" + encodedPSI,

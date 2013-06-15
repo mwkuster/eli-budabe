@@ -56,7 +56,7 @@
          (catch clojure.lang.ExceptionInfo e
            (route/not-found "<h1>#{psi} not found</h1>"))))
 
-  (GET ["/content/:psi", :psi #"[^/;?]+"] [psi] 
+  (GET ["/content/:psi", :psi #"[^;?]+"] [psi] 
        (let
            [response (get-content psi)]
          ;(println response)
