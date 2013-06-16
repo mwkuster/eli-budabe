@@ -68,8 +68,8 @@ CONSTRUCT {
   OPTIONAL { ?subj cdm:work_affected_by_work ?related_to }
   OPTIONAL { ?subj cdm:act_consolidated_consolidates_resource_legal ?consolidates }
   OPTIONAL { ?subj cdm:resource_legal_consolidated_by_act_consolidated ?consolidated_by }
-  OPTIONAL { ?subj cdm:resource_legal_implemented_by_resource_legal ?transposes  }
-  OPTIONAL { ?subj cdm:resource_legal_implements_resource_legal ?transposed_by  }
+  # OPTIONAL { ?subj cdm:resource_legal_implemented_by_resource_legal ?transposed_by  }
+  # OPTIONAL { ?subj cdm:resource_legal_implements_resource_legal ?transposes  }
   OPTIONAL { ?subj cdm:directive_implemented_by_measure_national_implementing ?transposes  }
   OPTIONAL { ?subj cdm:resource_legal_based_on_resource_legal ?based_on }
   OPTIONAL { ?subj cdm:resource_legal_based_on_treaty ?based_on }
