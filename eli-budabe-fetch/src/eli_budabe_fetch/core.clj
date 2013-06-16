@@ -111,7 +111,10 @@ WHERE {
   [cellar-psi]
   (let
       [uri (URLDecoder/decode cellar-psi)]
-    (client/get uri {:as :stream})))
+    (println uri)
+    (if (.startsWith uri "http://publications.europa.eu/resource/cellar")
+      (client/get uri {:as :stream})
+      {:status 404})))
     
 (def elis (atom {}))
 

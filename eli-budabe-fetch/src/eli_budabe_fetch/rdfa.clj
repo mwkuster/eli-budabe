@@ -17,6 +17,7 @@
             [:link {:rel "stylesheet" :href "/eli.css"}]] 
            [:body  {:class "md"}
             [:h1 {:class "md"} (str "ELI notice for " work)]
+            [:p {:class "warning"} "This tool is purely experimental, privately maintained and certain to change. No guarantee for any of the ELIs generated."]
             (for [subj-pred subj-partition]
               (let
                   [pred-partition (partition-by :p subj-pred)
@@ -34,8 +35,11 @@
                        [:td (let
                                 [obj (:o triple)]
                               (if (and (string? obj) (.startsWith obj "http://"))
-                                (if (.startsWith obj "http://publications.europa.eu/resource/cellar/")
+                                (case obj
+                                  ((.startsWith obj "http://publications.europa.eu/resource/cellar/"))
                                   [:a {:property (:p triple) :href obj :onClick (str "this.removeAttribute('href');var loc = '/content/'+encodeURIComponent('" obj "'); window.location =  loc;")} obj]
+                                  ((.startsWith obj "http://publications.europa.eu/resource/authority/"))
+                                  [:a {:property (:p triple) :href obj :onClick (str "this.removeAttribute('href');var loc = 'http://publications.europa.eu/mdr/authority/index.html'")} obj]
                                   [:a {:property (:p triple) :href obj} obj])
                                 [:span {:property (:p triple) :content obj} obj]))]]))]]))]])))
               

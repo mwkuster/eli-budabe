@@ -43,7 +43,7 @@
   (GET "/eli4celex/:celex" [celex]
        (resp/redirect (str "/eli4psi/http%3A%2F%2Fpublications.europa.eu%2Fresource%2Fcelex%2F" celex)))
 
- (GET "/eli4id_jo/:oj" [oj]
+  (GET "/eli4id_jo/:oj" [oj]
        (resp/redirect (str "/eli4psi/http%3A%2F%2Fpublications.europa.eu%2Fresource%2Foj%2F" oj)))
   
   (GET ["/eli4psi/:psi", :psi #"[^/;?]+"] [psi] 
@@ -57,13 +57,10 @@
          (catch clojure.lang.ExceptionInfo e
            (route/not-found "<h1>#{psi} not found</h1>"))))
 
-  (GET ["/content/:psi", :psi #"[^;?]+"] [psi] 
+  (GET ["/content/:psi", :psi #"[^/;?]+"] [psi] 
        (let
            [response (get-content psi)]
-         ;(println response)
-         (println (:headers response))
-         (println (get (:headers response) "content-type"))
-         (if (= (:status response) 200)
+          (if (= (:status response) 200)
            {:status 200, :headers {"Content-Type" 
                                     (get (:headers response) "content-type")}, :body (:body response)}
            (route/not-found "<h1>Content for #{psi} not found</h1>"))))
@@ -84,6 +81,6 @@
 
 (defn increase-timeout [server]
   (doseq [connector (.getConnectors server)]
-    (.setMaxIdleTime connector (* 5 60 1000))))
+    (.setMaxIdleTime connector (* 2 60 1000))))
 
 (jetty/run-jetty app {:port 3000 :configurator increase-timeout})
