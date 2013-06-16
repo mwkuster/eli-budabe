@@ -35,12 +35,12 @@
                        [:td (let
                                 [obj (:o triple)]
                               (if (and (string? obj) (.startsWith obj "http://"))
-                                (case obj
-                                  ((.startsWith obj "http://publications.europa.eu/resource/cellar/"))
+                                (cond
+                                  (.startsWith obj "http://publications.europa.eu/resource/cellar/")
                                   [:a {:property (:p triple) :href obj :onClick (str "this.removeAttribute('href');var loc = '/content/'+encodeURIComponent('" obj "'); window.location =  loc;")} obj]
-                                  ((.startsWith obj "http://publications.europa.eu/resource/authority/"))
-                                  [:a {:property (:p triple) :href obj :onClick (str "this.removeAttribute('href');var loc = 'http://publications.europa.eu/mdr/authority/index.html'")} obj]
-                                  [:a {:property (:p triple) :href obj} obj])
+                                  (.startsWith obj "http://publications.europa.eu/resource/authority/")
+                                  [:a {:property (:p triple) :href obj :onClick (str "this.removeAttribute('href'); window.location = 'http://publications.europa.eu/mdr/authority/index.html'")} obj]
+                                  :else [:a {:property (:p triple) :href obj} obj])
                                 [:span {:property (:p triple) :content obj} obj]))]]))]]))]])))
               
             
