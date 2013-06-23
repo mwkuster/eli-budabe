@@ -16,7 +16,7 @@ end
 
 get '/eli4celex/:psi' do
   begin
-    Eli.get_eli("http://publications.europa.eu/resource/celex/" + psiencode(params[:psi])).to_json
+    Eli.new("http://publications.europa.eu/resource/celex/" + psiencode(params[:psi])).eli.to_json
   rescue Exception => e
     status 404
     body e.to_json
@@ -26,7 +26,8 @@ end
 get '/eli4celex/:psi/metadata' do
   begin
     psi = "http://publications.europa.eu/resource/celex/" + psiencode(params[:psi])
-    Eli.metadata(psi)
+    eli_obj = Eli.new(psi)
+    eli_obj.metadata
   rescue Exception => e
     status 404
     body e.to_json
@@ -35,7 +36,7 @@ end
 
 get '/eli4id_jo/:psi' do
   begin
-    Eli.get_eli("http://publications.europa.eu/resource/oj/" +  psiencode(params[:psi])).to_json
+    Eli.new("http://publications.europa.eu/resource/oj/" +  psiencode(params[:psi])).eli.to_json
   rescue Exception => e
     status 404
     body e.to_json
@@ -45,7 +46,8 @@ end
 get '/eli4id_jo/:psi/metadata' do
   begin
     psi = "http://publications.europa.eu/resource/oj/" + psiencode(params[:psi])
-    Eli.metadata(psi)
+    eli_obj = Eli.new(psi)
+    eli_obj.metadata
   rescue Exception => e
     status 404
     body e.to_json
@@ -54,27 +56,10 @@ end
 
 get '/eli/:typedoc/:year/:natural_number/oj' do
   begin
-    number = params[:natural_number]
-    len_number = number.length
-    sector = case params[:typedoc]
-               when ("dir" or "dir_impl" or "dir_del")
-               "L"
-               when ("reg" or "reg_del" or "reg_impl")
-               "R"
-               when ("dec" or "dec_del" or "dec_impl")
-               "D"
-               else
-               nil
-             end
-    celex = if sector then
-              "3#{params[:year]}#{sector}#{"0" * (4 - len_number) + number}" 
-            else
-              find_celex(Eli::RT_TYPEDOC_MAPPING[params[:typedoc]], params[:year], params[:natural_number])
-            end
-    puts celex
-    puts sector
+    celex = find_celex(Eli::RT_TYPEDOC_MAPPING[params[:typedoc]], params[:year], params[:natural_number])
     psi = "http://publications.europa.eu/resource/celex/#{celex}"
-    Eli.metadata(psi)
+    eli_obj = Eli.new(psi)
+    eli_obj.metadata
   rescue Exception => e
     status 404
     body e.to_json

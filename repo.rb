@@ -37,7 +37,7 @@ class Repo
   end
 
   def repo_for_psi(cellar_psi)
-    "Initiates an RDF repository based on a remote or local, work-level Cellar production system identifier in the form of a URI"
+    "Initiates an RDF repository based on a remote, work-level Cellar production system identifier in the form of a URI"
 
     add_to_repo!(cellar_psi)
 

@@ -75,5 +75,8 @@ curl -v -XPUT -T 32012L0012R%2801%29.ttl --header "Content-type: text/turtle;cha
 curl -v http://localhost:3030/eli/data?graph=http%3A%2F%2Fpublications.europa.eu%2Fresource%2Fcelex%2F32012L0012
 ```
 
+Note
+========
 
+Latest version of the pure Ruby implementation 
 

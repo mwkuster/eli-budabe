@@ -3,14 +3,6 @@ body {
     background-color: #FFFFF0;
     padding: 20pt;
 }
-body.md { 
-    font-family: verdana;sans-serif;
-    background-color: #FFFFF0;
-    padding: 12pt;
-}
 h1 {font-size: normal;}
-h2 {font-size: 14pt;}
-h1.md {font-size: 16pt}
-th {font-weight: normal}
 #loading {display: none;}
 .warning {color: red; font-size: small; padding-top: 30pt;}
